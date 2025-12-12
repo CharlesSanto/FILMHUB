@@ -15,21 +15,27 @@ public class AuthController : Controller
         _authService = authService;
     }
     
+    [HttpGet]
     public IActionResult Register()
     {
         return View();
     }
     [HttpPost]  
-    public IActionResult CreateUser(RegisterDto registerDto)
+    public IActionResult Register(RegisterDto registerDto)
     {
         if (!ValidateEmailHelper.IsValidEmail(registerDto.Email))
             return BadRequest(new {message = "Invalid email."});
 
         if (_authService.EmailExists(registerDto.Email))
-            return BadRequest(new { message = "Email already exists." });
+            ModelState.AddModelError("Email", "O email já está cadastrado.");
         
         if (registerDto.Password != registerDto.ConfirmPassword)
             return BadRequest(new { message = "Passwords do not match." });
+        
+        if (!ModelState.IsValid)
+        {
+            return View(registerDto);
+        }
         
         _authService.CreateUser(registerDto);
         return Ok(new { message = "User created successfully." });

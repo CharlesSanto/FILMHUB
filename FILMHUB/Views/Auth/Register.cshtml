@@ -7,7 +7,9 @@
 <div class="form-createuser">
     <h2 class="title-createuser">Criar conta</h2>
     
-    <form asp-action="CreateUser" method="post" id="registerForm">
+    <span asp-validation-for="Email" class="validation-error" id="emailError"></span>
+    
+    <form asp-action="Register" method="post" id="registerForm">
         <div>
             <label asp-for="Name">Nome</label> <br/>
             <input asp-for="Name" type="text"/>
