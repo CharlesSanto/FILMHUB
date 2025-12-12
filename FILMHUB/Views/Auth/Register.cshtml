@@ -1,4 +1,38 @@
+@model FILMHUB.DTO.RegisterDto
+
 @{
     ViewData["Title"] = "Register";
 }
+
+<div class="form-createuser">
+    <h2 class="title-createuser">Criar conta</h2>
+    
+    <form asp-action="CreateUser" method="post">
+        <div class="">
+            <label asp-for="Name">Nome</label> <br/>
+            <input asp-for="Name" type="text"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Email"></label> <br/>
+            <input asp-for="Email"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Senha</label> <br/>
+            <input asp-for="Password" type="password"/>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="ConfirmPassword">Confirmar senha</label> <br/>
+            <input asp-for="ConfirmPassword" type="password"/>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <button class="register" type="submit">Criar conta</button>
+    </form>
+    
+    <p>Já tem uma conta? <a>Entrar</a></p>
+    
+</div>
 

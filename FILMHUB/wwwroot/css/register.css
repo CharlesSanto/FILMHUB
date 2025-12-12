@@ -1,3 +1,59 @@
-body {
-    background-color: yellow;
+.form-createuser {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    color: #F5F5F5;
+    background-color: #1A1A1A;
+    padding: 40px;
+    border-radius: 10px;
+    
+}
+
+.title-createuser {
+    font-size: 40px;
+    padding-bottom: 30px;
+    color: #F5F5F5;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 8px;
+    background-color: rgba(13, 13, 13, 0.8);
+    border-radius: 5px;
+    border: transparent;
+    color: white;
+    font-size: 20px;
+}
+
+input:focus {
+    background-color: rgba(13, 13, 13, 0.8);
+    color: #F5F5F5;
+    border: none;
+}
+
+.register {
+    font-size: 20px;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    background-color: #E50914;
+    color: #F5F5F5;
+    font-weight: bold;
+}
+
+p {
+    color: #F5F5F5;
+    font-weight: bold;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+a {
+    cursor: pointer;
 }

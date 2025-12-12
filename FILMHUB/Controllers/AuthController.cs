@@ -6,10 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FILMHUB.Controllers;
 
-
-[ApiController]
-[Route("[controller]")]
-public class AuthController : ControllerBase
+public class AuthController : Controller
 {
     private readonly IAuthService _authService;
     
@@ -17,8 +14,13 @@ public class AuthController : ControllerBase
     {
         _authService = authService;
     }
+    
+    public IActionResult Register()
+    {
+        return View();
+    }
 
-    [HttpPost("register")]  
+    [HttpPost]  
     public IActionResult CreateUser(RegisterDto registerDto)
     {
         if (!ValidateEmailHelper.IsValidEmail(registerDto.Email))
@@ -26,6 +28,9 @@ public class AuthController : ControllerBase
 
         if (_authService.EmailExists(registerDto.Email))
             return BadRequest(new { message = "Email already exists." });
+        
+        if (registerDto.Password != registerDto.ConfirmPassword)
+            return BadRequest(new { message = "Passwords do not match." });
         
         _authService.CreateUser(registerDto);
         return Ok(new { message = "User created successfully." });
