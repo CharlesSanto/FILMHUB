@@ -19,7 +19,6 @@ public class AuthController : Controller
     {
         return View();
     }
-
     [HttpPost]  
     public IActionResult CreateUser(RegisterDto registerDto)
     {
