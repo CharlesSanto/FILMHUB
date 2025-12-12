@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FILMHUB.Data;
+using FILMHUB.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
