@@ -1,0 +1,7 @@
+﻿services:
+  filmhub:
+    image: filmhub
+    build:
+      context: .
+      dockerfile: FILMHUB/Dockerfile
+
