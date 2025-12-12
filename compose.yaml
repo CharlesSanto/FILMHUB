@@ -1,7 +1,18 @@
-﻿services:
-  filmhub:
-    image: filmhub
-    build:
-      context: .
-      dockerfile: FILMHUB/Dockerfile
+﻿version: "3.9"
 
+services:
+  postgres:
+    image: postgres:17
+    container_name: filmhub-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: filmhubdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - filmhub_data:/var/lib/postgresql/data
+
+volumes:
+  filmhub_data:
