@@ -7,26 +7,26 @@
 <div class="form-createuser">
     <h2 class="title-createuser">Criar conta</h2>
     
-    <form asp-action="CreateUser" method="post">
-        <div class="">
+    <form asp-action="CreateUser" method="post" id="registerForm">
+        <div>
             <label asp-for="Name">Nome</label> <br/>
             <input asp-for="Name" type="text"/>
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <span asp-validation-for="Name" class="validation-error" id="nameError"></span>
         </div>
         <div>
             <label asp-for="Email"></label> <br/>
             <input asp-for="Email"/>
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <span asp-validation-for="Email" class="validation-error" id="emailError"></span>
         </div>
         <div>
             <label asp-for="Password">Senha</label> <br/>
             <input asp-for="Password" type="password"/>
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <span asp-validation-for="Password" class="validation-error" id="passwordError"></span>
         </div>
         <div>
             <label asp-for="ConfirmPassword">Confirmar senha</label> <br/>
             <input asp-for="ConfirmPassword" type="password"/>
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <span asp-validation-for="ConfirmPassword" class="validation-error" id="confirmPasswordError"></span>
         </div>
 
         <button class="register" type="submit">Criar conta</button>
@@ -35,4 +35,8 @@
     <p>Já tem uma conta? <a>Entrar</a></p>
     
 </div>
+
+@section Scripts {
+    <script src="~/js/validation-error.js" defer></script>
+}
 
