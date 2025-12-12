@@ -27,7 +27,7 @@ public class AuthController : Controller
             return BadRequest(new {message = "Invalid email."});
 
         if (_authService.EmailExists(registerDto.Email))
-            ModelState.AddModelError("Email", "O email já está cadastrado.");
+            ModelState.AddModelError("Email", "Este e-mail já está cadastrado. Tente outro ou faça login.");
         
         if (registerDto.Password != registerDto.ConfirmPassword)
             return BadRequest(new { message = "Passwords do not match." });
@@ -38,6 +38,7 @@ public class AuthController : Controller
         }
         
         _authService.CreateUser(registerDto);
-        return Ok(new { message = "User created successfully." });
+        // return Ok(new { message = "User created successfully." });
+        return RedirectToAction("Index", "Home");
     }
 }
