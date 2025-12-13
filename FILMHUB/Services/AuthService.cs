@@ -37,9 +37,10 @@ public class AuthService : IAuthService
     
     public bool UsersExists(string email, string password)
     {
-        var passwordHash = PassowordHelper.HashPassword(password);
+        var user = _context.Users.FirstOrDefault(e => e.Email == email);
+
+        if (user == null) return false;
         
-        return _context.Users.Any(e => e.Email == email && 
-                                       e.PasswordHash == passwordHash);
+        return PassowordHelper.VerifyPassword(password, user.PasswordHash);
     }
 }

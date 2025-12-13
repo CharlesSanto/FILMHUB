@@ -24,7 +24,7 @@ public class AuthController : Controller
     [HttpPost]
     public IActionResult Login(LoginDto loginDto)
     {
-        if (_authService.UsersExists(loginDto.Email, loginDto.Password))
+        if (!_authService.UsersExists(loginDto.Email, loginDto.Password))
             ModelState.AddModelError("Email", "Email ou senha incorretos.");    
 
         if (!ModelState.IsValid)
