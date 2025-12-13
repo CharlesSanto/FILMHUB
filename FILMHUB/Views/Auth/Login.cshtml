@@ -7,7 +7,7 @@
 <div class="form-login">
     <h2>Entrar</h2>
     
-    <form asp-action="Login" method="post">
+    <form asp-action="Login" method="post" novalidate="novalidate">
         <div>
             <label asp-for="Email">Email</label> <br/>
             <input asp-for="Email" type="email"/>
