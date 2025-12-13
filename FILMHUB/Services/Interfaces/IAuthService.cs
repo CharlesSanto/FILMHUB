@@ -7,4 +7,5 @@ public interface IAuthService
 {
     bool EmailExists(string email);
     void CreateUser(RegisterDto registerDto);
+    bool UsersExists(string email,  string password);
 }
