@@ -61,6 +61,12 @@ p {
 
 a {
     cursor: pointer;
+    text-decoration: none;
+    color: #F5F5F5;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .validation-error {
