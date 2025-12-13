@@ -14,6 +14,18 @@ public class AuthController : Controller
     {
         _authService = authService;
     }
+
+    [HttpGet]
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Login(LoginDto loginDto)
+    {
+        return View(loginDto);
+    }
     
     [HttpGet]
     public IActionResult Register()
@@ -39,6 +51,6 @@ public class AuthController : Controller
         
         _authService.CreateUser(registerDto);
         // return Ok(new { message = "User created successfully." });
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Login", "Auth");
     }
 }
