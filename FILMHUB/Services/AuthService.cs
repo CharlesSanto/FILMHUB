@@ -1,0 +1,37 @@
+using FILMHUB.Data;
+using FILMHUB.DTO;
+using FILMHUB.Helpers;
+using FILMHUB.Models;
+using FILMHUB.Services.Interfaces;
+
+namespace FILMHUB.Services;
+
+public class AuthService : IAuthService
+{
+    private readonly ApplicationDbContext _context;
+    
+    public AuthService(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public bool EmailExists(string email)
+    {
+            return _context.Users.Any(e => e.Email == email);
+    }
+
+    public void CreateUser(RegisterDto registerDto)
+    {
+        User user = new User
+        {
+            Name = registerDto.Name,
+            Email = registerDto.Email,
+            PasswordHash = PassowordHelper.HashPassword(registerDto.Password),
+            CreatedAt =  DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+        
+        _context.Users.Add(user);
+        _context.SaveChanges();
+    }
+}
