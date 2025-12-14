@@ -54,6 +54,8 @@ li a{
     padding: 10px;
     border-radius: 20px;
     transition: background-color 0.1s ease;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 li a:hover {
