@@ -1,4 +1,31 @@
 footer {
-    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
     background-color: #1A1A1A;
+}
+
+footer  div {
+    margin: 0;
+}
+
+.footer-content p {
+    font-size: 15px;
+    font-weight: normal;
+    padding: 5px;
+}
+
+ul {
+    justify-content: center;
+}
+
+ul li {
+    font-size: 15px;
+    font-weight: normal;
+    padding: 10px;
+}
+
+i {
+    margin-right: 4px;
 }
