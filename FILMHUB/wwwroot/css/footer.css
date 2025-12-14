@@ -16,6 +16,12 @@ footer  div {
     padding: 5px;
 }
 
+.footer-content a {
+    font-size: 15px;
+    font-weight: normal;
+    padding: 5px;
+}
+
 ul {
     justify-content: center;
 }
