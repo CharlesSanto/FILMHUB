@@ -3,3 +3,31 @@
 @{
     ViewData["Title"] = "Login";
 }
+
+<div class="form-login">
+    <h2>Entrar</h2>
+    
+    <form asp-action="Login" method="post" novalidate="novalidate">
+        <div>
+            <label asp-for="Email">Email</label> <br/>
+            <input asp-for="Email" type="email"/>
+            <span asp-validation-for="Email" class="validation-error" id="emailError"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Senha</label> <br/>
+            <input asp-for="Password" type="password"/>
+            <span asp-validation-for="Password" class="validation-error" id="passwordError"></span>
+        </div>
+        
+        <button class="login" type="submit">Entrar</button>
+    </form>
+    
+    <p class="forgotten-password"><a>Esqueceu a senha?</a></p>
+    
+    <p>Não tem uma conta? <a asp-controller="Auth" asp-action="Register">Cadastre-se</a></p>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/validation.js"></script>
+}

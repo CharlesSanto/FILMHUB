@@ -34,4 +34,13 @@ public class AuthService : IAuthService
         _context.Users.Add(user);
         _context.SaveChanges();
     }
+    
+    public bool UsersExists(string email, string password)
+    {
+        var user = _context.Users.FirstOrDefault(e => e.Email == email);
+
+        if (user == null) return false;
+        
+        return PassowordHelper.VerifyPassword(password, user.PasswordHash);
+    }
 }

@@ -7,7 +7,8 @@
 <div class="form-createuser">
     <h2 class="title-createuser">Criar conta</h2>
     
-    <form asp-action="Register" method="post" id="registerForm">
+    <form asp-action="Register" method="post" id="registerForm" novalidate="novalidate">
+        
         <div>
             <label asp-for="Name">Nome</label> <br/>
             <input asp-for="Name" type="text"/>
@@ -37,6 +38,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/validation-error.js" defer></script>
+    <script src="~/js/validation.js"></script>
 }
-
