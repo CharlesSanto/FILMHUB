@@ -65,46 +65,53 @@ li a:hover {
 
 .account {
     display: flex;
-    align-items: center; /* Centraliza texto e imagem verticalmente */
+    flex-direction: row;
+    align-items: center;
     position: relative;
     margin: 0;
-    gap: 15px; /* Um pouco mais de espaço */
+    gap: 15px;
 }
 
 .account-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 18px; /* Ajuste leve para harmonia */
+    font-size: 20px;
     font-weight: bold;
     color: #F5F5F5;
     padding: 5px;
+}
+.account-name .material-symbols-outlined {
+    font-size: 24px;
 }
 
 .account-logged {
     display: none;
     position: absolute;
-    top: 120%; /* Empurra um pouco para baixo para não colar no nome */
+    top: 120%; 
     right: 0;
     background-color: #111;
-    border: 1px solid #333; /* Borda sutil para destacar do fundo */
+    border: 1px solid #333;
     border-radius: 8px;
-    padding: 5px 0; /* Padding vertical no container */
+    padding: 5px 0; 
     min-width: 180px;
     z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Sombra para profundidade */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-/* Lógica do Dropdown */
 .account:focus-within .account-logged {
     display: block;
-    animation: fadeIn 0.2s ease-in-out; /* Opcional: animação suave */
+    animation: fadeIn 0.2s ease-in-out; 
 }
 
-/* Estilização unificada para Botões e Links dentro do dropdown */
 .account-logged button,
 .account-logged a {
-    display: block; /* Ocupa a linha toda */
+    display: block;
     width: 100%;
     background: none;
     border: none;
@@ -112,9 +119,9 @@ li a:hover {
     color: #e0e0e0;
     text-align: left;
     cursor: pointer;
-    text-decoration: none; /* Remove sublinhado do link */
+    text-decoration: none;
     font-size: 14px;
-    font-family: inherit; /* Herda a fonte do site */
+    font-family: inherit;
     transition: background 0.2s;
 }
 
