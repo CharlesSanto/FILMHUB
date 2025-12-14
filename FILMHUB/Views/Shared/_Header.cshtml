@@ -12,21 +12,36 @@
     </nav>
     
     <div class="account">
-        
+
         @{
-            var userName = Context.Session.GetString("UserName"); 
+            var userName = Context.Session.GetString("UserName");
         }
-        
+
         @if (!string.IsNullOrEmpty(userName))
         {
-            <p>@userName</p>
+            <button class="account-name" type="button">
+                @userName
+            </button>
+
+            <div class="account-logged">
+                <form method="post">
+                    <button asp-controller="Account" asp-action="Settings">
+                        Configurações
+                    </button>
+
+                    <button asp-controller="Auth" asp-action="Logout">
+                        Sair
+                    </button>
+                </form>
+            </div>
+
+            <img width="70" height="70" src="~/img/temp-profile-photo-removebg-preview.png" />
         }
         else
         {
-            <a asp-controller="Auth" asp-action="Login" >Entrar</a>
+            <a asp-controller="Auth" asp-action="Login">Entrar</a>
+            <a asp-controller="Auth" asp-action="Register">Criar conta</a>
         }
-        
-        <img width="50px" height="50px" src="~/img/temp-profile-photo-removebg-preview.png" alt="Foto de perfil"/>
     </div>
     
 </header>
