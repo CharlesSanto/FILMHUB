@@ -48,6 +48,12 @@ input:focus {
     font-weight: bold;
 }
 
+.logo-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .register:hover {
     background-color: #B00710;
 }
