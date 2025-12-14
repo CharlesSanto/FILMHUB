@@ -4,9 +4,11 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - FILMHUB</title>
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/register.css" asp-append-version="true"/>
     <link rel="stylesheet"  href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet"  href="~/css/login.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true"/>
 </head>
 <body>
 
@@ -17,13 +19,7 @@
 
 @if (!(currentController == "Auth" && (currentAction == "Register" || currentAction == "Login")))
 {
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Auth" asp-action="Register">FILMHUB</a>
-            </div>
-        </nav>
-    </header>
+    @await Html.PartialAsync("_Header") 
 }
 
 <div class="container">
