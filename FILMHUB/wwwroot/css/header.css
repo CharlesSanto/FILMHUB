@@ -1,4 +1,82 @@
 header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     height: 60px;
     background-color: #1A1A1A;
+    color: #F5F5F5;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 300px;
+}
+
+.logo {
+    width: 300px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    width: 800px;
+}
+
+search {
+    width: 600px;
+}
+
+.search-movie {
+    border-radius: 10px;
+    background-color: #F5F5F5;
+    color: #0D0D0D;
+    height: 70%;
+    border: none;
+}
+
+.search-movie:focus {
+    background-color: #F5F5F5;
+    border: 1px solid yellow;
+    color: #0D0D0D;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+}
+
+li a{
+    padding: 10px;
+    border-radius: 20px;
+    transition: background-color 0.1s ease;
+}
+
+li a:hover {
+    text-decoration: none;
+    background-color: rgba(13, 13, 13, 0.4);
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    gap: 10px;
+}
+
+.account a {
+    padding: 10px;
+    border-radius: 20px;
+    transition: background-color 0.1s ease;
+}
+
+.account a:hover {
+    text-decoration: none;
+    background-color: rgba(13, 13, 13, 0.4);
 }
