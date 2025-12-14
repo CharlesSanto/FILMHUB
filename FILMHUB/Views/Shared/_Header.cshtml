@@ -14,33 +14,44 @@
     <div class="account">
 
         @{
+            // Boa prática: Verificar null de forma segura
             var userName = Context.Session.GetString("UserName");
         }
 
         @if (!string.IsNullOrEmpty(userName))
         {
             <button class="account-name" type="button">
-                @userName
+                @userName <span class="material-symbols-outlined">
+                    arrow_drop_down
+                </span>
             </button>
 
             <div class="account-logged">
-                <form method="post">
-                    <button asp-controller="Account" asp-action="Settings">
-                        Configurações
-                    </button>
+            
+                <a asp-controller="Account" asp-action="Settings">
+                    Configurações
+                </a>
 
-                    <button asp-controller="Auth" asp-action="Logout">
+                <hr style="border: 0; border-top: 1px solid #333; margin: 2px 0;">
+
+                <form method="post" asp-controller="Auth" asp-action="Logout" style="margin:0;">
+                    <button type="submit">
                         Sair
                     </button>
                 </form>
             </div>
 
-            <img width="70" height="70" src="~/img/temp-profile-photo-removebg-preview.png" />
+            <img width="50" height="50" 
+                 style="border-radius: 50%; object-fit: cover;" 
+                 src="~/img/temp-profile-photo-removebg-preview.png" 
+                 alt="Foto de perfil" />
         }
         else
         {
-            <a asp-controller="Auth" asp-action="Login">Entrar</a>
-            <a asp-controller="Auth" asp-action="Register">Criar conta</a>
+            <div style="display: flex; gap: 15px;">
+                <a asp-controller="Auth" asp-action="Login" style="color: white; text-decoration: none;">Entrar</a>
+                <a asp-controller="Auth" asp-action="Register" style="color: white; text-decoration: none;">Criar conta</a>
+            </div>
         }
     </div>
     
