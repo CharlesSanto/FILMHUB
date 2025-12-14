@@ -35,11 +35,6 @@ public class AuthController : Controller
         HttpContext.Session.SetInt32("UserId", user.Id);
         HttpContext.Session.SetString("UserName", user.Name);
         
-        var name = HttpContext.Session.GetString("UserName");
-        var email  = HttpContext.Session.GetInt32("UserId");
-        Console.WriteLine(name);
-        Console.WriteLine(email);
-        
         return RedirectToAction("Index", "Home");
     }
     
