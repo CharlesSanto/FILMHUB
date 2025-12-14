@@ -9,6 +9,10 @@
     <link rel="stylesheet"  href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet"  href="~/css/login.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true"/>
+    <link rel="stylesheet"  href="~/css/about.css" asp-append-version="true"/>
+    
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    
 </head>
 <body>
 
@@ -30,11 +34,7 @@
 
 @if (!(currentController == "Auth" && (currentAction == "Register" || currentAction == "Login")))
 {
-    <footer class="border-top footer text-muted">
-        <div>
-            &copy; 2025 - FILMHUB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    @await Html.PartialAsync("_Footer")
 }
 
 
