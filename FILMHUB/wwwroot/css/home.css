@@ -19,7 +19,7 @@
 .carousel {
     display: flex;
     gap: 12px;
-    overflow-x: auto;
+    overflow: hidden;
     scroll-behavior: smooth;
 }
 
