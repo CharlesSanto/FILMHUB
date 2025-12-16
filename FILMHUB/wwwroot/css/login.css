@@ -6,6 +6,10 @@
     min-height: calc(100vh - 80px);
 }
 
+.login-container div {
+    margin-top: 20px;
+}
+
 .form-login {
     width: 600px;
     display: flex;
