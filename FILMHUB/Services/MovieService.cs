@@ -28,7 +28,7 @@ public class MovieService : IMovieService
 
     public async Task<List<Movie>> GetTopRatedMovies()
     {
-        var topRated = await _client.GetFromJsonAsync<MovieApiResponse>("/movie/top_rated");
+        var topRated = await _client.GetFromJsonAsync<MovieApiResponse>("movie/top_rated");
         
         return topRated.Results;
     }
