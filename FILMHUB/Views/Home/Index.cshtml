@@ -5,20 +5,24 @@
 }
 
 <div class="home-container">
+    
+    <section class="home-banner">
+        
+    </section>
 
     <section class="popular-movies">
-        <h2 class="section-title">Populares</h2>
+        <h2 class="section-title">Populares da semama</h2>
 
         <div class="carousel-wrapper">
             <button class="carousel-btn left" onclick="scrollCarousel('popularCarousel', -900)">‹</button>
 
             <div class="carousel" id="popularCarousel">
-                @foreach (var movie in Model.PopularMovies)
+                @foreach (var movie in Model.TrendingMovies)
                 {
                     <div class="movie-card">
                         <div class="movie-image">
                             <img src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")"
-                                 alt="@movie.Title" />
+                                 alt="@movie.Title"/>
                         </div>
 
                         <p class="movie-title">@movie.Title</p>
@@ -28,7 +32,7 @@
             <button class="carousel-btn right" onclick="scrollCarousel('popularCarousel', 900)">›</button>
         </div>
     </section>
-    
+
     <section class="theater-movies">
         <h2 class="section-title">Nos cinemas</h2>
 
@@ -41,17 +45,17 @@
                     <div class="movie-card">
                         <div class="movie-image">
                             <img src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")"
-                                 alt="@movie.Title" />
+                                 alt="@movie.Title"/>
                         </div>
 
-                        <p class="movie-title">@movie.Title</p> 
+                        <p class="movie-title">@movie.Title</p>
                     </div>
                 }
             </div>
             <button class="carousel-btn right" onclick="scrollCarousel('theatersCarousel', 900)">›</button>
         </div>
     </section>
-    
+
     <section class="top-movies">
         <h2 class="section-title">Os favoritos do público</h2>
 
@@ -64,10 +68,10 @@
                     <div class="movie-card">
                         <div class="movie-image">
                             <img src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")"
-                                 alt="@movie.Title" />
+                                 alt="@movie.Title"/>
                         </div>
 
-                        <p class="movie-title">@movie.Title</p> 
+                        <p class="movie-title">@movie.Title</p>
                     </div>
                 }
             </div>

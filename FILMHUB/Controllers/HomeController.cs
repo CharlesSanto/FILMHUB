@@ -21,9 +21,9 @@ public class HomeController : Controller
     {
         HomeViewModel movieResponse = new HomeViewModel()
         {
-            PopularMovies = await _movieService.GetPopularMoviesAsync(),
             MoviesInTheaters = await _movieService.GetMoviesInTheaters(),
-            TopRatedMovies = await _movieService.GetTopRatedMovies()
+            TopRatedMovies = await _movieService.GetTopRatedMovies(),
+            TrendingMovies = await _movieService.GetTrendingMovies()
         };
         
         return View(movieResponse);

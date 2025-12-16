@@ -32,4 +32,11 @@ public class MovieService : IMovieService
         
         return topRated.Results;
     }
+
+    public async Task<List<Movie>> GetTrendingMovies()
+    {
+        var trendingMovies = await _client.GetFromJsonAsync<MovieApiResponse>("trending/movie/week");
+        
+        return trendingMovies.Results;
+    }
 }
