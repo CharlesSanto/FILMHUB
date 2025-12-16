@@ -1,29 +1,29 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FILMHUB.Models;
+using FILMHUB.Services.Interfaces;
 
 namespace FILMHUB.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IMovieService _movieService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IMovieService movieService)
     {
         _logger = logger;
+        _movieService = movieService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var moviesResponse = await _movieService.GetPopularMoviesAsync();
+        
+        return View(moviesResponse);
     }
 
     public IActionResult About()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
     {
         return View();
     }

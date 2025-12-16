@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using FILMHUB.Data;
 using FILMHUB.Services.Interfaces;
 using FILMHUB.Services;
+using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,16 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromHours(2);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddHttpClient<IMovieService, MovieService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["TMDB:BASE_URL"]);
+    
+    var token = builder.Configuration["TMDB:BEARER_TOKEN"]!.Trim('"');
+
+    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 });
 
 var app = builder.Build();

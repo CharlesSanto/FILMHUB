@@ -29,5 +29,5 @@ public class Movie
     public int Runtime { get; set; }
     
     [JsonPropertyName("vote_average")]
-    public int VoteAverage { get; set; }
+    public double VoteAverage { get; set; }
 }
