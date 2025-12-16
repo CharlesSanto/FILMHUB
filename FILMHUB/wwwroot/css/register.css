@@ -24,7 +24,7 @@
     color: #F5F5F5;
 }
 
-div {
+.form-createuser div {
     margin-top: 20px;
 }
 
@@ -63,6 +63,7 @@ input:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
     
 .register:hover {
