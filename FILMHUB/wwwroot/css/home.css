@@ -1,0 +1,77 @@
+.home-container {
+    width: 100%;
+}
+
+.popular-movies {
+    margin: 30px 0; 
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+.popular-movies-carousel {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.popular-movies-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 41%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: white;
+    font-size: 32px;
+    width: 40px;
+    height: 242px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-btn.left {
+    left: 0;
+    border-radius: 1px 0;
+}
+
+.carousel-btn.right {
+    right: 0;
+    border-radius: 0 1px;
+}
+
+.movie-card {
+    width: 160px;
+    flex-shrink: 0;
+}
+
+.movie-image {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.movie-image img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.movie-image:hover img {
+    transform: scale(1.08);
+}
+
+.movie-title {
+    font-size: 14px;
+    text-align: center;
+}

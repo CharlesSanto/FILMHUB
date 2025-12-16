@@ -1,6 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<FILMHUB.Models.Movie>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
+<div class="home-container">
+
+    <section class="popular-movies">
+        <h2 class="section-title">Filmes populares</h2>
+
+        <div class="carousel-wrapper">
+            <button class="carousel-btn left" onclick="scrollCarousel(-900)">‹</button>
+
+            <div class="popular-movies-carousel" id="popularCarousel">
+                @foreach (var movie in Model)
+                {
+                    <div class="movie-card">
+                        <div class="movie-image">
+                            <img src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")"
+                                 alt="@movie.Title" />
+                        </div>
+
+                        <p class="movie-title">@movie.Title</p>
+                    </div>
+                }
+            </div>
+            <button class="carousel-btn right" onclick="scrollCarousel(900)">›</button>
+        </div>
+    </section>
+
 </div>
+
+<script>
+    function scrollCarousel(value) {
+        document.getElementById("popularCarousel")
+            .scrollBy({ left: value, behavior: "smooth" });
+    }
+</script>
