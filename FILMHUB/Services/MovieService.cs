@@ -25,4 +25,11 @@ public class MovieService : IMovieService
         
         return theatersMovies.Results;
     }
+
+    public async Task<List<Movie>> GetTopRatedMovies()
+    {
+        var topRated = await _client.GetFromJsonAsync<MovieApiResponse>("/movie/top_rated");
+        
+        return topRated.Results;
+    }
 }
