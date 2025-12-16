@@ -19,7 +19,7 @@ body {
 
 .container {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   padding: 0 300px;
