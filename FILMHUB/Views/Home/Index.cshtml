@@ -1,4 +1,4 @@
-﻿@model List<FILMHUB.Models.Movie>
+﻿@model FILMHUB.ViewModel.HomeViewModel
 
 @{
     ViewData["Title"] = "Home";
@@ -10,10 +10,10 @@
         <h2 class="section-title">Filmes populares</h2>
 
         <div class="carousel-wrapper">
-            <button class="carousel-btn left" onclick="scrollCarousel(-900)">‹</button>
+            <button class="carousel-btn left" onclick="scrollCarousel('popularCarousel', -900)">‹</button>
 
-            <div class="popular-movies-carousel" id="popularCarousel">
-                @foreach (var movie in Model)
+            <div class="carousel" id="popularCarousel">
+                @foreach (var movie in Model.PopularMovies)
                 {
                     <div class="movie-card">
                         <div class="movie-image">
@@ -25,15 +25,61 @@
                     </div>
                 }
             </div>
-            <button class="carousel-btn right" onclick="scrollCarousel(900)">›</button>
+            <button class="carousel-btn right" onclick="scrollCarousel('popularCarousel', 900)">›</button>
+        </div>
+    </section>
+    
+    <section class="theater-movies">
+        <h2 class="section-title">Nos cinemas</h2>
+
+        <div class="carousel-wrapper">
+            <button class="carousel-btn left" onclick="scrollCarousel('theatersCarousel', -900)">‹</button>
+
+            <div class="carousel" id="theatersCarousel">
+                @foreach (var movie in Model.MoviesInTheaters)
+                {
+                    <div class="movie-card">
+                        <div class="movie-image">
+                            <img src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")"
+                                 alt="@movie.Title" />
+                        </div>
+
+                        <p class="movie-title">@movie.Title</p> 
+                    </div>
+                }
+            </div>
+            <button class="carousel-btn right" onclick="scrollCarousel('theatersCarousel', 900)">›</button>
+        </div>
+    </section>
+    
+    <section class="top-movies">
+        <h2 class="section-title">Os favoritos do público</h2>
+
+        <div class="carousel-wrapper">
+            <button class="carousel-btn left" onclick="scrollCarousel('topmoviesCarousel', -900)">‹</button>
+
+            <div class="carousel" id="topmoviesCarousel">
+                @foreach (var movie in Model.MoviesInTheaters)
+                {
+                    <div class="movie-card">
+                        <div class="movie-image">
+                            <img src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")"
+                                 alt="@movie.Title" />
+                        </div>
+
+                        <p class="movie-title">@movie.Title</p> 
+                    </div>
+                }
+            </div>
+            <button class="carousel-btn right" onclick="scrollCarousel('topmoviesCarousel',900)">›</button>
         </div>
     </section>
 
 </div>
 
 <script>
-    function scrollCarousel(value) {
-        document.getElementById("popularCarousel")
+    function scrollCarousel(carrouselId, value) {
+        document.getElementById(carrouselId)
             .scrollBy({ left: value, behavior: "smooth" });
     }
 </script>
