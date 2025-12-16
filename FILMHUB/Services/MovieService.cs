@@ -11,32 +11,18 @@ public class MovieService : IMovieService
     {
         _client = client;
     }
-    
-    public async Task<List<Movie>> GetPopularMoviesAsync()
-    {
-        var popularMovies = await _client.GetFromJsonAsync<MovieApiResponse>("movie/popular?language=pt-BR");
-        
-        return popularMovies.Results;
-    }
-    
-    public async Task<List<Movie>> GetMoviesInTheaters()
-    {
-        var theatersMovies = await _client.GetFromJsonAsync<MovieApiResponse>("movie/now_playing?language=pt-BR");
-        
-        return theatersMovies.Results;
-    }
 
-    public async Task<List<Movie>> GetTopRatedMovies()
+    private async Task<List<Movie>> GetMovies(string endpoint)
     {
-        var topRated = await _client.GetFromJsonAsync<MovieApiResponse>("movie/top_rated?language=pt-BR");
-        
-        return topRated.Results;
+        var movieResponse = await _client.GetFromJsonAsync<MovieApiResponse>($"{endpoint}?language=pt-BR");
+        return movieResponse?.Results ?? new List<Movie>();
     }
+    
+    public async Task<List<Movie>> GetPopularMoviesAsync() => await GetMovies("movie/popular");
 
-    public async Task<List<Movie>> GetTrendingMovies()
-    {
-        var trendingMovies = await _client.GetFromJsonAsync<MovieApiResponse>("trending/movie/week?language=pt-BR");
-        
-        return trendingMovies.Results;
-    }
+    public async Task<List<Movie>> GetMoviesInTheaters() => await GetMovies("movie/now_playing");
+
+    public async Task<List<Movie>> GetTopRatedMovies() => await GetMovies("movie/top_rated");
+
+    public async Task<List<Movie>> GetTrendingMovies() => await GetMovies("trending/movie/week");
 }
