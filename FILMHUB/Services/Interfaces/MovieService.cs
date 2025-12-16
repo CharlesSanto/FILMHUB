@@ -14,8 +14,6 @@ public class MovieService : IMovieService
     
     public async Task<List<Movie>> GetPopularMoviesAsync()
     {
-        // https://api.themoviedb.org/3/movie/popular
-        
         var movieResponse = await _client.GetFromJsonAsync<MovieApiResponse>("movie/popular");
         
         return movieResponse.Results;
