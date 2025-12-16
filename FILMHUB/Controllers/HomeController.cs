@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FILMHUB.Models;
 using FILMHUB.Services.Interfaces;
+using FILMHUB.ViewModel;
 
 namespace FILMHUB.Controllers;
 
@@ -18,9 +19,13 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var moviesResponse = await _movieService.GetPopularMoviesAsync();
+        HomeViewModel movieResponse = new HomeViewModel()
+        {
+            PopularMovies = await _movieService.GetPopularMoviesAsync(),
+            MoviesInTheaters = await _movieService.GetMoviesInTheaters()
+        };
         
-        return View(moviesResponse);
+        return View(movieResponse);
     }
 
     public IActionResult About()
