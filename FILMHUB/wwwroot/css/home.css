@@ -29,14 +29,14 @@
 
 .carousel-btn {
     position: absolute;
-    top: 38%;
+    top: 40%;
     transform: translateY(-50%);
     background: rgba(0,0,0,0.6);
     border: none;
     color: white;
     font-size: 32px;
     width: 40px;
-    height: 242px;
+    height: 234px;
     cursor: pointer;
     z-index: 10;
 }
@@ -74,6 +74,6 @@
 }
 
 .movie-title {
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
 }
