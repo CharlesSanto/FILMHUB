@@ -38,4 +38,26 @@ public class MovieService : IMovieService
     public async Task<List<Movie>> GetTopRatedMovies() => await GetMovies("movie/top_rated");
 
     public async Task<List<Movie>> GetTrendingMovies() => await GetMovies("trending/movie/week");
+
+    public async Task<Movie> GetRandomBannerMovie()
+    {
+        const string cacheKey = "banner_movie";
+
+        if (_cache.TryGetValue(cacheKey, out Movie cachedmovies))
+        {
+            return cachedmovies;
+        }
+        
+        var movies = await GetMovies("movie/now_playing");
+
+        if (movies == null || movies.Count == 0)
+            return null;
+
+        var random = new Random();
+        var bannerMovie = movies[random.Next(movies.Count)];
+        
+        _cache.Set(cacheKey, bannerMovie, TimeSpan.FromMinutes(30));
+
+        return bannerMovie;
+    }
 }

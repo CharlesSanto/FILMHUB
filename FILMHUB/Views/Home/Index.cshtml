@@ -8,11 +8,11 @@
     
     <section class="home-banner">
         @{
-            <img src="@($"https://image.tmdb.org/t/p/w1280{Model.TrendingMovies[0].BackdropPath}")" alt="@Model.TrendingMovies[0].Title"/>
+            <img src="@($"https://image.tmdb.org/t/p/w1280{Model.BannerMovie.BackdropPath}")" alt="@Model.BannerMovie.Title"/>
             
             <div class="banner-content">
-                <h2 class="banner-title">@Model.TrendingMovies[0].Title</h2>
-                <p class="banner-overview">@Model.TrendingMovies[0].Overview</p>
+                <h2 class="banner-title">@Model.BannerMovie.Title</h2>
+                <p class="banner-overview">@Model.BannerMovie.Overview</p>
                 <button class="banner-info">
                     <span class="material-symbols-outlined">
                         info

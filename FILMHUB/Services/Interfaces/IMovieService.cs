@@ -8,4 +8,5 @@ public interface IMovieService
     Task<List<Movie>> GetMoviesInTheaters();
     Task<List<Movie>> GetTopRatedMovies();
     Task<List<Movie>> GetTrendingMovies();
+    Task<Movie> GetRandomBannerMovie();
 }

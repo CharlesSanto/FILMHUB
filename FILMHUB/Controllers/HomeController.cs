@@ -23,7 +23,8 @@ public class HomeController : Controller
         {
             MoviesInTheaters = await _movieService.GetMoviesInTheaters(),
             TopRatedMovies = await _movieService.GetTopRatedMovies(),
-            TrendingMovies = await _movieService.GetTrendingMovies()
+            TrendingMovies = await _movieService.GetTrendingMovies(),
+            BannerMovie = await _movieService.GetRandomBannerMovie()
         };
         
         return View(movieResponse);
