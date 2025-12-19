@@ -14,8 +14,7 @@ header {
 
 .account > div {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    align-items: center;   
     margin: 0;
 }
 
@@ -59,7 +58,7 @@ ul {
 
 li a{
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     transition: background-color 0.1s ease;
     font-size: 20px;
     font-weight: bold;
@@ -70,75 +69,85 @@ li a:hover {
     background-color: rgba(13, 13, 13, 0.4);
 }
 
-.account {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.dropdown {
     position: relative;
-    margin: 0;
-    gap: 15px;
 }
 
-.account-name {
+.dropbtn {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 5px;
-
-    background: none;
+    align-items: center;
+    background-color: #1A1A1A;
+    color: #F5F5F5;
+    font-size: 18px;
     border: none;
     cursor: pointer;
-    font-size: 20px;
+    gap: 15px;
     font-weight: bold;
-    color: #F5F5F5;
-    padding: 5px;
-}
-.account-name .material-symbols-outlined {
-    font-size: 24px;
 }
 
-.account-logged {
+.dropdown-content {
     display: none;
     position: absolute;
-    top: 120%; 
-    right: 0;
-    background-color: #111;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 5px 0; 
-    min-width: 180px;
+    background-color: #1A1A1A;
+    min-width: 150px;
     z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border-radius:  0 0 10px 10px;
+    right: 10px;
 }
 
-.account:focus-within .account-logged {
-    display: block;
-    animation: fadeIn 0.2s ease-in-out; 
-}
-
-.account-logged button,
-.account-logged a {
-    display: block;
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 10px 15px;
-    color: #e0e0e0;
-    text-align: left;
-    cursor: pointer;
+.dropdown-content a {
+    color: #F5F5F5;
+    padding: 12px 16px;
     text-decoration: none;
-    font-size: 14px;
-    font-family: inherit;
-    transition: background 0.2s;
+    display: block;
 }
 
-.account-logged button:hover,
-.account-logged a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: #fff;
+.dropdown-content a:hover {
+    background-color: rgba(13, 13, 13, 0.4);
+    text-decoration: none;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.account-logout,
+.account-settings {
+    width: 100%;
+    font-size: 15px;
+    background-color: #1A1A1A;
+    color: #F5F5F5;
+    border: none;
+    padding: 20px;
+}
+
+.account-logout:hover,
+.account-settings:hover {
+    background-color: rgba(13, 13, 13, 0.4);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.account-settings {
+    border-radius: 10px 10px 0 0;
+}
+
+.account-logout {
+    border-radius: 0 0 10px 10px;
+}
+
+.enter-account,
+.register-account{
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.1s ease;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.enter-account:hover,
+.register-account:hover{
+    text-decoration: none;
+    background-color: rgba(13, 13, 13, 0.4);
 }

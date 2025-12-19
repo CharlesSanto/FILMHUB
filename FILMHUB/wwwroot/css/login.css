@@ -16,7 +16,7 @@
     flex-direction: column;
     color: #F5F5F5;
     background-color: #1A1A1A;
-    padding: 40px 40px 20px 40px;
+    padding: 40px 40px 30px 40px;
     border-radius: 10px;
 }
 
@@ -42,8 +42,15 @@
     background-color: #B00710;
 }
 
-
 .forgotten-password {
-    text-align: end;
     font-size: small;
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.login-to-register {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15px;
 }
