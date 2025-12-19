@@ -1,18 +1,22 @@
+using FILMHUB.Data;
 using FILMHUB.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace FILMHUB.Services.Interfaces;
 
 public class MovieService : IMovieService
 {
+    private readonly ApplicationDbContext _context;
     private readonly HttpClient _client;
     private readonly IMemoryCache _cache;
     
-    public MovieService(HttpClient client, IMemoryCache cache)
+    public MovieService(HttpClient client, IMemoryCache cache, ApplicationDbContext context)
     {
         _client = client;
         _cache = cache;
+        _context = context;
     }
 
     private async Task<List<Movie>> GetMovies(string endpoint)
@@ -67,5 +71,11 @@ public class MovieService : IMovieService
         _cache.Set(cacheKey, bannerMovie, TimeSpan.FromMinutes(30));
 
         return bannerMovie;
+    }
+
+    public async Task<UserMovie> GetUserAndMovie(int? userId, int movieId)
+    {
+        return await _context.UserMovies
+            .FirstOrDefaultAsync(user => user.Id == userId && movieId == user.MovieId);
     }
 }

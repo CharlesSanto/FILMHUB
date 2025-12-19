@@ -34,7 +34,22 @@ public class HomeController : Controller
     {
         Movie movie = await _movieService.GetMovieByID(id);
         
-        return View(movie);
+        if (movie == null) return NotFound();
+
+        UserMovie? userMovie = null;
+        
+        int? userId = HttpContext.Session.GetInt32("UserId");
+
+        if (userId.HasValue)
+        {
+            userMovie = await _movieService.GetUserAndMovie(userId, movie.Id);
+        }
+
+        return View(new MovieDetailsViewModels
+        {
+            Movie = movie,
+            UserMovie = userMovie
+        });
     }
 
     public IActionResult About()
