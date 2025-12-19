@@ -8,7 +8,7 @@
     
     <section class="home-banner">
         @{
-            <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w1920{Model.TrendingMovies[0].BackdropPath}")" />
+            <img src="@($"https://image.tmdb.org/t/p/w1280{Model.TrendingMovies[0].BackdropPath}")" alt="@Model.TrendingMovies[0].Title"/>
             
             <div class="banner-content">
                 <h2 class="banner-title">@Model.TrendingMovies[0].Title</h2>
