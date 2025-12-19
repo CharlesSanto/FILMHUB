@@ -56,10 +56,12 @@
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+    line-height: 140%;
     overflow: hidden;
     text-align: start;
     font-weight: normal;
     font-size: 16px;
+    margin-top: 10px;
 }
 
 .banner-info {
@@ -159,8 +161,10 @@
     transform: scale(1.08);
 }
 
+.movie-rating,
 .movie-title {
     font-size: 16px;
     text-align: left;
+    padding-top: 10px;
     padding-left: 15px;
 }
