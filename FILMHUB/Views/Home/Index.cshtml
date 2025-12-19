@@ -37,7 +37,11 @@
                             <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                  alt="@movie.Title"/>
                         </div>
-                        <p class="movie-rating">@Math.Round(movie.VoteAverage, 1)</p>
+                        <p class="movie-rating">
+                            <span class="material-symbols-outlined">
+                                star_rate
+                            </span>@Math.Round(movie.VoteAverage, 1)
+                        </p>
                         <p class="movie-title">@movie.Title</p>
                     </div>
                 }
@@ -60,7 +64,11 @@
                             <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                  alt="@movie.Title"/>
                         </div>
-                        <p class="movie-rating">@Math.Round(movie.VoteAverage, 1)</p>
+                        <p class="movie-rating">
+                            <span class="material-symbols-outlined">
+                                star_rate
+                            </span>@Math.Round(movie.VoteAverage, 1)
+                        </p>
                         <p class="movie-title">@movie.Title</p>
                     </div>
                 }
@@ -83,7 +91,11 @@
                             <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                  alt="@movie.Title"/>
                         </div>
-                        <p class="movie-rating">@Math.Round(movie.VoteAverage, 1)</p>
+                        <p class="movie-rating">
+                            <span class="material-symbols-outlined">
+                                star_rate
+                            </span>@Math.Round(movie.VoteAverage, 1)
+                        </p>
                         <p class="movie-title">@movie.Title</p>
                     </div>
                 }
