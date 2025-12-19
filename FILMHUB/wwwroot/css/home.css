@@ -137,7 +137,6 @@
 .movie-card {
     width: 160px;
     flex-shrink: 0;
-    height: 100%;
 }
 
 .movie-image {
