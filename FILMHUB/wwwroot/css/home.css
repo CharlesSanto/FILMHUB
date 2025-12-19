@@ -138,6 +138,8 @@
 .movie-card {
     width: 160px;
     flex-shrink: 0;
+    background-color: #1A1A1A;
+    border-radius: 10px;
 }
 
 .movie-image {
