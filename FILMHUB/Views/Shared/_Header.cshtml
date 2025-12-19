@@ -19,31 +19,16 @@
 
         @if (!string.IsNullOrEmpty(userName))
         {
-            <button class="account-name" type="button">
-                @userName
-            </button>
-
-            <div class="account-logged">
-            
-                <a asp-controller="Account" asp-action="Settings" class="account-settings">
-                    Configurações
-                </a>
-                    
-                <a asp-controller="Auth" asp-action="Logout"  class="account-logout">
-                    Sair
-                </a>
-            
-                @* <form method="post" asp-controller="Auth" asp-action="Logout" style="margin:0;" > *@
-                @*     <button type="submit" class="account-logout"> *@
-                @*         Sair *@
-                @*     </button> *@
-                @* </form> *@
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Usuário
+                    <img width="30" height="30" style="border-radius:50%; object-fit:cover;" src="~/img/temp-profile-photo-removebg-preview.png" alt="Avatar"/>
+                </button>
+                <div class="dropdown-content">
+                    <a asp-controller="Account" asp-action="Settings">Configurações</a>
+                    <a asp-controller="Auth" asp-action="Logout">Sair</a>
+                </div>
             </div>
-
-            <img width="50" height="50" 
-                 style="border-radius: 50%; object-fit: cover;" 
-                 src="~/img/temp-profile-photo-removebg-preview.png" 
-                 alt="Foto de perfil" />
         }
         else
         {
