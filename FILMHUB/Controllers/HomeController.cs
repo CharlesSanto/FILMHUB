@@ -52,9 +52,13 @@ public class HomeController : Controller
         });
     }
 
-    public async Task<IActionResult> Movies()
+    public async Task<IActionResult> Movies(int page = 1)
     {
-        var movies = await _movieService.GetPopularMoviesAsync();
+        
+        if (page < 1) page = 1;
+        if (page > 10) page = 10;
+        
+        var movies = await _movieService.GetPopularMoviesAsync(page);
         
         return View(movies);
     }

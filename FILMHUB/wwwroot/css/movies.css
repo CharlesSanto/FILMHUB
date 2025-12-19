@@ -9,3 +9,28 @@
     flex-wrap: wrap;
     gap: 26px;
 }
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 50px auto;
+    gap: 16px;
+}
+.pagination a {
+    padding: 16px;;
+}
+
+.pagination a:hover {
+    text-decoration: none;
+    background-color: #F5F5F5;
+    color: #1A1A1A;
+    border-radius: 5px;
+}
+
+.active {
+    background-color: #F5F5F5;
+    color: #1A1A1A;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
