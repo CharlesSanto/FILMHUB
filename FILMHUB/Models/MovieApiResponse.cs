@@ -6,4 +6,7 @@ public class MovieApiResponse
 {
     [JsonPropertyName("results")]
     public List<Movie> Results { get; set; }
+    
+    [JsonPropertyName("page")]
+    public int Page { get; set; }
 }

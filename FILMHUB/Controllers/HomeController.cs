@@ -52,6 +52,13 @@ public class HomeController : Controller
         });
     }
 
+    public async Task<IActionResult> Movies()
+    {
+        var movies = await _movieService.GetPopularMoviesAsync();
+        
+        return View(movies);
+    }
+
     public IActionResult About()
     {
         return View();
