@@ -11,7 +11,7 @@
             <img src="@($"https://image.tmdb.org/t/p/w1280{Model.BannerMovie.BackdropPath}")" alt="@Model.BannerMovie.Title"/>
             
             <div class="banner-content">
-                <h2 class="banner-title">@Model.BannerMovie.Title</h2>
+                <h1 class="banner-title">@Model.BannerMovie.Title</h1>
                 <p class="banner-overview">@Model.BannerMovie.Overview</p>
                 <button class="banner-info">
                     <span class="material-symbols-outlined">
@@ -37,8 +37,6 @@
                             <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                  alt="@movie.Title"/>
                         </div>
-
-                        <p class="movie-title">@movie.Title</p>
                     </div>
                 }
             </div>
