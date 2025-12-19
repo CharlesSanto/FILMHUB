@@ -54,12 +54,30 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Movies(int page = 1)
     {
-        
-        if (page < 1) page = 1;
-        if (page > 10) page = 10;
-        
-        var movies = await _movieService.GetPopularMoviesAsync(page);
-        
+        MovieApiResponse movies = null;
+        int currentPage = page;
+        int maxPage = 10;
+
+        while (currentPage <= maxPage)
+        {
+            try
+            {
+                movies = await _movieService.GetPopularMoviesAsync(currentPage);
+                if (movies?.Results != null && movies.Results.Any())
+                    break;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro na página {currentPage}: {ex.Message}");
+            }
+            currentPage++;
+        }
+
+        if (movies == null || !movies.Results.Any())
+        {
+            movies = new MovieApiResponse { Page = 1, Results = new List<Movie>() };
+        }
+
         return View(movies);
     }
 
