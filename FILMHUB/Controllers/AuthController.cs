@@ -24,14 +24,23 @@ public class AuthController : Controller
     [HttpPost]
     public IActionResult Login(LoginDto loginDto)
     {
-        if (!_authService.UsersExists(loginDto.Email, loginDto.Password))
-            ModelState.AddModelError("Email", "Email ou senha incorretos.");    
+        var user = _authService.ValidateUser(loginDto.Email,  loginDto.Password);
 
-        if (!ModelState.IsValid)
+        if (user == null)
         {
+            ModelState.AddModelError("Email", "Email ou senha incorretos.");
             return View(loginDto);
         }
         
+        HttpContext.Session.SetInt32("UserId", user.Id);
+        HttpContext.Session.SetString("UserName", user.Name);
+        
+        return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
         return RedirectToAction("Index", "Home");
     }
     

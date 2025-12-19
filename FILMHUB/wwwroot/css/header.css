@@ -12,6 +12,13 @@ header {
     padding: 0 300px;
 }
 
+.account > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+}
+
 .logo {
     width: 300px;
 }
@@ -65,20 +72,73 @@ li a:hover {
 
 .account {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    margin: 0;
+    gap: 15px;
+}
+
+.account-name {
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
-    gap: 10px;
+    gap: 5px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #F5F5F5;
+    padding: 5px;
+}
+.account-name .material-symbols-outlined {
+    font-size: 24px;
 }
 
-.account a {
-    padding: 10px;
-    border-radius: 20px;
-    transition: background-color 0.1s ease;
+.account-logged {
+    display: none;
+    position: absolute;
+    top: 120%; 
+    right: 0;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 5px 0; 
+    min-width: 180px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-.account a:hover {
+.account:focus-within .account-logged {
+    display: block;
+    animation: fadeIn 0.2s ease-in-out; 
+}
+
+.account-logged button,
+.account-logged a {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    color: #e0e0e0;
+    text-align: left;
+    cursor: pointer;
     text-decoration: none;
-    background-color: rgba(13, 13, 13, 0.4);
+    font-size: 14px;
+    font-family: inherit;
+    transition: background 0.2s;
+}
+
+.account-logged button:hover,
+.account-logged a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

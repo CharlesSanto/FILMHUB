@@ -1,0 +1,9 @@
+using System.Text.Json.Serialization;
+
+namespace FILMHUB.Models;
+
+public class MovieApiResponse
+{
+    [JsonPropertyName("results")]
+    public List<Movie> Results { get; set; }
+}
