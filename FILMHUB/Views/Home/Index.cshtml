@@ -13,12 +13,11 @@
             <div class="banner-content">
                 <h1 class="banner-title">@Model.BannerMovie.Title</h1>
                 <p class="banner-overview">@Model.BannerMovie.Overview</p>
-                <button class="banner-info">
-                    <span class="material-symbols-outlined">
-                        info
-                    </span>
+                <a class="banner-info" asp-controller="Home" asp-action="MovieDetails" asp-route-id="@Model.BannerMovie.Id">
+    
+                    <span class="material-symbols-outlined">info</span>
                     Mais informações
-                </button>
+                </a>
             </div>
         }
     </section>
@@ -34,8 +33,10 @@
                 {
                     <div class="movie-card">
                         <div class="movie-image">
-                            <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                 alt="@movie.Title"/>
+                            <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                     alt="@movie.Title"/>
+                            </a>
                         </div>
                         <p class="movie-rating">
                             <span class="material-symbols-outlined">
@@ -61,9 +62,11 @@
                 {
                     <div class="movie-card">
                         <div class="movie-image">
-                            <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                 alt="@movie.Title"/>
-                        </div>
+                            <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                     alt="@movie.Title"/>
+                            </a>
+                        </div> 
                         <p class="movie-rating">
                             <span class="material-symbols-outlined">
                                 star_rate
@@ -88,8 +91,10 @@
                 {
                     <div class="movie-card">
                         <div class="movie-image">
-                            <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                 alt="@movie.Title"/>
+                            <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                     alt="@movie.Title"/>
+                            </a>
                         </div>
                         <p class="movie-rating">
                             <span class="material-symbols-outlined">

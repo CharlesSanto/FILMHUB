@@ -90,6 +90,7 @@
     color: #0D0D0D;
     cursor: pointer;
     transform: scale(1.01);
+    text-decoration: none;
 }
 
 .section-title {
