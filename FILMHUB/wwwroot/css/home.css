@@ -58,7 +58,7 @@
 
 .banner-info {
     display: flex;
-    background-color: #0D0D0D;
+    background-color: #1A1A1A;
     width: 70%;
     height: 50px;
     margin-top: 20px;
@@ -66,7 +66,7 @@
     border-radius: 10px;
     text-align: center;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bolder;
     color: #F5F5F5;
     justify-content: center;
     align-items: center;
@@ -81,7 +81,7 @@
     background-color: #F5F5F5;
     color: #0D0D0D;
     cursor: pointer;
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 .section-title {
