@@ -28,7 +28,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
     border-radius: 10px;
 }
@@ -49,16 +49,17 @@
 .banner-title {
     text-align: start;
     font-weight: bolder;
-    font-size: 50px;
+    font-size: 70px;
 }
 
-.banner-content p {
+.banner-overview {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-align: start;
     font-weight: normal;
+    font-size: 16px;
 }
 
 .banner-info {
