@@ -9,4 +9,5 @@ public interface IMovieService
     Task<List<Movie>> GetTopRatedMovies();
     Task<List<Movie>> GetTrendingMovies();
     Task<Movie> GetRandomBannerMovie();
+    Task<Movie> GetMovieByID(int id);
 }

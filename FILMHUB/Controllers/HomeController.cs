@@ -30,6 +30,13 @@ public class HomeController : Controller
         return View(movieResponse);
     }
 
+    public async Task<IActionResult> MovieDetails(int id)
+    {
+        Movie movie = await _movieService.GetMovieByID(id);
+        
+        return View(movie);
+    }
+
     public IActionResult About()
     {
         return View();

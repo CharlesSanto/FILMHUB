@@ -1,4 +1,5 @@
 using FILMHUB.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace FILMHUB.Services.Interfaces;
@@ -38,6 +39,13 @@ public class MovieService : IMovieService
     public async Task<List<Movie>> GetTopRatedMovies() => await GetMovies("movie/top_rated");
 
     public async Task<List<Movie>> GetTrendingMovies() => await GetMovies("trending/movie/week");
+
+    public async Task<Movie> GetMovieByID(int id)
+    {
+        var movie = await _client.GetFromJsonAsync<Movie>($"movie/{id}?language=pt-BR");
+        
+        return movie;
+    }
 
     public async Task<Movie> GetRandomBannerMovie()
     {
