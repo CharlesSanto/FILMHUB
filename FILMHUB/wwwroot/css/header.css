@@ -101,7 +101,7 @@ li a:hover {
     z-index: 3;
     background-color: #1A1A1A;
     border-radius: 15px;
-    right: 30px;
+    right: 50px;
 }
 
 .account-logout,
