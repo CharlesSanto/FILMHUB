@@ -9,7 +9,7 @@
 .home-banner {
     position: relative;
     width: 100%;
-    height: 510px;
+    height: 560px;
     margin-top: 30px;
     overflow: hidden;
 }
@@ -37,7 +37,7 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
-    width: 400px;
+    width: 470px;
     position: absolute;
     inset: 0;
     color: #F5F5F5;
