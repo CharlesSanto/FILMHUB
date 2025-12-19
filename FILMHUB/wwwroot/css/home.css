@@ -115,7 +115,7 @@
     position: absolute;
     top: 40%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
     border: none;
     color: white;
     font-size: 32px;
@@ -136,7 +136,7 @@
 }
 
 .movie-card {
-    width: 160px;
+    width: 240px;
     flex-shrink: 0;
     background-color: #1A1A1A;
     border-radius: 10px;
@@ -160,6 +160,7 @@
 }
 
 .movie-title {
-    font-size: 12px;
-    text-align: center;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 15px;
 }
