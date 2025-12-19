@@ -1,0 +1,30 @@
+@model List<FILMHUB.Models.Movie>
+
+@{
+    ViewData["Title"] = "Filmes";
+}
+
+<div class="movies">
+    <h1 class="section-title">Filmes populares</h1>
+    
+    <div class="section-movies">
+        @foreach (var movie in Model)
+        {
+            <div class="movie-card">
+                <div class="movie-image">
+                    <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                        <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                             alt="@movie.Title"/>
+                    </a>
+                </div> 
+                <p class="movie-rating">
+                    <span class="material-symbols-outlined">
+                        star_rate
+                    </span>@Math.Round(movie.VoteAverage, 1)
+                </p>
+                <p class="movie-title">@movie.Title</p>
+            </div>
+        }
+    </div>
+    
+</div>
