@@ -28,7 +28,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1;
     border-radius: 10px;
 }
@@ -118,12 +118,12 @@
     position: absolute;
     top: 40%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     border: none;
     color: white;
     font-size: 32px;
     width: 40px;
-    height: 234px;
+    height: 134px;
     cursor: pointer;
     z-index: 10;
 }

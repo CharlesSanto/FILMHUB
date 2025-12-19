@@ -29,7 +29,7 @@ public class MovieService : IMovieService
         }
         
         var movieResponse = await _client.GetFromJsonAsync<MovieApiResponse>($"{endpoint}?language=pt-BR");
-        var movies = movieResponse?.Results ?? new List<Movie>();
+        var movies = movieResponse?.Results.Take(10).ToList() ?? new List<Movie>();
 
         _cache.Set(cacheKey, movies, TimeSpan.FromMinutes(10));
 
