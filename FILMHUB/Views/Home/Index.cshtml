@@ -7,7 +7,14 @@
 <div class="home-container">
     
     <section class="home-banner">
-        
+        @{
+            <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w1920{Model.TrendingMovies[1].BackdropPath}")" />
+            
+            <div class="banner-content">
+                <h2 class="banner-title">@Model.TrendingMovies[1].Title</h2>
+                <p class="banner-overview">@Model.TrendingMovies[1].Overview</p>
+            </div>
+        }
     </section>
 
     <section class="popular-movies">
