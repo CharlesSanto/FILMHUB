@@ -35,14 +35,21 @@ public class MovieService : IMovieService
 
         return movies;
     }
-    
-    public async Task<List<Movie>> GetPopularMoviesAsync() => await GetMovies("movie/popular");
 
     public async Task<List<Movie>> GetMoviesInTheaters() => await GetMovies("movie/now_playing");
 
     public async Task<List<Movie>> GetTopRatedMovies() => await GetMovies("movie/top_rated");
 
     public async Task<List<Movie>> GetTrendingMovies() => await GetMovies("trending/movie/week");
+    
+    public async Task<MovieApiResponse> GetPopularMoviesAsync(int page = 1)
+    {
+        var movies = await _client.GetFromJsonAsync<MovieApiResponse>($"movie/popular?language=pt-BR&page={page}");
+
+        if (movies == null) return null;
+        
+        return movies;
+    }
 
     public async Task<Movie> GetMovieByID(int id)
     {

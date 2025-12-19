@@ -1,0 +1,53 @@
+@model FILMHUB.Models.MovieApiResponse;
+
+@{
+    ViewData["Title"] = "Filmes";
+}
+
+<div class="movies">
+    <h1 class="section-title">Filmes populares</h1>
+    
+    <div class="section-movies">
+        @foreach (var movie in Model.Results)
+        {
+            <div class="movie-card">
+                <div class="movie-image">
+                    <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                        <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                             alt="@movie.Title"/>
+                    </a>
+                </div> 
+                <p class="movie-rating">
+                    <span class="material-symbols-outlined">
+                        star_rate
+                    </span>@Math.Round(movie.VoteAverage, 1)
+                </p>
+                <p class="movie-title">@movie.Title</p>
+            </div>
+        }
+    </div>
+    
+    <div class="pagination">
+        <a asp-controller="Home" asp-action="Movies" 
+           asp-route-page="@(Math.Max(Model.Page - 1, 1))"
+           class="prev-button @(Model.Page == 1 ? "disabled" : "")">
+            &lt;
+        </a>
+
+        @for (int i = 1; i <= 10; i++)
+        {
+            <a asp-controller="Home" asp-action="Movies" asp-route-page="@i"
+               class="@(i == Model.Page ? "active" : "")">
+                @i
+            </a>
+        }
+
+        <a asp-controller="Home" asp-action="Movies" 
+           asp-route-page="@(Math.Min(Model.Page + 1, 10))"
+           class="next-button @(Model.Page == 10 ? "disabled" : "")">
+            &gt;
+        </a>
+    </div>
+
+    
+</div>
