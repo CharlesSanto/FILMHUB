@@ -48,7 +48,7 @@ public class MovieService : IMovieService
             return cachedmovies;
         }
         
-        var movies = await GetMovies("movie/now_playing");
+        var movies = await GetMovies("movie/popular");
 
         if (movies == null || movies.Count == 0)
             return null;
