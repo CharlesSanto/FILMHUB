@@ -15,6 +15,8 @@
 }
 
 .home-banner img{
+    position: relative;
+    z-index: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -22,12 +24,13 @@
     border-radius: 10px;
 }
 
-.home-banner img::before {
+.home-banner::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85); /* controla o tom escuro */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
+    border-radius: 10px;
 }
 
 .banner-content {
@@ -40,6 +43,7 @@
     color: #F5F5F5;
     padding-left: 20px;
     padding-bottom: 20px;
+    z-index: 2;
 }
 
 .banner-title {
