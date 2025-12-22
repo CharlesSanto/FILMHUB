@@ -60,7 +60,7 @@ hr {
 }
 
 .sinopse h2 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .trailer {
@@ -70,7 +70,12 @@ hr {
 }
 
 .trailer h2 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.trailer iframe {
+    border: none;
+    border-radius: 10px;
 }
 
 
