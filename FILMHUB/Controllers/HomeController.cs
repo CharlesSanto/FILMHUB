@@ -33,6 +33,7 @@ public class HomeController : Controller
     public async Task<IActionResult> MovieDetails(int id)
     {
         Movie movie = await _movieService.GetMovieByID(id);
+        var trailer = await _movieService.GetMovieTrailer(id);
         
         if (movie == null) return NotFound();
 
@@ -48,7 +49,8 @@ public class HomeController : Controller
         return View(new MovieDetailsViewModels
         {
             Movie = movie,
-            UserMovie = userMovie
+            UserMovie = userMovie,
+            Trailer = trailer
         });
     }
 
