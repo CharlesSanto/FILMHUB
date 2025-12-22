@@ -1,0 +1,55 @@
+.movie-details {
+    width: 100%;
+    margin: 30px auto;
+}
+
+.details-banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.details-banner img {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 10px;
+}
+
+.details-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    width: 470px;
+    position: absolute;
+    inset: 0;
+    color: #F5F5F5;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    z-index: 2;
+}
+
+.sinopse {
+    width: 80%;
+    margin: 20px 0;
+    text-align: justify;
+    line-height: 150%;
+}
+
+.sinopse h2 {
+    margin-bottom: 10px;
+}

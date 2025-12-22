@@ -4,4 +4,20 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Model.Movie.Title</h1>
+<div class="movie-details">
+    
+    <div class="details-banner">
+        <img src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.BackdropPath}")"/>
+
+        <div class="details-content">
+            <h1 class="details-title">@Model.Movie.Title</h1>
+            <p>@Model.Movie.ReleaseDate</p>
+            <p>@Model.Movie.Runtime</p>
+        </div>
+    </div>
+
+    <div class="sinopse">
+        <h2>Sinopse</h2>
+        <p>@Model.Movie.Overview</p>
+    </div>
+</div>
