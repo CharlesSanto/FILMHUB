@@ -83,7 +83,10 @@ public class MovieService : IMovieService
     public async Task<UserMovie> GetUserAndMovie(int? userId, int movieId)
     {
         return await _context.UserMovies
-            .FirstOrDefaultAsync(user => user.Id == userId && movieId == user.MovieId);
+            .FirstOrDefaultAsync(um =>
+                um.UserId == userId &&
+                um.MovieId == movieId
+            );
     }
 
     public async Task<string> GetMovieTrailer(int movieId)
