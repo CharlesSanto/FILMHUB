@@ -5,6 +5,8 @@
 
     int hour = @Model.Movie.Runtime / 60;
     int minutes = @Model.Movie.Runtime % 60;
+    
+    var director = Model.Crew.FirstOrDefault(c => c.Job == "Director");
 }
 
 <div class="movie-details">
@@ -15,7 +17,7 @@
         <div class="details-content">
             <h1 class="details-title">@Model.Movie.Title</h1>
             
-            <p>@Model.Movie.ReleaseDate?.Year - @(Model.Certification == "L" ? "Livre" : Model.Certification) - @hour h @minutes m</p>
+            <p>@Model.Movie.ReleaseDate?.Year - @(Model.Certification == "L" ? "Livre" : Model.Certification) - @hour h @minutes m - Dirigido por @director.Name</p>
         </div>
     </div>
     

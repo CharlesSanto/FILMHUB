@@ -8,6 +8,7 @@ public class MovieDetailsViewModels
     public UserMovie UserMovie { get; set; }
     public string Trailer { get; set; }
     public string Certification { get; set; }
+    public List<Crew> Crew { get; set; }
     
     public bool HasUserMovie => UserMovie != null;
 }

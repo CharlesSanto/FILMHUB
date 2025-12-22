@@ -125,4 +125,11 @@ public class MovieService : IMovieService
         return certification;
     }
 
+    public async Task<List<Crew>> GetMovieCredits(int movieId)
+    {
+        var creadits = await _client.GetFromJsonAsync<Credits>($"movie/{movieId}/credits");
+        
+        return creadits?.Crew ?? new List<Crew>();
+        
+    }
 }
