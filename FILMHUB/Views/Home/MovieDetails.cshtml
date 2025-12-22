@@ -38,7 +38,41 @@
         
         @if (!string.IsNullOrEmpty(userName))
         {
-            <div>Watchlist</div>
+            <div class="review-movie">
+
+                <div class="movie-actions">
+                    @switch (Model.UserMovie?.Status)
+                    {
+                        case UserMovieStatus.WantToWatch:
+                            <button class="btn btn-to-watch">Para assistir</button>
+                            break;
+
+                        case UserMovieStatus.Watched:
+                            <button class="btn btn-to-watched">Já assisti</button>
+                            break;
+
+                        default:
+                            <button class="btn">Assistir</button>
+                            break;
+                    }
+
+                    <button class="btn btn-favorite">Favoritar</button>
+                </div>
+
+                <div class="movie-rating">
+                    <div class="rating-info">
+                        <h3>Avaliação do público</h3>
+                        <p>
+                            <span class="material-symbols-outlined">star_rate</span>
+                            @Math.Round(Model.Movie.VoteAverage, 1)
+                        </p>
+                    </div>
+
+                    <button class="btn btn-review">Avaliar</button>
+                </div>
+
+            </div>
+
         }
         else
         {
