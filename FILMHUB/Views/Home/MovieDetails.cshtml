@@ -16,6 +16,39 @@
         </div>
     </div>
     
+    <div class="review-section">
+        
+        <img width="200" src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.PosterPath}")"/>
+        
+        @{
+            var userName = Context.Session.GetString("UserName");
+        }
+        
+        @if (!string.IsNullOrEmpty(userName))
+        {
+            <div>Watchlist</div>
+        }
+        else
+        {
+            <div class="login-to-review">
+                <a asp-controller="Auth" asp-action="Login">Faça login para avaliar</a>
+                
+                <h3>Avaliação do público</h3>
+                <p>
+                    <span class="material-symbols-outlined">
+                        star_rate
+                    </span>
+                    @Math.Round(Model.Movie.VoteAverage, 1)
+                </p>
+                
+            </div>
+            
+        }
+            
+        
+        
+    </div>
+    
     <hr/>
 
     <div class="sinopse">
