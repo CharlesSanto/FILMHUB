@@ -15,9 +15,16 @@
         <img src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.BackdropPath}")"/>
 
         <div class="details-content">
-            <h1 class="details-title">@Model.Movie.Title</h1>
             
-            <p>@Model.Movie.ReleaseDate?.Year - @(Model.Certification == "L" ? "Livre" : Model.Certification) - @hour h @minutes m - Dirigido por @director.Name</p>
+            <div class="details-title">
+                <h1>@Model.Movie.Title</h1>
+                <p>@Model.Movie.ReleaseDate?.Year</p>
+            </div>
+            
+            <p>
+                <span class="certification age-@Model.Certification">@(Model.Certification == "L" ? "Livre" : Model.Certification)</span> 
+                     &bull;  @hour h @minutes m &bull;  Dirigido por @director.Name
+            </p>
         </div>
     </div>
     
