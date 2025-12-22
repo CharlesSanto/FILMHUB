@@ -85,4 +85,28 @@ public class MovieService : IMovieService
         return await _context.UserMovies
             .FirstOrDefaultAsync(user => user.Id == userId && movieId == user.MovieId);
     }
+
+    public async Task<string> GetMovieTrailer(int movieId)
+    {
+        var videoResponse = await _client.GetFromJsonAsync<MovieVideoResponse>($"movie/{movieId}/videos?language=pt-BR");
+
+        if (videoResponse?.Results == null || !videoResponse.Results.Any()) 
+            return null;
+
+        var trailerFinal = videoResponse.Results
+            .Where(v => v.Site == "YouTube" && v.Type == "Trailer")
+            .OrderByDescending(v => v.Name.Contains("Dublado", StringComparison.OrdinalIgnoreCase)) 
+            .ThenByDescending(v => v.Official)
+            .ThenByDescending(v => v.Iso_639_1 == "pt")
+            .FirstOrDefault();
+
+        if (trailerFinal == null)
+        {
+            var fallbackResponse = await _client.GetFromJsonAsync<MovieVideoResponse>($"movie/{movieId}/videos");
+            trailerFinal = fallbackResponse?.Results
+                .FirstOrDefault(v => v.Site == "YouTube" && v.Type == "Trailer");
+        }
+
+        return trailerFinal?.Key;
+    }
 }

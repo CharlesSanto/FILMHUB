@@ -23,6 +23,27 @@
     
     <div class="trailer">
         
+        @if (Model.Trailer != null && Model.Trailer.Any())
+        {
+            @if (!string.IsNullOrEmpty(Model.Trailer))
+            {
+                <h2>Trailer</h2>
+                
+                <iframe
+                    width="790"
+                    height="100%"
+                    src="https://www.youtube.com/embed/@Model.Trailer" 
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+            }
+        }
+        else
+        {
+            <p></p>
+        }
+
+
     </div>
     
 </div>
