@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Details";
+
+    int hour = @Model.Movie.Runtime / 60;
+    int minutes = @Model.Movie.Runtime % 60;
 }
 
 <div class="movie-details">
@@ -11,8 +14,8 @@
 
         <div class="details-content">
             <h1 class="details-title">@Model.Movie.Title</h1>
-            <p>@Model.Movie.ReleaseDate</p>
-            <p>@Model.Movie.Runtime</p>
+            
+            <p>@Model.Movie.ReleaseDate?.Year - @(Model.Certification == "L" ? "Livre" : Model.Certification) - @hour h @minutes m</p>
         </div>
     </div>
     

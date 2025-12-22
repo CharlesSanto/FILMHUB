@@ -34,6 +34,7 @@ public class HomeController : Controller
     {
         Movie movie = await _movieService.GetMovieByID(id);
         var trailer = await _movieService.GetMovieTrailer(id);
+        var certification =  await _movieService.GetMovieCertification(id);
         
         if (movie == null) return NotFound();
 
@@ -50,7 +51,8 @@ public class HomeController : Controller
         {
             Movie = movie,
             UserMovie = userMovie,
-            Trailer = trailer
+            Trailer = trailer,
+            Certification = certification
         });
     }
 

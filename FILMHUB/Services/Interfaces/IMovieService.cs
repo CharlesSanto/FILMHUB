@@ -12,4 +12,5 @@ public interface IMovieService
     Task<Movie> GetMovieByID(int id);
     Task<UserMovie> GetUserAndMovie(int? userId, int movieId);
     Task<string?> GetMovieTrailer(int movieId);
+    Task<string> GetMovieCertification(int movieId);
 }

@@ -34,7 +34,7 @@ hr {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
     border-radius: 10px;
 }
@@ -50,6 +50,8 @@ hr {
     padding-left: 20px;
     padding-bottom: 20px;
     z-index: 2;
+    gap: 25px;
+    font-weight: bold;
 }
 
 .review-section {

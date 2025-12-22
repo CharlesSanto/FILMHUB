@@ -109,4 +109,20 @@ public class MovieService : IMovieService
 
         return trailerFinal?.Key;
     }
+
+    public async Task<string> GetMovieCertification(int movieId)
+    {
+        var response = await _client.GetFromJsonAsync<MovieCertificationResponse>(
+            $"movie/{movieId}/release_dates"
+        );
+        
+        var br = response?.Results
+            ?.FirstOrDefault(r => r.Iso_3166_1 == "BR");
+
+        var certification = br?.ReleaseDates
+            .FirstOrDefault(rd => !string.IsNullOrEmpty(rd.Certification))
+            ?.Certification;
+        return certification;
+    }
+
 }
