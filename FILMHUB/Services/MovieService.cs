@@ -200,6 +200,7 @@ public class MovieService : IMovieService
                 Rating = rating,
                 WatchedAt = watchedAt,
                 Review =  comment,
+                Status = UserMovieStatus.Watched,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
             };
@@ -213,6 +214,7 @@ public class MovieService : IMovieService
             userMovie.Rating = rating;
             userMovie.WatchedAt = watchedAt;
             userMovie.Review = comment;
+            userMovie.Status = UserMovieStatus.Watched;
             userMovie.UpdatedAt = DateTime.UtcNow;
         }
         
