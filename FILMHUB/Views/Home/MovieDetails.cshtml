@@ -149,30 +149,32 @@
                         <input
                             type="date"
                             name="WatchedAt"
-                            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+                            value="@(Model.UserMovie?.WatchedAt.HasValue == true
+                                       ? Model.UserMovie.WatchedAt.Value.ToString("yyyy-MM-dd")
+                                       : DateTime.UtcNow.ToString("yyyy-MM-dd"))"
                             class="review-date-input" />
                     </div>
 
                     <textarea
                         name="Comment"
                         class="review-textarea"
-                        placeholder="Faça sua avaliação"></textarea>
+                        placeholder="Faça sua avaliação">@(Model.UserMovie?.Review)</textarea>
 
                     <div class="rating">
                         <div class="star-rating">
-                            <input type="radio" id="star10" name="Rating" value="10">
+                            <input type="radio" id="star10" name="Rating" value="10" @(Model.UserMovie?.Rating == 10 ? "checked" : "") >
                             <label for="star10">★</label>
 
-                            <input type="radio" id="star8" name="Rating" value="8">
+                            <input type="radio" id="star8" name="Rating" value="8" @(Model.UserMovie?.Rating == 8 ? "checked" : "")>
                             <label for="star8">★</label>
 
-                            <input type="radio" id="star6" name="Rating" value="6">
+                            <input type="radio" id="star6" name="Rating" value="6" @(Model.UserMovie?.Rating == 6 ? "checked" : "")>
                             <label for="star6">★</label>
 
-                            <input type="radio" id="star4" name="Rating" value="4">
+                            <input type="radio" id="star4" name="Rating" value="4" @(Model.UserMovie?.Rating == 4 ? "checked" : "")>
                             <label for="star4">★</label>
 
-                            <input type="radio" id="star2" name="Rating" value="2">
+                            <input type="radio" id="star2" name="Rating" value="2" @(Model.UserMovie?.Rating == 2 ? "checked" : "")>
                             <label for="star2">★</label>
                         </div>
 
