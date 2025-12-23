@@ -71,6 +71,11 @@ public class HomeController : Controller
         return RedirectToAction("MovieDetails", new { id = movieId });
     }
 
+    public async Task<IActionResult> FavoritesMovies()
+    {
+        return View();
+    }
+
     public async Task<IActionResult> Movies(int page = 1)
     {
         MovieApiResponse movies = null;

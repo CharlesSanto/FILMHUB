@@ -25,6 +25,7 @@
                     <img width="50" height="50" style="border-radius:50%; object-fit:cover;" src="~/img/temp-profile-photo-removebg-preview.png" alt="Avatar"/>
                 </button>
                 <div class="dropdown-content">
+                    <a asp-controller="Home" asp-action="FavoritesMovies" class="favorites">Favoritos</a>
                     <a asp-controller="Account" asp-action="Settings" class="account-settings">Configurações</a>
                     <a asp-controller="Auth" asp-action="Logout" class="account-logout">Sair</a>
                 </div>
