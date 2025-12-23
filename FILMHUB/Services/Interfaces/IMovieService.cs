@@ -11,4 +11,11 @@ public interface IMovieService
     Task<Movie> GetRandomBannerMovie();
     Task<Movie> GetMovieByID(int id);
     Task<UserMovie> GetUserAndMovie(int? userId, int movieId);
+    Task<string?> GetMovieTrailer(int movieId);
+    Task<string> GetMovieCertification(int movieId);
+    Task<List<Crew>> GetMovieCredits(int movieId);
+    Task SetStatus (int userId, int movieId, UserMovieStatus status);
+    Task IsFavorite(int userId, int movieId, bool status);
+    Task SaveReview(int userId, int movieId, int rating, DateTime watchedAt, string comment);
+    Task<List<UserMovie>> GetRecentReviwes(int movieId);
 }

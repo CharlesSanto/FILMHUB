@@ -2,6 +2,295 @@
 
 @{
     ViewData["Title"] = "Details";
+
+    int hour = @Model.Movie.Runtime / 60;
+    int minutes = @Model.Movie.Runtime % 60;
+    
+    var director = Model.Crew.FirstOrDefault(c => c.Job == "Director");
 }
 
-<h1>@Model.Movie.Title</h1>
+<div class="movie-details">
+    
+    <div class="details-banner">
+        <img src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.BackdropPath}")"/>
+
+        <div class="details-content">
+            
+            <div class="details-title">
+                <h1>@Model.Movie.Title</h1>
+                <p>@Model.Movie.ReleaseDate?.Year</p>
+            </div>
+            
+            <p>
+                <span class="certification age-@Model.Certification">@(Model.Certification == "L" ? "Livre" : Model.Certification)</span> 
+                &bull;  @hour h @minutes m &bull;  Dirigido por @director.Name
+            </p>
+        </div>
+    </div>
+    
+    <div class="review-section">
+        
+        <img width="200" src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.PosterPath}")"/>
+        
+        @{
+            var userName = Context.Session.GetString("UserName");
+        }
+        
+        @if (!string.IsNullOrEmpty(userName))
+        {
+            <div class="review-movie">
+
+                <div class="movie-actions">
+                    <button id="btn-status" class="btn @(Model.UserMovie?.Status == UserMovieStatus.WantToWatch ? "btn-to-watch" :
+                                                       Model.UserMovie?.Status == UserMovieStatus.Watched ? "btn-to-watched" : "")"
+                            data-movie="@Model.Movie.Id"
+                            data-status="@((int?)Model.UserMovie?.Status ?? 1)">
+                        @(Model.UserMovie?.Status == UserMovieStatus.WantToWatch ? "Para assistir" :
+                        Model.UserMovie?.Status == UserMovieStatus.Watched ? "Já assisti" : "Assistir")
+                    </button>
+                    
+                    <button type="button" id="btn-favorite" class="btn btn-favorite"
+                            data-movie="@Model.Movie.Id"
+                            data-favorite="@(Model.UserMovie?.IsFavorite ?? false)">
+                        @(Model.UserMovie?.IsFavorite == true ? "Desfavoritar" : "Favoritar")
+                    </button>
+                </div>
+
+                <div class="movie-rating-details">
+                    <div class="rating-info">
+                        <h3>Avaliação do público</h3>
+                        <p>
+                            <span class="material-symbols-outlined">star_rate</span>
+                            @Math.Round(Model.Movie.VoteAverage, 1)
+                        </p>
+                    </div>
+
+                    <button id="open-review" class="btn btn-review">Avaliar</button>
+                </div>
+
+            </div>
+
+        }
+        else
+        {
+            <div class="login-to-review">
+                <a asp-controller="Auth" asp-action="Login">Faça login para avaliar</a>
+                
+                <h3>Avaliação do público</h3>
+                <p>
+                    <span class="material-symbols-outlined">
+                        star_rate
+                    </span>
+                    @Math.Round(Model.Movie.VoteAverage, 1)
+                </p>
+                
+            </div>
+            
+        }
+        
+    </div>
+    
+    <hr/>
+
+    <div class="sinopse">
+        <h2>Sinopse</h2>
+        <p>@Model.Movie.Overview</p>
+    </div>
+    
+    
+    <div class="trailer">
+        
+        @if (Model.Trailer != null && Model.Trailer.Any())
+        {
+            @if (!string.IsNullOrEmpty(Model.Trailer))
+            {
+                <hr/>
+                
+                <h2>Trailer</h2>
+                
+                <iframe
+                    width="790"
+                    height="420"
+                    src="https://www.youtube.com/embed/@Model.Trailer" 
+                    allowfullscreen>
+                </iframe>
+            }
+        }
+        else
+        {
+            <p></p>
+        }
+        
+    </div>
+    
+    <hr/>
+    
+    @if (Model.RecentReviews.Any())
+    {
+        <div class="recent-reviews">
+            <h2 class="recent-reviews-title">Avaliações recentes</h2>
+
+            @foreach (var reviews in Model.RecentReviews)
+            {
+                var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <p class="user-name-review">@reviews.User?.Name</p>
+
+                        <div class="review-stars">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="star @(i <= stars ? "filled" : "")">★</span>
+                            }
+                        </div>
+                    </div>
+
+                    <p class="review-comment">@reviews.Review</p>
+                </div>
+            }
+        </div>
+    }
+    
+    
+    <dialog id="review-dialog">
+        <h1>Eu assisti...</h1>
+        
+        <hr/>
+        
+        <div class="review">
+            <img src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.PosterPath}")"/>
+            
+            <div class="review-container">
+    
+                <form asp-action="SaveReview" method="post" class="review-container">
+
+                    <input type="hidden" name="MovieId" value="@Model.Movie.Id" />
+
+                    <div class="review-header">
+                        <h2 class="review-title">@Model.Movie.Title</h2>
+                        <p class="review-year">@Model.Movie.ReleaseDate?.Year</p>
+                    </div>
+
+                    <div class="review-date">
+                        <p>Assistido em</p>
+                        <input
+                            type="date"
+                            name="WatchedAt"
+                            value="@(Model.UserMovie?.WatchedAt.HasValue == true
+                                       ? Model.UserMovie.WatchedAt.Value.ToString("yyyy-MM-dd")
+                                       : DateTime.UtcNow.ToString("yyyy-MM-dd"))"
+                            class="review-date-input" />
+                    </div>
+
+                    <textarea
+                        name="Comment"
+                        class="review-textarea"
+                        placeholder="Faça sua avaliação">@(Model.UserMovie?.Review)</textarea>
+
+                    <div class="rating">
+                        <div class="star-rating">
+                            <input type="radio" id="star10" name="Rating" value="10" @(Model.UserMovie?.Rating == 10 ? "checked" : "") >
+                            <label for="star10">★</label>
+
+                            <input type="radio" id="star8" name="Rating" value="8" @(Model.UserMovie?.Rating == 8 ? "checked" : "")>
+                            <label for="star8">★</label>
+
+                            <input type="radio" id="star6" name="Rating" value="6" @(Model.UserMovie?.Rating == 6 ? "checked" : "")>
+                            <label for="star6">★</label>
+
+                            <input type="radio" id="star4" name="Rating" value="4" @(Model.UserMovie?.Rating == 4 ? "checked" : "")>
+                            <label for="star4">★</label>
+
+                            <input type="radio" id="star2" name="Rating" value="2" @(Model.UserMovie?.Rating == 2 ? "checked" : "")>
+                            <label for="star2">★</label>
+                        </div>
+
+                        <div class="actions">
+                            <button type="button" id="cancel-review" class="btn-cancel-review">
+                                Cancelar
+                            </button>
+
+                            <button type="submit" class="btn-save-review">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </dialog>
+    
+</div>
+
+@section Scripts
+{
+    <script>
+        const dialog = document.getElementById('review-dialog');
+        const openBtn = document.getElementById('open-review');
+        const cancelBtn = document.getElementById('cancel-review');
+    
+        openBtn.addEventListener('click', () => dialog.showModal());
+        cancelBtn.addEventListener('click', () => dialog.close());
+    </script>
+
+    
+    <script>
+        const btn = document.getElementById('btn-favorite');
+        
+        btn.addEventListener('click', async () => {
+            const movieId = btn.dataset.movie;
+            const status = btn.dataset.favorite === 'true' ? false : true;
+        
+            const formData = new FormData();
+            formData.append('movieId', movieId);
+            formData.append('status', status);
+        
+            const response = await fetch('/Home/IsFavorite', {
+                method: 'POST',
+                body: formData
+            });
+        
+            if (response.ok) {
+                btn.dataset.favorite = status;
+                btn.textContent = status ? "Desfavoritar" : "Favoritar";
+            }
+        });
+    </script>
+    
+    <script>
+        const btnStatus = document.getElementById('btn-status');
+        
+        btnStatus.addEventListener('click', async () => {
+            const movieId = btnStatus.dataset.movie;
+            let status = parseInt(btnStatus.dataset.status);
+        
+            if (status === 0) status = 1;
+            else if (status === 1) status = 2;
+            else status = 0;
+        
+            const formData = new FormData();
+            formData.append('movieId', movieId);
+            formData.append('status', status);
+        
+            const response = await fetch('/Home/SetStatus', {
+                method: 'POST',
+                body: formData
+            });
+        
+            if (response.ok) {
+                btnStatus.dataset.status = status;
+                if (status === 0) {
+                    btnStatus.textContent = "Já assisti";
+                    btnStatus.className = "btn btn-to-watched";
+                } else if (status === 1) {
+                    btnStatus.textContent = "Assistir";
+                    btnStatus.className = "btn";
+                } else if (status === 2) {
+                    btnStatus.textContent = "Para assistir";
+                    btnStatus.className = "btn btn-to-watch";
+                }
+            }
+        });
+</script>
+}

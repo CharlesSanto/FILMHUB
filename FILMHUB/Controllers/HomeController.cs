@@ -33,6 +33,10 @@ public class HomeController : Controller
     public async Task<IActionResult> MovieDetails(int id)
     {
         Movie movie = await _movieService.GetMovieByID(id);
+        var trailer = await _movieService.GetMovieTrailer(id);
+        var certification =  await _movieService.GetMovieCertification(id);
+        var crew = await _movieService.GetMovieCredits(id);
+        var reviews = await _movieService.GetRecentReviwes(id);
         
         if (movie == null) return NotFound();
 
@@ -48,8 +52,23 @@ public class HomeController : Controller
         return View(new MovieDetailsViewModels
         {
             Movie = movie,
-            UserMovie = userMovie
+            UserMovie = userMovie,
+            Trailer = trailer,
+            Certification = certification,
+            Crew = crew,
+            RecentReviews = reviews
         });
+    }
+    
+    public async Task<IActionResult> SaveReview(int movieId, int rating, DateTime watchedAt, string comment)
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        int userId = userIdSession.Value;
+        
+        await _movieService.SaveReview(userId, movieId, rating, watchedAt, comment);
+        
+        return RedirectToAction("MovieDetails", new { id = movieId });
     }
 
     public async Task<IActionResult> Movies(int page = 1)
@@ -79,6 +98,27 @@ public class HomeController : Controller
         }
 
         return View(movies);
+    }
+
+    public async Task<IActionResult> SetStatus(int movieId, UserMovieStatus status)
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        int userId = userIdSession.Value;
+        
+        await _movieService.SetStatus(userId, movieId, status);
+        
+        return RedirectToAction("MovieDetails",  new { id = movieId });
+    }
+
+    public async Task<IActionResult> IsFavorite(int movieId, bool status)
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        int userId = userIdSession.Value ;
+
+        await _movieService.IsFavorite(userId, movieId, status);
+        
+        return RedirectToAction("MovieDetails", new { id = movieId });
     }
 
     public IActionResult About()

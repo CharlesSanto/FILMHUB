@@ -2,7 +2,7 @@
 
 public enum UserMovieStatus
 {
-    WantToWatch = 0,
-    Watched = 1,
-    Favorite = 2
+    None = 0,
+    WantToWatch = 1,
+    Watched = 2
 }
