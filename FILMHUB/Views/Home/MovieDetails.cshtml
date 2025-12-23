@@ -68,14 +68,11 @@
                             break;
                     }
                     
-                    <form asp-action="IsFavorite" method="post">
-                        <input type="hidden" name="movieId" value="@Model.Movie.Id" />
-                        <input type="hidden" name="status"
-                               value="@(Model.UserMovie != null && Model.UserMovie.IsFavorite ? "false" : "true")"/>
-                        <button type="submit" class="btn btn-favorite">
-                            @(Model.UserMovie != null && Model.UserMovie.IsFavorite ? "Desfavoritar" : "Favoritar")
-                        </button>
-                    </form>
+                    <button type="button" id="btn-favorite" class="btn btn-favorite"
+                            data-movie="@Model.Movie.Id"
+                            data-favorite="@(Model.UserMovie?.IsFavorite ?? false)">
+                        @(Model.UserMovie?.IsFavorite == true ? "Desfavoritar" : "Favoritar")
+                    </button>
                 </div>
 
                 <div class="movie-rating-details">
@@ -137,7 +134,6 @@
                     width="790"
                     height="420"
                     src="https://www.youtube.com/embed/@Model.Trailer" 
-                    frameborder="0"
                     allowfullscreen>
                 </iframe>
             }
@@ -152,3 +148,29 @@
     <hr/>
     
 </div>
+
+@section Scripts
+{
+    <script>
+        const btn = document.getElementById('btn-favorite');
+        
+        btn.addEventListener('click', async () => {
+            const movieId = btn.dataset.movie;
+            const status = btn.dataset.favorite === 'true' ? false : true;
+        
+            const formData = new FormData();
+            formData.append('movieId', movieId);
+            formData.append('status', status);
+        
+            const response = await fetch('/Home/IsFavorite', {
+                method: 'POST',
+                body: formData
+            });
+        
+            if (response.ok) {
+                btn.dataset.favorite = status;
+                btn.textContent = status ? "Desfavoritar" : "Favoritar";
+            }
+                });
+</script>
+}
