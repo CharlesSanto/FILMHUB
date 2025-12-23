@@ -102,7 +102,7 @@
         <p>@Model.Movie.Overview</p>
     </div>
     
-    <hr/>
+    
     
     <div class="trailer">
         
@@ -110,6 +110,8 @@
         {
             @if (!string.IsNullOrEmpty(Model.Trailer))
             {
+                <hr/>
+                
                 <h2>Trailer</h2>
                 
                 <iframe
