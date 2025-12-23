@@ -1,12 +1,11 @@
 .movies {
-    padding-top: 50px;
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
 }
 
 hr {
-    color: #F5F5F5;
-    padding: 5px;
+    padding: 1px;
     border-radius: 2px;
     border: none;
 }
