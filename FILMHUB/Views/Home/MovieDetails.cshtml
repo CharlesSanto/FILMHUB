@@ -41,32 +41,13 @@
             <div class="review-movie">
 
                 <div class="movie-actions">
-                    @switch (Model.UserMovie?.Status)
-                    {
-                        case UserMovieStatus.WantToWatch:
-                            <form asp-action="SetStatus" method="post">
-                                <input type="hidden" name="movieId" value="@Model.Movie.Id" />
-                                <input type="hidden" name="status" value="2" />
-                                <button type="submit" class="btn btn-to-watch">Para assistir</button>
-                            </form>
-                            break;
-
-                        case UserMovieStatus.Watched:
-                            <form asp-action="SetStatus" method="post">
-                                <input type="hidden" name="movieId" value="@Model.Movie.Id" />
-                                <input type="hidden" name="status" value="0" /> 
-                                <button type="submit" class="btn btn-to-watched">Já assisti</button>
-                            </form>
-                            break;
-
-                        default:
-                            <form asp-action="SetStatus" method="post">
-                                <input type="hidden" name="movieId" value="@Model.Movie.Id" />
-                                <input type="hidden" name="status" value="1" />
-                                <button type="submit" class="btn">Assistir</button>
-                            </form>
-                            break;
-                    }
+                    <button id="btn-status" class="btn @(Model.UserMovie?.Status == UserMovieStatus.WantToWatch ? "btn-to-watch" :
+                                                       Model.UserMovie?.Status == UserMovieStatus.Watched ? "btn-to-watched" : "")"
+                            data-movie="@Model.Movie.Id"
+                            data-status="@((int?)Model.UserMovie?.Status ?? 1)">
+                        @(Model.UserMovie?.Status == UserMovieStatus.WantToWatch ? "Para assistir" :
+                        Model.UserMovie?.Status == UserMovieStatus.Watched ? "Já assisti" : "Assistir")
+                    </button>
                     
                     <button type="button" id="btn-favorite" class="btn btn-favorite"
                             data-movie="@Model.Movie.Id"
@@ -171,6 +152,42 @@
                 btn.dataset.favorite = status;
                 btn.textContent = status ? "Desfavoritar" : "Favoritar";
             }
-                });
+        });
+    </script>
+    
+    <script>
+        const btnStatus = document.getElementById('btn-status');
+        
+        btnStatus.addEventListener('click', async () => {
+            const movieId = btnStatus.dataset.movie;
+            let status = parseInt(btnStatus.dataset.status);
+        
+            if (status === 0) status = 1;
+            else if (status === 1) status = 2;
+            else status = 0;
+        
+            const formData = new FormData();
+            formData.append('movieId', movieId);
+            formData.append('status', status);
+        
+            const response = await fetch('/Home/SetStatus', {
+                method: 'POST',
+                body: formData
+            });
+        
+            if (response.ok) {
+                btnStatus.dataset.status = status;
+                if (status === 0) {
+                    btnStatus.textContent = "Já assisti";
+                    btnStatus.className = "btn btn-to-watched";
+                } else if (status === 1) {
+                    btnStatus.textContent = "Assistir";
+                    btnStatus.className = "btn";
+                } else if (status === 2) {
+                    btnStatus.textContent = "Para assistir";
+                    btnStatus.className = "btn btn-to-watch";
+                }
+            }
+        });
 </script>
 }
