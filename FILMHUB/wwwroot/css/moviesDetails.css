@@ -191,6 +191,18 @@ hr {
     text-decoration: none;
 }
 
+.login-to-review p{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 19px;
+}
+
+.login-to-review span{
+    color: yellow;
+    font-weight: bold;
+}
+
 .movie-rating-details p {
     display: flex;
     align-items: center;
