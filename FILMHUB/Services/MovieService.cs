@@ -218,4 +218,16 @@ public class MovieService : IMovieService
         
         await _context.SaveChangesAsync();
     }
+
+    public async Task<List<UserMovie>> GetRecentReviwes(int movieId)
+    {
+        var userMovie = await _context.UserMovies
+            .Include(um => um.User)
+            .Where(um => !string.IsNullOrEmpty(um.Review) && um.MovieId == movieId)
+            .OrderByDescending(um => um.UpdatedAt)
+            .Take(10)
+            .ToListAsync();
+        
+        return  userMovie;
+    }
 }

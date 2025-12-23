@@ -125,6 +125,34 @@
     
     <hr/>
     
+    @if (Model.RecentReviews.Any())
+    {
+        <div class="recent-reviews">
+            <h2 class="recent-reviews-title">Avaliações recentes</h2>
+
+            @foreach (var reviews in Model.RecentReviews)
+            {
+                var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <p class="user-name-review">@reviews.User?.Name</p>
+
+                        <div class="review-stars">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="star @(i <= stars ? "filled" : "")">★</span>
+                            }
+                        </div>
+                    </div>
+
+                    <p class="review-comment">@reviews.Review</p>
+                </div>
+            }
+        </div>
+    }
+    
+    
     <dialog id="review-dialog">
         <h1>Eu assisti...</h1>
         

@@ -36,6 +36,7 @@ public class HomeController : Controller
         var trailer = await _movieService.GetMovieTrailer(id);
         var certification =  await _movieService.GetMovieCertification(id);
         var crew = await _movieService.GetMovieCredits(id);
+        var reviews = await _movieService.GetRecentReviwes(id);
         
         if (movie == null) return NotFound();
 
@@ -54,7 +55,8 @@ public class HomeController : Controller
             UserMovie = userMovie,
             Trailer = trailer,
             Certification = certification,
-            Crew = crew
+            Crew = crew,
+            RecentReviews = reviews
         });
     }
     
