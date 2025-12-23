@@ -144,6 +144,9 @@
                                 <span class="star @(i <= stars ? "filled" : "")">★</span>
                             }
                         </div>
+                        
+                        <p class="review-avaliation">Avaliado em @Model.UserMovie.WatchedAt.Value.ToString("dd/MM/yyyy")</p>
+                        
                     </div>
 
                     <p class="review-comment">@reviews.Review</p>
