@@ -57,6 +57,17 @@ public class HomeController : Controller
             Crew = crew
         });
     }
+    
+    public async Task<IActionResult> SaveReview(int movieId, int rating, DateTime watchedAt, string comment)
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        int userId = userIdSession.Value;
+        
+        await _movieService.SaveReview(userId, movieId, rating, watchedAt, comment);
+        
+        return RedirectToAction("MovieDetails", new { id = movieId });
+    }
 
     public async Task<IActionResult> Movies(int page = 1)
     {
@@ -91,7 +102,7 @@ public class HomeController : Controller
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
         
-        int userId = userIdSession.Value ;
+        int userId = userIdSession.Value;
         
         await _movieService.SetStatus(userId, movieId, status);
         

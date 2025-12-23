@@ -186,4 +186,36 @@ public class MovieService : IMovieService
 
         await _context.SaveChangesAsync();
     }
+
+    public async Task SaveReview(int userId, int movieId, int rating, DateTime watchedAt, string comment)
+    {
+        var userMovie = await _context.UserMovies.FirstOrDefaultAsync(um => um.UserId == userId && um.MovieId == movieId);
+
+        if (userMovie == null)
+        {
+            userMovie = new UserMovie()
+            {
+                UserId = userId,
+                MovieId = movieId,
+                Rating = rating,
+                WatchedAt = watchedAt,
+                Review =  comment,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+            };
+            
+            await _context.UserMovies.AddAsync(userMovie);
+        }
+        else
+        {
+            userMovie.UserId = userId;
+            userMovie.MovieId = movieId;
+            userMovie.Rating = rating;
+            userMovie.WatchedAt = watchedAt;
+            userMovie.Review = comment;
+            userMovie.UpdatedAt = DateTime.UtcNow;
+        }
+        
+        await _context.SaveChangesAsync();
+    }
 }
