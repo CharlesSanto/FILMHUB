@@ -145,7 +145,11 @@
                             }
                         </div>
                         
-                        <p class="review-avaliation">Avaliado em @Model.UserMovie.WatchedAt.Value.ToString("dd/MM/yyyy")</p>
+                        <p class="review-avaliation">
+                            Avaliado em @(reviews.WatchedAt.HasValue 
+                                            ? reviews.WatchedAt.Value.ToString("dd/MM/yyyy") 
+                                            : "-")
+                        </p>
                         
                     </div>
 
