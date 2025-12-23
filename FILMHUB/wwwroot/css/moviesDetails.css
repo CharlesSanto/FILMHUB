@@ -155,9 +155,16 @@ hr {
     font-size: 16px;
 }
 
+.btn-to-watch {
+    background-color: darkgreen;
+}
+
+.btn-to-watched {
+    background-color: darkblue;
+}
+
 .btn:hover {
     cursor: pointer;
-    background: rgba(26, 26, 26, 0.6);
 }
 
 .login-to-review {

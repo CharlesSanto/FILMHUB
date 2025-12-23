@@ -44,19 +44,38 @@
                     @switch (Model.UserMovie?.Status)
                     {
                         case UserMovieStatus.WantToWatch:
-                            <button class="btn btn-to-watch">Para assistir</button>
+                            <form asp-action="SetStatus" method="post">
+                                <input type="hidden" name="movieId" value="@Model.Movie.Id" />
+                                <input type="hidden" name="status" value="2" />
+                                <button type="submit" class="btn btn-to-watch">Para assistir</button>
+                            </form>
                             break;
 
                         case UserMovieStatus.Watched:
-                            <button class="btn btn-to-watched">Já assisti</button>
+                            <form asp-action="SetStatus" method="post">
+                                <input type="hidden" name="movieId" value="@Model.Movie.Id" />
+                                <input type="hidden" name="status" value="0" /> 
+                                <button type="submit" class="btn btn-to-watched">Já assisti</button>
+                            </form>
                             break;
 
                         default:
-                            <button class="btn">Assistir</button>
+                            <form asp-action="SetStatus" method="post">
+                                <input type="hidden" name="movieId" value="@Model.Movie.Id" />
+                                <input type="hidden" name="status" value="1" />
+                                <button type="submit" class="btn">Assistir</button>
+                            </form>
                             break;
                     }
-
-                    <button class="btn btn-favorite">Favoritar</button>
+                    
+                    <form asp-action="IsFavorite" method="post">
+                        <input type="hidden" name="movieId" value="@Model.Movie.Id" />
+                        <input type="hidden" name="status"
+                               value="@(Model.UserMovie != null && Model.UserMovie.IsFavorite ? "false" : "true")"/>
+                        <button type="submit" class="btn btn-favorite">
+                            @(Model.UserMovie != null && Model.UserMovie.IsFavorite ? "Desfavoritar" : "Favoritar")
+                        </button>
+                    </form>
                 </div>
 
                 <div class="movie-rating">

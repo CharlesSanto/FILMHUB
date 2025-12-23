@@ -14,4 +14,6 @@ public interface IMovieService
     Task<string?> GetMovieTrailer(int movieId);
     Task<string> GetMovieCertification(int movieId);
     Task<List<Crew>> GetMovieCredits(int movieId);
+    Task SetStatus (int userId, int movieId, UserMovieStatus status);
+    Task IsFavorite(int userId, int movieId, bool status);
 }

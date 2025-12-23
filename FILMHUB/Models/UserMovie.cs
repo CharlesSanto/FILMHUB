@@ -15,6 +15,7 @@ public class UserMovie
     [MaxLength(2000)]
     public string? Review { get; set; }
     public UserMovieStatus Status { get; set; }
+    public bool IsFavorite { get; set; }
     public DateTime? WatchedAt { get; set; }
     
     public DateTime CreatedAt { get; set; }

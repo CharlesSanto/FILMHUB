@@ -135,4 +135,55 @@ public class MovieService : IMovieService
         return creadits?.Crew ?? new List<Crew>();
         
     }
+
+    public async Task SetStatus(int userId, int movieId, UserMovieStatus status)
+    {
+        var userMovie = await _context.UserMovies.FirstOrDefaultAsync(um => um.UserId == userId && um.MovieId == movieId);
+
+        if (userMovie == null)
+        {
+            userMovie = new UserMovie()
+            {
+                UserId = userId,
+                MovieId = movieId,
+                Status = status,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+            _context.UserMovies.Add(userMovie);
+        }
+        else
+        {
+            userMovie.Status = status;
+            userMovie.UpdatedAt = DateTime.UtcNow;
+        }
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task IsFavorite(int userId, int movieId, bool status)
+    {
+        var userMovie = await  _context.UserMovies.FirstOrDefaultAsync(um => um.UserId == userId && um.MovieId == movieId);
+
+        if (userMovie == null)
+        {
+            userMovie = new UserMovie()
+            {
+                UserId = userId,
+                MovieId = movieId,
+                Status = UserMovieStatus.None,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                IsFavorite = status,
+            };
+            
+            _context.UserMovies.Add(userMovie);
+        }
+        else
+        {
+            userMovie.IsFavorite = status;
+            userMovie.UpdatedAt = DateTime.UtcNow;
+        }
+
+        await _context.SaveChangesAsync();
+    }
 }

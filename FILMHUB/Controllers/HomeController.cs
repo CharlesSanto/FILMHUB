@@ -87,6 +87,27 @@ public class HomeController : Controller
         return View(movies);
     }
 
+    public async Task<IActionResult> SetStatus(int movieId, UserMovieStatus status)
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        int userId = userIdSession.Value ;
+        
+        await _movieService.SetStatus(userId, movieId, status);
+        
+        return RedirectToAction("MovieDetails",  new { id = movieId });
+    }
+
+    public async Task<IActionResult> IsFavorite(int movieId, bool status)
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        int userId = userIdSession.Value ;
+
+        await _movieService.IsFavorite(userId, movieId, status);
+        
+        return RedirectToAction("MovieDetails", new { id = movieId });
+    }
+
     public IActionResult About()
     {
         return View();
