@@ -23,7 +23,7 @@
             
             <p>
                 <span class="certification age-@Model.Certification">@(Model.Certification == "L" ? "Livre" : Model.Certification)</span> 
-                     &bull;  @hour h @minutes m &bull;  Dirigido por @director.Name
+                &bull;  @hour h @minutes m &bull;  Dirigido por @director.Name
             </p>
         </div>
     </div>
@@ -65,7 +65,7 @@
                         </p>
                     </div>
 
-                    <button class="btn btn-review">Avaliar</button>
+                    <button id="open-review" class="btn btn-review">Avaliar</button>
                 </div>
 
             </div>
@@ -87,8 +87,6 @@
             </div>
             
         }
-            
-        
         
     </div>
     
@@ -98,7 +96,6 @@
         <h2>Sinopse</h2>
         <p>@Model.Movie.Overview</p>
     </div>
-    
     
     
     <div class="trailer">
@@ -128,10 +125,86 @@
     
     <hr/>
     
+    <dialog id="review-dialog">
+        <h1>Eu assisti...</h1>
+        
+        <hr/>
+        
+        <div class="review">
+            <img src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.PosterPath}")"/>
+            
+            <div class="review-container">
+    
+                <form asp-action="SaveReview" method="post" class="review-container">
+
+                    <input type="hidden" name="MovieId" value="@Model.Movie.Id" />
+
+                    <div class="review-header">
+                        <h2 class="review-title">@Model.Movie.Title</h2>
+                        <p class="review-year">@Model.Movie.ReleaseDate?.Year</p>
+                    </div>
+
+                    <div class="review-date">
+                        <p>Assistido em</p>
+                        <input
+                            type="date"
+                            name="WatchedAt"
+                            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+                            class="review-date-input" />
+                    </div>
+
+                    <textarea
+                        name="Comment"
+                        class="review-textarea"
+                        placeholder="Faça sua avaliação"></textarea>
+
+                    <div class="rating">
+                        <div class="star-rating">
+                            <input type="radio" id="star10" name="Rating" value="10">
+                            <label for="star10">★</label>
+
+                            <input type="radio" id="star8" name="Rating" value="8">
+                            <label for="star8">★</label>
+
+                            <input type="radio" id="star6" name="Rating" value="6">
+                            <label for="star6">★</label>
+
+                            <input type="radio" id="star4" name="Rating" value="4">
+                            <label for="star4">★</label>
+
+                            <input type="radio" id="star2" name="Rating" value="2">
+                            <label for="star2">★</label>
+                        </div>
+
+                        <div class="actions">
+                            <button type="button" id="cancel-review" class="btn-cancel-review">
+                                Cancelar
+                            </button>
+
+                            <button type="submit" class="btn-save-review">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </dialog>
+    
 </div>
 
 @section Scripts
 {
+    <script>
+        const dialog = document.getElementById('review-dialog');
+        const openBtn = document.getElementById('open-review');
+        const cancelBtn = document.getElementById('cancel-review');
+    
+        openBtn.addEventListener('click', () => dialog.showModal());
+        cancelBtn.addEventListener('click', () => dialog.close());
+    </script>
+
+    
     <script>
         const btn = document.getElementById('btn-favorite');
         
