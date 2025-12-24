@@ -1,0 +1,10 @@
+@model List<FILMHUB.Models.Movie>
+
+@{
+    ViewData["Title"] = "Watchlist";
+}
+
+@foreach (var movie in Model)
+{
+    <h1>@movie.Title</h1>
+}
