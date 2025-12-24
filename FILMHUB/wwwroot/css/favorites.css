@@ -1,0 +1,54 @@
+.favorites-movies {
+    margin-top: 40px;
+}
+
+.movie-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie-card {
+    width: 240px;
+    height: 430px;
+    flex-shrink: 0;
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding-bottom: 5px;
+}
+
+.movie-image {
+    position: relative;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    height: 80%;
+}
+
+.movie-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.movie-image:hover img {
+    transform: scale(1.08);
+}
+
+.movie-rating {
+    gap: 3px;
+}
+
+.movie-rating span {
+    color: yellow;
+    font-size: 20px;
+}
+
+.movie-rating,
+.movie-title {
+    display: flex;
+    font-size: 16px;
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 15px;
+}

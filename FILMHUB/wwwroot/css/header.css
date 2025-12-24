@@ -112,6 +112,7 @@ li a:hover {
     display: block;
 }
 
+.favorites,
 .account-logout,
 .account-settings {
     width: 100%;

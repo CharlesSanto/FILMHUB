@@ -1,5 +1,6 @@
 using FILMHUB.Data;
 using FILMHUB.Models;
+using FILMHUB.ViewModel;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
@@ -232,4 +233,31 @@ public class MovieService : IMovieService
         
         return  userMovie;
     }
+
+    public async Task<List<FavoriteMovieViewModel>> GetFavoriteMovies(int userId)
+    {
+        var favoriteMovieIds = await _context.UserMovies
+            .Where(um => um.UserId == userId && um.IsFavorite)
+            .Select(um => um.MovieId)
+            .ToListAsync();
+
+        var movies = new List<FavoriteMovieViewModel>();
+
+        foreach (var movieId in favoriteMovieIds)
+        {
+            var movie = await GetMovieByID(movieId);
+            if (movie.Id == null) continue;
+
+            movies.Add(new FavoriteMovieViewModel
+            {
+                MovieId = movie.Id,
+                Title = movie.Title,
+                PosterPath = movie.PosterPath,
+                VoteAverage = movie.VoteAverage
+            });
+        }
+
+        return movies;
+    }
+
 }
