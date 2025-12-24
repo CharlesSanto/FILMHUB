@@ -109,6 +109,16 @@ public class HomeController : Controller
         return View(movies);
     }
 
+    public async Task<IActionResult> Reviews()
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        int userId = userIdSession.Value;
+        
+        var reviews = await _movieService.GetUserReviews(userId);
+        
+        return View(reviews);
+    }
+
     public async Task<IActionResult> SetStatus(int movieId, UserMovieStatus status)
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");

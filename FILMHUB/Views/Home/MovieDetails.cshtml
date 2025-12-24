@@ -12,7 +12,7 @@
 <div class="movie-details">
     
     <div class="details-banner">
-        <img src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.BackdropPath}")"/>
+        <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.BackdropPath}")"/>
 
         <div class="details-content">
             
@@ -30,7 +30,7 @@
     
     <div class="review-section">
         
-        <img width="200" src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.PosterPath}")"/>
+        <img class="lazyload" width="200" src="@($"https://image.tmdb.org/t/p/w780{Model.Movie.PosterPath}")"/>
         
         @{
             var userName = Context.Session.GetString("UserName");
@@ -109,6 +109,7 @@
                 <h2>Trailer</h2>
                 
                 <iframe
+                    class="lazyload"
                     width="790"
                     height="420"
                     src="https://www.youtube.com/embed/@Model.Trailer" 
@@ -166,7 +167,7 @@
         <hr/>
         
         <div class="review">
-            <img src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.PosterPath}")"/>
+            <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w1280{Model.Movie.PosterPath}")"/>
             
             <div class="review-container">
     

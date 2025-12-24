@@ -260,4 +260,35 @@ public class MovieService : IMovieService
         return movies;
     }
 
+    public async Task<ReviewsViewModel> GetUserReviews(int userId)
+    {
+        var reviews = await _context.UserMovies
+            .Where(um => um.UserId == userId && !string.IsNullOrEmpty(um.Review))
+            .OrderByDescending(um => um.UpdatedAt)
+            .ToListAsync();
+
+        var moviesTasks = reviews.Select(async um =>
+        {
+            try
+            {
+                return await GetMovieByID(um.MovieId);
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+        });
+
+        var movies = (await Task.WhenAll(moviesTasks))
+            .Where(filme => filme != null)
+            .ToList();
+
+        var viewModels = new ReviewsViewModel()
+        {
+            Movies = movies,
+            UserMovies = reviews
+        };
+        
+        return viewModels;
+    }
 }
