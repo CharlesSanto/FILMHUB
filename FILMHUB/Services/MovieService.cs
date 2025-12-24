@@ -264,6 +264,7 @@ public class MovieService : IMovieService
     {
         var reviews = await _context.UserMovies
             .Where(um => um.UserId == userId && !string.IsNullOrEmpty(um.Review))
+            .OrderByDescending(um => um.UpdatedAt)
             .ToListAsync();
 
         var moviesTasks = reviews.Select(async um =>
