@@ -8,7 +8,7 @@
     
     <section class="home-banner">
         @{
-            <img src="@($"https://image.tmdb.org/t/p/w1280{Model.BannerMovie.BackdropPath}")" alt="@Model.BannerMovie.Title"/>
+            <img class="lazyload" src="@($"https://image.tmdb.org/t/p/w1280{Model.BannerMovie.BackdropPath}")" alt="@Model.BannerMovie.Title"/>
             
             <div class="banner-content">
                 <h1 class="banner-title">@Model.BannerMovie.Title</h1>
@@ -34,7 +34,7 @@
                     <div class="movie-card">
                         <div class="movie-image">
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                      alt="@movie.Title"/>
                             </a>
                         </div>
@@ -63,7 +63,7 @@
                     <div class="movie-card">
                         <div class="movie-image">
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                      alt="@movie.Title"/>
                             </a>
                         </div> 
@@ -92,7 +92,7 @@
                     <div class="movie-card">
                         <div class="movie-image">
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                      alt="@movie.Title"/>
                             </a>
                         </div>

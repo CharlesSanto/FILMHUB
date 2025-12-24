@@ -17,7 +17,7 @@
                 <div class="movie-card">
                     <div class="movie-image">
                         <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.MovieId">
-                            <img loading="lazy"
+                            <img class="lazyload" loading="lazy"
                                  src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                  alt="@movie.Title"/>
                         </a>
