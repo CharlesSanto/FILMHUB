@@ -20,4 +20,5 @@ public interface IMovieService
     Task SaveReview(int userId, int movieId, int rating, DateTime watchedAt, string comment);
     Task<List<UserMovie>> GetRecentReviwes(int movieId);
     Task<List<FavoriteMovieViewModel>> GetFavoriteMovies(int userId);
+    Task<ReviewsViewModel> GetUserReviews(int userId);
 }
