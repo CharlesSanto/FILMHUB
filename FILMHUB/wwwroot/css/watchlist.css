@@ -16,4 +16,35 @@
 .watchlist-header p {
     font-size: 16px;
     font-weight: bold;
+}   
+
+.watchlist-movie {
+    display: flex;
+    gap: 20px;
+}
+
+.watchlist-card {
+    width: 240px;
+    height: 430px;
+    flex-shrink: 0;
+    background-color: #1A1A1A;
+    border-radius: 10px;
+}
+
+.watchlist-card img {
+    position: relative;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    height: 85%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.watchlist-card  p{
+    display: flex;
+    font-size: 16px;
+    text-align: left;
+    padding-top: 5px;
+    padding-left: 15px;
+    font-weight: bold;
 }
