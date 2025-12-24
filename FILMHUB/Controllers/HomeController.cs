@@ -63,7 +63,6 @@ public class HomeController : Controller
     public async Task<IActionResult> SaveReview(int movieId, int rating, DateTime watchedAt, string comment)
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
-        
         int userId = userIdSession.Value;
         
         await _movieService.SaveReview(userId, movieId, rating, watchedAt, comment);
@@ -73,7 +72,12 @@ public class HomeController : Controller
 
     public async Task<IActionResult> FavoritesMovies()
     {
-        return View();
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        int userId = userIdSession.Value;
+
+        var favorites = await _movieService.GetFavoriteMovies(userId);
+        
+        return View(favorites);
     }
 
     public async Task<IActionResult> Movies(int page = 1)

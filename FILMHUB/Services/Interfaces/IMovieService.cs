@@ -1,4 +1,5 @@
 using FILMHUB.Models;
+using FILMHUB.ViewModel;
 
 namespace FILMHUB.Services.Interfaces;
 
@@ -18,4 +19,5 @@ public interface IMovieService
     Task IsFavorite(int userId, int movieId, bool status);
     Task SaveReview(int userId, int movieId, int rating, DateTime watchedAt, string comment);
     Task<List<UserMovie>> GetRecentReviwes(int movieId);
+    Task<List<FavoriteMovieViewModel>> GetFavoriteMovies(int userId);
 }
