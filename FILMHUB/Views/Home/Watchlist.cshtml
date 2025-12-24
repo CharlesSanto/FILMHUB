@@ -13,19 +13,25 @@
     
     <hr/>
     
-    <div class="watchlist-movie">
-        @foreach (var movie in Model)
-        {
-            <div class="watchlist-card">
+    @if (Model.Any())
+    {
+        <div class="watchlist-movie">
+            @foreach (var movie in Model)
+            {
+                <div class="watchlist-card">
                 
-                <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                    <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                         alt="@movie.Title"/>
-                </a>
-                <p>@movie.Title</p>
-            </div>
-        }
-    </div>
-    
+                    <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                        <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                             alt="@movie.Title"/>
+                    </a>
+                    <p>@movie.Title</p>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Sem filmes na watchlist</p>
+    }
     
 </div>
