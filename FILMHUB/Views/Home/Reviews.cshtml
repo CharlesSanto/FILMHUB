@@ -5,15 +5,19 @@
 }
 
 <div class="user-reviews-page">
-    <h1 class="page-title">Minhas Avaliações</h1>
+    
+    <div class="user-reviews-header">
+        <h1 class="page-title">Minhas Avaliações</h1>
+        <p>@Model.UserMovies.Count Filmes avaliados</p> 
+    </div>
 
     <hr/>
-    
+
     @foreach (var movie in Model.Movies)
     {
         <div class="movie-review-card">
             <div class="movie-info">
-                
+
                 <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
                     <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w780{movie.BackdropPath}")" alt="@movie.Title" class="movie-poster lazyload"/>
                 </a>
@@ -43,8 +47,7 @@
                 </div>
             </div>
         </div>
-        
+
         <hr/>
     }
 </div>
-

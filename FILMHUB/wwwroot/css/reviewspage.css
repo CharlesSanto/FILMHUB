@@ -7,6 +7,17 @@
     color: #F5F5F5;
 }
 
+.user-reviews-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-reviews-header p {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .page-title {
     font-size: 28px;
     font-weight: 700;
