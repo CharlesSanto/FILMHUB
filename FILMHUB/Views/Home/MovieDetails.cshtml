@@ -135,7 +135,7 @@
             {
                 var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
 
-                <div class="review-card">
+                <div class="review-cards">
                     <div class="review-header">
                         <p class="user-name-review">@reviews.User?.Name</p>
 
@@ -154,7 +154,7 @@
                         
                     </div>
 
-                    <p class="review-comment">@reviews.Review</p>
+                    <p class="review-comments">@reviews.Review</p>
                 </div>
             }
         </div>

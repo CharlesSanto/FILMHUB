@@ -254,7 +254,7 @@ hr {
     margin-bottom: 10px;
 }
 
-.review-card {
+.review-cards {
     background-color: #141414;
     border-radius: 12px;
     padding: 16px 18px;
@@ -276,11 +276,17 @@ hr {
     color: #e5e5e5;
 }
 
-.review-comment {
+.review-comments {
     font-size: 14px;
     line-height: 1.5;
     color: #cfcfcf;
+
+    white-space: pre-wrap;
     word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .review-stars {
