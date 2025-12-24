@@ -4,7 +4,17 @@
     ViewData["Title"] = "Watchlist";
 }
 
-@foreach (var movie in Model)
-{
-    <h1>@movie.Title</h1>
-}
+<div class="watchlist-container">
+    
+    <div class="watchlist-header">
+        <h1>Watchlist</h1>
+        <p>@Model.Count filmes para assistir</p>
+    </div>
+    
+    <hr/>
+    
+    @foreach (var movie in Model)
+    {
+        <h1>@movie.Title</h1>
+    }
+</div>
