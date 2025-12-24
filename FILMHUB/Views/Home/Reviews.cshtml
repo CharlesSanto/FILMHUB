@@ -4,5 +4,8 @@
     ViewData["Title"] = "Reviews";
 }
 
-<h1>@Model.Movies[0].Title</h1>
+@foreach (var movie in Model.Movies)
+{
+    <h1>@movie.Title</h1>
+}
 
