@@ -23,6 +23,13 @@
     font-weight: 700;
 }
 
+.hr-review {
+    padding: 1px;
+    margin-top: 35px;
+    background-color: #1A1A1A;
+    border-radius: 1px;
+}
+
 .movie-review-card {
     background-color: transparent;
     border-radius: 12px;
