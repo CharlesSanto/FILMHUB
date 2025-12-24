@@ -84,5 +84,11 @@
     line-height: 1.5;
     color: #F5F5F5;
     font-weight: normal;
+    
+    white-space: pre-wrap;
     word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
