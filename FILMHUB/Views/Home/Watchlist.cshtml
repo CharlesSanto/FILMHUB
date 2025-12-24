@@ -11,7 +11,7 @@
         
         @if (Model.Any())
         {
-            <p>@Model.Count filmes para assistir</p>
+            <p> @Model.Count @(Model.Count > 1 ? "filmes para assistir" : "filme para assistir")</p>
         }
         
     </div>
