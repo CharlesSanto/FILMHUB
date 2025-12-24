@@ -8,7 +8,12 @@
     
     <div class="watchlist-header">
         <h1>Watchlist</h1>
-        <p>@Model.Count filmes para assistir</p>
+        
+        @if (Model.Any())
+        {
+            <p>@Model.Count filmes para assistir</p>
+        }
+        
     </div>
     
     <hr/>
