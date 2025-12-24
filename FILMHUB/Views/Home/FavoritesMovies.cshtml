@@ -8,7 +8,11 @@
     
     <div class="favorites-header">
         <h1>Favoritos</h1>
-        <p>@Model.Count filmes como favoritos</p>
+        
+        @if (Model.Any())
+        {
+            <p>@Model.Count @(Model.Count > 1 ? "filmes como favorito" : "filme como favorito")</p>
+        }
     </div>
     
     
