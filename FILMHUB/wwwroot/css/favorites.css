@@ -1,3 +1,7 @@
+.favorites-movies {
+    margin-top: 40px;
+}
+
 .movie-cards-container {
     display: flex;
     flex-wrap: wrap;
