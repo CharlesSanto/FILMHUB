@@ -58,17 +58,17 @@
 
 .review-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
     gap: 12px;
 }
 
-.review-rating {
+.review-notas {
     font-weight: 600;
     color: #f5c518;
 }
 
-.review-date {
+.review-data {
     font-size: 0.85rem;
     color: #9e9e9e;
 }
