@@ -4,8 +4,39 @@
     ViewData["Title"] = "Reviews";
 }
 
-@foreach (var movie in Model.Movies)
-{
-    <h1>@movie.Title</h1>
-}
+<div class="user-reviews-page">
+    <h1 class="page-title">Minhas Avaliações</h1>
+
+    <hr/>
+    
+    @foreach (var movie in Model.Movies)
+    {
+        <div class="movie-review-card">
+            <div class="movie-info">
+                <img src="@($"https://image.tmdb.org/t/p/w1280{movie.BackdropPath}")" alt="@movie.Title" class="movie-poster" />
+
+                <div class="reviews-container">
+                    <h2 class="movie-title">@movie.Title</h2>
+
+                    @foreach (var review in Model.UserMovies.Where(r => r.MovieId == movie.Id))
+                    {
+                        <div class="review-card">
+                            <div class="review-header">
+                                <p class="review-rating">Nota: @review.Rating / 10</p>
+                                <p class="review-date">
+                                    Avaliado em @(review.WatchedAt.HasValue 
+                                                    ? review.WatchedAt.Value.ToString("dd/MM/yyyy") 
+                                                    : "-")
+                                </p>
+                            </div>
+                            <p class="review-comment">@review.Review</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <hr/>
+    }
+</div>
 

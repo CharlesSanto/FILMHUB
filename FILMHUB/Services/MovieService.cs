@@ -263,7 +263,7 @@ public class MovieService : IMovieService
     public async Task<ReviewsViewModel> GetUserReviews(int userId)
     {
         var reviews = await _context.UserMovies
-            .Where(um => um.UserId == userId)
+            .Where(um => um.UserId == userId && !string.IsNullOrEmpty(um.Review))
             .ToListAsync();
 
         var moviesTasks = reviews.Select(async um =>
