@@ -171,7 +171,6 @@ public class MovieService : IMovieService
             {
                 UserId = userId,
                 MovieId = movieId,
-                Status = UserMovieStatus.None,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 IsFavorite = status,
