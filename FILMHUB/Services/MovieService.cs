@@ -292,25 +292,20 @@ public class MovieService : IMovieService
         return viewModels;
     }
 
-    public async Task<List<Movie>> GetUserWatchList(int userId)
+    public async Task<List<Movie?>> GetUserWatchList(int userId)
     {
-        var movies = await _context.UserMovies
-            .Where(um => um.UserId == userId)
+        var movieIds = await _context.UserMovies
+            .Where(um => um.UserId == userId && um.Status == UserMovieStatus.WantToWatch)
             .OrderByDescending(um => um.UpdatedAt)
             .Select(um => um.MovieId)
+            .Distinct()
             .ToListAsync();
 
-        var watchlist = new List<Movie>();
+        var movieTasks = movieIds.Select(id => GetMovieByID(id));
 
-        foreach (var movieId in movies)
-        {
-            var filme = await GetMovieByID(movieId);
-            
-            if (filme == null) continue;
-            
-            watchlist.Add(filme);
-        }
-        
-        return watchlist;
+        return (await Task.WhenAll(movieTasks))
+            .Where(m => m != null)
+            .ToList();
     }
+
 }

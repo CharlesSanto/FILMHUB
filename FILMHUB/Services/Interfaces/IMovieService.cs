@@ -21,5 +21,5 @@ public interface IMovieService
     Task<List<UserMovie>> GetRecentReviwes(int movieId);
     Task<List<FavoriteMovieViewModel>> GetFavoriteMovies(int userId);
     Task<ReviewsViewModel> GetUserReviews(int userId);
-    Task<List<Movie>> GetUserWatchList(int userId);
+    Task<List<Movie?>> GetUserWatchList(int userId);
 }
