@@ -13,7 +13,10 @@
     {
         <div class="movie-review-card">
             <div class="movie-info">
-                <img src="@($"https://image.tmdb.org/t/p/w1280{movie.BackdropPath}")" alt="@movie.Title" class="movie-poster" />
+                
+                <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                    <img src="@($"https://image.tmdb.org/t/p/w1280{movie.BackdropPath}")" alt="@movie.Title" class="movie-poster"/>
+                </a>
 
                 <div class="reviews-container">
                     <h2 class="movie-title">@movie.Title</h2>
@@ -21,7 +24,7 @@
                     @foreach (var review in Model.UserMovies.Where(r => r.MovieId == movie.Id))
                     {
                         var stars = (int)Math.Round((review.Rating ?? 0) / 2);
-                        
+
                         <div class="review-card">
                             <div class="review-header">
                                 <div class="review-stars">
@@ -31,8 +34,8 @@
                                     }
                                 </div>
                                 <p class="review-date">
-                                    Avaliado em @(review.WatchedAt.HasValue 
-                                                    ? review.WatchedAt.Value.ToString("dd/MM/yyyy") 
+                                    Avaliado em @(review.WatchedAt.HasValue
+                                                    ? review.WatchedAt.Value.ToString("dd/MM/yyyy")
                                                     : "-")
                                 </p>
                             </div>
