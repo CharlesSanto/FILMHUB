@@ -291,4 +291,26 @@ public class MovieService : IMovieService
         
         return viewModels;
     }
+
+    public async Task<List<Movie>> GetUserWatchList(int userId)
+    {
+        var movies = await _context.UserMovies
+            .Where(um => um.UserId == userId)
+            .OrderByDescending(um => um.UpdatedAt)
+            .Select(um => um.MovieId)
+            .ToListAsync();
+
+        var watchlist = new List<Movie>();
+
+        foreach (var movieId in movies)
+        {
+            var filme = await GetMovieByID(movieId);
+            
+            if (filme == null) continue;
+            
+            watchlist.Add(filme);
+        }
+        
+        return watchlist;
+    }
 }
