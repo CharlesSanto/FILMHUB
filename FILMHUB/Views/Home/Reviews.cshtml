@@ -8,7 +8,12 @@
     
     <div class="user-reviews-header">
         <h1 class="page-title">Minhas Avaliações</h1>
-        <p>@Model.UserMovies.Count Filmes avaliados</p> 
+        
+        @if (Model.UserMovies.Any())
+        {
+            <p>@Model.UserMovies.Count @(Model.UserMovies.Count > 1 ? "filmes avaliados" : "filme avaliados")</p> 
+        }
+        
     </div>
 
     <hr/>
