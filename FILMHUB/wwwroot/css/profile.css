@@ -57,3 +57,37 @@
     height: 56px;       
     background-color: #1A1A1A;
 }
+
+.review-cards-profile {
+    background-color: #141414;
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    transition: background 0.2s ease;
+}
+
+.review-header-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.review-poster-profile img{
+    width: 150px;
+    border-radius: 10px;
+}
+
+.review-comments-profile {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cfcfcf;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

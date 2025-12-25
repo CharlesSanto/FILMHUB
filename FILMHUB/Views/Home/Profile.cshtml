@@ -81,14 +81,23 @@
             {
                 var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
 
-                <div class="review-cards">
+                <div class="review-cards-profile">
                     
-                    @foreach(var titles in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
-                    {
-                        <p class="user-name-review">@titles.Title</p>
-                    }
-                    
-                    <div class="review-header">
+                    <div class="review-poster-profile">
+                        @foreach (var movie in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
+                        {
+                            <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w780{movie.PosterPath}")" alt="@movie.Title" class="lazyload"/>
+                            </a>
+                        }
+                    </div>
+
+                    <div class="review-header-profile">
+
+                        @foreach (var titles in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
+                        {
+                            <p class="user-name-review">@titles.Title</p>
+                        }
 
                         <div class="review-stars">
                             @for (int i = 1; i <= 5; i++)
@@ -102,10 +111,10 @@
                                             ? reviews.WatchedAt.Value.ToString("dd/MM/yyyy")
                                             : "-")
                         </p>
+                        
+                        <p class="review-comments-profile">@reviews.Review</p>
 
                     </div>
-
-                    <p class="review-comments">@reviews.Review</p>
                 </div>
             }
         </div>
