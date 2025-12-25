@@ -38,7 +38,7 @@
             <div class="vertical-line"></div>
             
             <div class="profile-header__stat">
-                <p class="profile-header__stat-number">@Model.Reviews.UserMovies.Count</p>
+                <p class="profile-header__stat-number">@Model.Reviews.UserMovies.Count(r => r.WatchedAt?.Year == 2025)</p>
                 <p class="profile-header__stat-label">Este ano</p>
             </div>
 
