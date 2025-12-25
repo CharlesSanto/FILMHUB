@@ -60,7 +60,7 @@
 
 .review-cards-profile {
     background-color: #141414;
-    border-radius: 12px;
+    border-radius: 12px;    
     padding: 16px 18px;
     display: flex;
     flex-direction: row;
@@ -75,8 +75,14 @@
 }
 
 .review-poster-profile img{
-    width: 150px;
+    width: 110px;
     border-radius: 10px;
+}
+
+.review-stars-profile {
+    display: flex;
+    gap: 4px;
+    align-items: center;
 }
 
 .review-comments-profile {
@@ -87,7 +93,7 @@
     white-space: pre-wrap;
     word-break: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: 7;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

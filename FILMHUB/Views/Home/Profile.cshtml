@@ -87,7 +87,7 @@
                         @foreach (var movie in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
                         {
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w780{movie.PosterPath}")" alt="@movie.Title" class="lazyload"/>
+                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")" alt="@movie.Title" class="lazyload"/>
                             </a>
                         }
                     </div>
@@ -99,18 +99,20 @@
                             <p class="user-name-review">@titles.Title</p>
                         }
 
-                        <div class="review-stars">
+                        <div class="review-stars-profile">
                             @for (int i = 1; i <= 5; i++)
                             {
                                 <span class="star @(i <= stars ? "filled" : "")">★</span>
                             }
+                            
+                            <p class="review-avaliation">
+                                Avaliado em @(reviews.WatchedAt.HasValue
+                                                ? reviews.WatchedAt.Value.ToString("dd/MM/yyyy")
+                                                : "-")
+                            </p>
                         </div>
 
-                        <p class="review-avaliation">
-                            Avaliado em @(reviews.WatchedAt.HasValue
-                                            ? reviews.WatchedAt.Value.ToString("dd/MM/yyyy")
-                                            : "-")
-                        </p>
+                        
                         
                         <p class="review-comments-profile">@reviews.Review</p>
 
