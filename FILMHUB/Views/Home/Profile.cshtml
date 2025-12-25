@@ -8,6 +8,45 @@
 }
 
 <div class="profile-container">
-    <h1>@userName</h1>
+    
+    <div class="profile-header">
+    
+        <div class="profile-header__user">
+    
+            <img 
+                class="profile-header__avatar"
+                width="250" 
+                height="250" 
+                src="~/img/temp-profile-photo-removebg-preview.png"
+                alt="Foto do perfil"
+            />
+
+            <h1 class="profile-header__username">@userName</h1>
+
+        </div>
+
+        <a class="profile-header__edit-link" href="#">
+            Editar perfil
+        </a>
+
+        <div class="profile-header__stats">
+        
+            <div class="profile-header__stat">
+                <p class="profile-header__stat-number">45</p>
+                <p class="profile-header__stat-label">Filmes</p>
+            </div>
+            
+            <div class="vertical-line"></div>
+            
+            <div class="profile-header__stat">
+                <p class="profile-header__stat-number">45</p>
+                <p class="profile-header__stat-label">Este ano</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    
 </div>
 
