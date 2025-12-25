@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 50px;
 }
 
@@ -15,6 +15,12 @@
     flex-direction: row;
     align-items: center;
     font-weight: bold;
+    gap: 20px;
+}
+
+.profile-header__avatar{
+    width: 200px;
+    height: 200px;
 }
 
 .profile-header__edit-link {
