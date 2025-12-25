@@ -77,7 +77,7 @@
             
             <hr/>
 
-            @foreach (var reviews in Model.Reviews.UserMovies.Take(5))
+            @foreach (var reviews in Model.Reviews.UserMovies.Where(r => !string.IsNullOrEmpty(r.Review)).Take(5))
             {
                 var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
 
