@@ -1,0 +1,10 @@
+
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+@{
+    var userName = Context.Session.GetString("UserName");
+}
+
+<h1>@userName</h1>
