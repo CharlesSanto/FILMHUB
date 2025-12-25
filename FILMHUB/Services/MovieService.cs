@@ -52,12 +52,13 @@ public class MovieService : IMovieService
         return movies;
     }
 
-    public async Task<Movie> GetMovieByID(int id)
-    {
-        var movie = await _client.GetFromJsonAsync<Movie>($"movie/{id}?language=pt-BR");
-        
-        return movie;
-    }
+    public Task<Movie?> GetMovieByID(int id) =>
+        GetOrSetCacheAsync(
+            $"movie_{id}",
+            TimeSpan.FromHours(12),
+            () => _client.GetFromJsonAsync<Movie>($"movie/{id}?language=pt-BR"),
+            CacheItemPriority.High
+        );
 
     public async Task<Movie> GetRandomBannerMovie()
     {
@@ -90,52 +91,54 @@ public class MovieService : IMovieService
             );
     }
 
-    public async Task<string> GetMovieTrailer(int movieId)
-    {
-        var videoResponse = await _client.GetFromJsonAsync<MovieVideoResponse>($"movie/{movieId}/videos?language=pt-BR");
+    public Task<string?> GetMovieTrailer(int movieId) =>
+        GetOrSetCacheAsync(
+            $"movie_{movieId}_trailer",
+            TimeSpan.FromHours(12),
+            async () =>
+            {
+                var response = await _client
+                    .GetFromJsonAsync<MovieVideoResponse>($"movie/{movieId}/videos?language=pt-BR");
 
-        if (videoResponse?.Results == null || !videoResponse.Results.Any()) 
-            return null;
-
-        var trailerFinal = videoResponse.Results
-            .Where(v => v.Site == "YouTube" && v.Type == "Trailer")
-            .OrderByDescending(v => v.Name.Contains("Dublado", StringComparison.OrdinalIgnoreCase)) 
-            .ThenByDescending(v => v.Official)
-            .ThenByDescending(v => v.Iso_639_1 == "pt")
-            .FirstOrDefault();
-
-        if (trailerFinal == null)
-        {
-            var fallbackResponse = await _client.GetFromJsonAsync<MovieVideoResponse>($"movie/{movieId}/videos");
-            trailerFinal = fallbackResponse?.Results
-                .FirstOrDefault(v => v.Site == "YouTube" && v.Type == "Trailer");
-        }
-
-        return trailerFinal?.Key;
-    }
-
-    public async Task<string> GetMovieCertification(int movieId)
-    {
-        var response = await _client.GetFromJsonAsync<MovieCertificationResponse>(
-            $"movie/{movieId}/release_dates"
+                return response?.Results?
+                    .Where(v => v.Site == "YouTube" && v.Type == "Trailer")
+                    .OrderByDescending(v => v.Official)
+                    .FirstOrDefault()
+                    ?.Key;
+            }
         );
-        
-        var br = response?.Results
-            ?.FirstOrDefault(r => r.Iso_3166_1 == "BR");
 
-        var certification = br?.ReleaseDates
-            .FirstOrDefault(rd => !string.IsNullOrEmpty(rd.Certification))
-            ?.Certification;
-        return certification;
-    }
 
-    public async Task<List<Crew>> GetMovieCredits(int movieId)
-    {
-        var creadits = await _client.GetFromJsonAsync<Credits>($"movie/{movieId}/credits");
-        
-        return creadits?.Crew ?? new List<Crew>();
-        
-    }
+    public Task<string?> GetMovieCertification(int movieId) =>
+        GetOrSetCacheAsync(
+            $"movie_{movieId}_cert",
+            TimeSpan.FromHours(24),
+            async () =>
+            {
+                var response = await _client
+                    .GetFromJsonAsync<MovieCertificationResponse>($"movie/{movieId}/release_dates");
+
+                return response?.Results?
+                    .FirstOrDefault(r => r.Iso_3166_1 == "BR")?
+                    .ReleaseDates
+                    .FirstOrDefault(rd => !string.IsNullOrEmpty(rd.Certification))
+                    ?.Certification;
+            }
+        );
+
+
+    public Task<List<Crew>> GetMovieCredits(int movieId) =>
+        GetOrSetCacheAsync(
+            $"movie_{movieId}_credits",
+            TimeSpan.FromHours(24),
+            async () =>
+            {
+                var response = await _client
+                    .GetFromJsonAsync<Credits>($"movie/{movieId}/credits");
+
+                return response?.Crew ?? new List<Crew>();
+            }
+        );
 
     public async Task SetStatus(int userId, int movieId, UserMovieStatus status)
     {
@@ -235,60 +238,41 @@ public class MovieService : IMovieService
 
     public async Task<List<FavoriteMovieViewModel>> GetFavoriteMovies(int userId)
     {
-        var favoriteMovieIds = await _context.UserMovies
-            .Where(um => um.UserId == userId && um.IsFavorite)
-            .Select(um => um.MovieId)
+        var ids = await _context.UserMovies
+            .Where(u => u.UserId == userId && u.IsFavorite)
+            .Select(u => u.MovieId)
             .ToListAsync();
 
-        var movies = new List<FavoriteMovieViewModel>();
+        var movies = await Task.WhenAll(ids.Select(GetMovieByID));
 
-        foreach (var movieId in favoriteMovieIds)
-        {
-            var movie = await GetMovieByID(movieId);
-            if (movie.Id == null) continue;
-
-            movies.Add(new FavoriteMovieViewModel
+        return movies
+            .Where(m => m != null)
+            .Select(m => new FavoriteMovieViewModel
             {
-                MovieId = movie.Id,
-                Title = movie.Title,
-                PosterPath = movie.PosterPath,
-                VoteAverage = movie.VoteAverage
-            });
-        }
-
-        return movies;
+                MovieId = m!.Id,
+                Title = m.Title,
+                PosterPath = m.PosterPath,
+                VoteAverage = m.VoteAverage
+            })
+            .ToList();
     }
 
     public async Task<ReviewsViewModel> GetUserReviews(int userId)
     {
         var reviews = await _context.UserMovies
-            .Where(um => um.UserId == userId && um.WatchedAt !=  null)
-            .OrderByDescending(um => um.UpdatedAt)
+            .Where(u => u.UserId == userId && u.WatchedAt != null)
+            .OrderByDescending(u => u.UpdatedAt)
             .ToListAsync();
 
-        var moviesTasks = reviews.Select(async um =>
-        {
-            try
-            {
-                return await GetMovieByID(um.MovieId);
-            }
-            catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                return null;
-            }
-        });
+        var movies = await Task.WhenAll(
+            reviews.Select(r => GetMovieByID(r.MovieId))
+        );
 
-        var movies = (await Task.WhenAll(moviesTasks))
-            .Where(filme => filme != null)
-            .ToList();
-
-        var viewModels = new ReviewsViewModel()
+        return new ReviewsViewModel
         {
-            Movies = movies,
+            Movies = movies.Where(m => m != null).ToList(),
             UserMovies = reviews
         };
-        
-        return viewModels;
     }
 
     public async Task<List<Movie?>> GetUserWatchList(int userId)
@@ -305,6 +289,27 @@ public class MovieService : IMovieService
         return (await Task.WhenAll(movieTasks))
             .Where(m => m != null)
             .ToList();
+    }
+    
+    private async Task<T?> GetOrSetCacheAsync<T>(
+        string key,
+        TimeSpan ttl,
+        Func<Task<T?>> factory,
+        CacheItemPriority priority = CacheItemPriority.Normal
+    )
+    {
+        if (_cache.TryGetValue(key, out T cached))
+            return cached;
+
+        var result = await factory();
+
+        _cache.Set(key, result, new MemoryCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = ttl,
+            Priority = priority
+        });
+
+        return result;
     }
 
 }
