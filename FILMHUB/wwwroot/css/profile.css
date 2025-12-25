@@ -58,6 +58,25 @@
     background-color: #1A1A1A;
 }
 
+.movie-card-profile {
+    width: 240px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.movie-image-profile {
+    position: relative;
+    overflow: hidden;
+    height: 80%;
+}
+
+.movie-image-profile img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
 .review-cards-profile {
     background-color: #141414;
     border-radius: 12px;    
@@ -76,7 +95,7 @@
 
 .review-poster-profile img{
     width: 110px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .review-stars-profile {

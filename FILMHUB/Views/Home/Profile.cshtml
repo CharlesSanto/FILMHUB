@@ -52,19 +52,13 @@
         <div class="section-movies">
             @foreach (var movie in Model.Reviews.Movies.Take(4))
             {
-                <div class="movie-card">
-                    <div class="movie-image">
+                <div class="movie-card-profile">
+                    <div class="movie-image-profile">
                         <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
                             <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
                                  alt="@movie.Title"/>
                         </a>
-                    </div> 
-                    <p class="movie-rating">
-                        <span class="material-symbols-outlined">
-                            star_rate
-                        </span>@Math.Round(movie.VoteAverage, 1)
-                    </p>
-                    <p class="movie-title">@movie.Title</p>
+                    </div>
                 </div>
             }
         </div>
@@ -77,7 +71,7 @@
             
             <hr/>
 
-            @foreach (var reviews in Model.Reviews.UserMovies.Where(r => !string.IsNullOrEmpty(r.Review)).Take(5))
+            @foreach (var reviews in Model.Reviews.UserMovies.Where(r => !string.IsNullOrEmpty(r.Review)).Take(4))
             {
                 var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
 
