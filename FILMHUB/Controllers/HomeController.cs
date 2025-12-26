@@ -30,6 +30,23 @@ public class HomeController : Controller
         return View(movieResponse);
     }
 
+    public async Task<IActionResult> Profile()
+    {
+        int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        int userId = userIdSession.Value;
+        
+        var reviews =  await _movieService.GetUserReviews(userId);
+        var favorites = await _movieService.GetFavoriteMovies(userId);
+
+        var vm = new ProfileViewModel()
+        {
+            FavoriteMovie = favorites,
+            Reviews = reviews
+        };
+        
+        return View(vm);
+    }
+
     public async Task<IActionResult> MovieDetails(int id)
     {
         Movie movie = await _movieService.GetMovieByID(id);

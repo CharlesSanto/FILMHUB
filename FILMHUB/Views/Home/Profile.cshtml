@@ -1,0 +1,120 @@
+@model FILMHUB.ViewModel.ProfileViewModel;
+
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+@{
+    var userName = Context.Session.GetString("UserName");
+}
+
+<div class="profile-container">
+    
+    <div class="profile-header">
+    
+        <div class="profile-header__user">
+    
+            <img 
+                class="profile-header__avatar"
+                src="~/img/temp-profile-photo-removebg-preview.png"
+                alt="Foto do perfil"
+            />
+
+            <h1 class="profile-header__username">@userName</h1>
+            
+            <a class="profile-header__edit-link" href="#">
+                Editar perfil
+            </a>
+
+        </div>
+
+        <div class="profile-header__stats">
+        
+            <div class="profile-header__stat">
+                <p class="profile-header__stat-number">@Model.Reviews.UserMovies.Count</p>
+                <p class="profile-header__stat-label">Filmes</p>
+            </div>
+            
+            <div class="vertical-line"></div>
+            
+            <div class="profile-header__stat">
+                <p class="profile-header__stat-number">@Model.Reviews.UserMovies.Count(r => r.WatchedAt?.Year == 2025)</p>
+                <p class="profile-header__stat-label">Este ano</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="profile-favorites">
+        <h2>Atualizações recentes</h2>
+        <hr/>
+        <div class="section-movies">
+            @foreach (var movie in Model.Reviews.Movies.Take(5))
+            {
+                <div class="movie-card-profile">
+                    <div class="movie-image-profile">
+                        <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                            <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                 alt="@movie.Title"/>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+    @if (Model.Reviews.UserMovies.Any())
+    {
+        <div class="recent-reviews">
+            <h2>Avaliações recentes</h2>
+            
+            <hr/>
+
+            @foreach (var reviews in Model.Reviews.UserMovies.Where(r => !string.IsNullOrEmpty(r.Review)).Take(4))
+            {
+                var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
+
+                <div class="review-cards-profile">
+                    
+                    <div class="review-poster-profile">
+                        @foreach (var movie in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
+                        {
+                            <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")" alt="@movie.Title" class="lazyload"/>
+                            </a>
+                        }
+                    </div>
+
+                    <div class="review-header-profile">
+
+                        @foreach (var titles in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
+                        {
+                            <p class="user-name-review">@titles.Title</p>
+                        }
+
+                        <div class="review-stars-profile">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="star @(i <= stars ? "filled" : "")">★</span>
+                            }
+                            
+                            <p class="review-avaliation">
+                                Avaliado em @(reviews.WatchedAt.HasValue
+                                                ? reviews.WatchedAt.Value.ToString("dd/MM/yyyy")
+                                                : "-")
+                            </p>
+                        </div>
+
+                        
+                        
+                        <p class="review-comments-profile">@reviews.Review</p>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    
+</div>
+

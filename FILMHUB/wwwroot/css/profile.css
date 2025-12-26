@@ -1,0 +1,118 @@
+.profile-container {
+    margin-top: 35px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.profile-header__user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+    gap: 20px;
+}
+
+.profile-header__avatar{
+    width: 200px;
+    height: 200px;
+}
+
+.profile-header__edit-link {
+    padding: 15px;
+    background-color: #F5F5F5;
+    color: #0d0d0d;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+.profile-header__edit-link:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.profile-header__stats {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.profile-header__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    gap: 10px;
+}
+
+.vertical-line {
+    width: 2px;          
+    height: 56px;       
+    background-color: #1A1A1A;
+}
+
+.movie-card-profile {
+    width: 240px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.movie-image-profile {
+    position: relative;
+    overflow: hidden;
+    height: 80%;
+}
+
+.movie-image-profile img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.review-cards-profile {
+    background-color: #141414;
+    border-radius: 12px;    
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    transition: background 0.2s ease;
+}
+
+.review-header-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.review-poster-profile img{
+    width: 110px;
+    border-radius: 5px;
+}
+
+.review-stars-profile {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.review-comments-profile {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cfcfcf;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
