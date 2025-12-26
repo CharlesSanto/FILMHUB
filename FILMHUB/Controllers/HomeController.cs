@@ -33,6 +33,12 @@ public class HomeController : Controller
     public async Task<IActionResult> Profile()
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        if (!userIdSession.HasValue)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        
         int userId = userIdSession.Value;
         
         var reviews =  await _movieService.GetUserReviews(userId);
@@ -80,6 +86,7 @@ public class HomeController : Controller
     public async Task<IActionResult> SaveReview(int movieId, int rating, DateTime watchedAt, string comment)
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
         int userId = userIdSession.Value;
         
         await _movieService.SaveReview(userId, movieId, rating, watchedAt, comment);
@@ -90,6 +97,12 @@ public class HomeController : Controller
     public async Task<IActionResult> FavoritesMovies()
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        if (!userIdSession.HasValue)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        
         int userId = userIdSession.Value;
 
         var favorites = await _movieService.GetFavoriteMovies(userId);
@@ -129,6 +142,12 @@ public class HomeController : Controller
     public async Task<IActionResult> Reviews()
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        if (!userIdSession.HasValue)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        
         int userId = userIdSession.Value;
         
         var reviews = await _movieService.GetUserReviews(userId);
@@ -139,6 +158,12 @@ public class HomeController : Controller
     public async Task<IActionResult> Watchlist()
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
+        if (!userIdSession.HasValue)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        
         int userId = userIdSession.Value;
         
         var watchlist = await _movieService.GetUserWatchList(userId);
@@ -160,6 +185,7 @@ public class HomeController : Controller
     public async Task<IActionResult> IsFavorite(int movieId, bool status)
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");
+        
         int userId = userIdSession.Value ;
 
         await _movieService.IsFavorite(userId, movieId, status);
