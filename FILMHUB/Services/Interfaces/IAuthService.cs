@@ -10,6 +10,6 @@ public interface IAuthService
     User ValidateUser(string email,  string password);
     User GetUserById(int id);
     void UpdateUser(int userId, string? name, string? email);
-    void ChangePassword(int userId, string newPassword, string currentPassword);
+    void ChangePassword(int userId, string newPassword);
     void DeleteUser(int userId);
 }

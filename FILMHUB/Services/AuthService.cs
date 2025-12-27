@@ -68,12 +68,12 @@ public class AuthService : IAuthService
         _context.SaveChanges();
     }
 
-    public void ChangePassword(int userId, string newPassword, string currentPassword)
+    public void ChangePassword(int userId, string newPassword)
     {
         var user = _context.Users.FirstOrDefault(u => u.Id == userId);
         
         if (user == null) return;
-        if (!string.IsNullOrWhiteSpace(newPassword) &&  PassowordHelper.VerifyPassword(currentPassword, user.PasswordHash))
+        if (!string.IsNullOrWhiteSpace(newPassword))
             user.PasswordHash = PassowordHelper.HashPassword(newPassword);
         
         _context.SaveChanges();

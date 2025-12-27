@@ -83,7 +83,7 @@ public class AuthController : Controller
     }
     
     [HttpPost]
-    public IActionResult Settings(UpdateUserDto updateUserDto)
+    public IActionResult UpdateUser(UpdateUserDto updateUserDto)
     {
         int? userIdSession = HttpContext.Session.GetInt32("UserId");
         if (userIdSession == null)
@@ -91,13 +91,9 @@ public class AuthController : Controller
             return RedirectToAction("Login", "Auth");
         }
         int userId = (int)userIdSession;
-
-        if (!string.IsNullOrWhiteSpace(updateUserDto.CurrentPassword))
-        {
-            _authService.ChangePassword(userId, updateUserDto.Password, updateUserDto.CurrentPassword);
-        }
         
-        _authService.UpdateUser(userId, updateUserDto.Name, updateUserDto.Email);
+        if (!string.IsNullOrWhiteSpace(updateUserDto.Name) || !string.IsNullOrWhiteSpace(updateUserDto.Email))
+            _authService.UpdateUser(userId, updateUserDto.Name, updateUserDto.Email);
         
         return RedirectToAction("Settings", "Auth");
     }
