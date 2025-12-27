@@ -72,7 +72,7 @@ public class AuthController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> Settings(string? name, string? email)
+    public async Task<IActionResult> Settings(RegisterDto registerDto)
     {
         int? userIdSession = HttpContext.Session.GetInt32("UserId");
         if (userIdSession == null)
@@ -81,7 +81,7 @@ public class AuthController : Controller
         }
         int userId = (int)userIdSession;
         
-        _authService.UpdateUser(userId, name, email);
+        _authService.UpdateUser(userId, registerDto.Name, registerDto.Email);
         
         return View();
     }
