@@ -68,11 +68,28 @@ public class AuthController : Controller
     [HttpGet]
     public IActionResult Settings()
     {
-        return View();
+        int? userIdSession = HttpContext.Session.GetInt32("UserId");
+        if (userIdSession == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        
+        var user = _authService.GetUserById(userIdSession.Value);
+        
+        if(!string.IsNullOrEmpty(user.Name))
+            HttpContext.Session.SetString("UserName", user.Name);
+
+        var dto = new UpdateUserDto
+        {
+            Name = user.Name,
+            Email = user.Email
+        };
+        
+        return View(dto);
     }
     
     [HttpPost]
-    public async Task<IActionResult> Settings(UpdateUserDto updateUserDto)
+    public IActionResult Settings(UpdateUserDto updateUserDto)
     {
         int? userIdSession = HttpContext.Session.GetInt32("UserId");
         if (userIdSession == null)
@@ -83,6 +100,6 @@ public class AuthController : Controller
         
         _authService.UpdateUser(userId, updateUserDto.Name, updateUserDto.Email);
         
-        return View();
+        return RedirectToAction("Settings", "Auth");
     }
 }
