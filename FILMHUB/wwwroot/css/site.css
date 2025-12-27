@@ -8,56 +8,35 @@
 html {
   background-color: #0D0D0D;
   color: white;
-  text-decoration: none; /* Nota: text-decoration geralmente vai em tags <a>, mas ok deixar aqui como reset global */
+  text-decoration: none;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  /* Mudei de height para min-height. 
-     Se o conteúdo for maior que a tela, 'height' cortaria o conteúdo. 'min-height' permite crescer. */
   min-height: 100vh;
 }
 
 .container {
-  /* Flex: 1 faz o container ocupar todo o espaço vertical disponível, empurrando o footer (se houver) para baixo */
   flex: 1;
   display: flex;
   flex-direction: column;
-
-  /* --- A MÁGICA DA RESPONSIVIDADE AQUI --- */
-
-  /* 1. Ocupa 100% da largura disponível em telas pequenas */
   width: 100%;
-
-  /* 2. Para de crescer quando atinge 1200px (tamanho padrão de sites).
-     Isso substitui o efeito visual que você tentou criar com o padding de 300px. */
   max-width: 1200px;
-
-  /* 3. Centraliza o container na tela (margens laterais automáticas) */
   margin-left: auto;
   margin-right: auto;
-
-  /* 4. Mantém sua margem inferior original */
   margin-bottom: 40px;
-
-  /* 5. Padding pequeno apenas para o conteúdo não colar na borda da tela do celular */
   padding: 0 20px;
 }
 
-/* --- AJUSTES FINOS (MEDIA QUERIES) --- */
-
-/* Opcional: Se você quiser que em telas muito grandes (TVs ou Monitores 4k)
-   o site fique mais largo, você pode ajustar aqui */
 @media (min-width: 1600px) {
   .container {
-    max-width: 1400px; /* Permite ficar mais largo em telas gigantes */
+    max-width: 1400px;
   }
 }
 
-/* Opcional: Ajustes para tablets */
 @media (max-width: 768px) {
   .container {
-    padding: 0 15px; /* Reduz um pouco o padding lateral em tablets/celulares */
+    padding: 0 15px;
   }
 }
