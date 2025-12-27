@@ -9,9 +9,14 @@ public class UpdateUserDto
     [EmailAddress(ErrorMessage = "Email inválido")]
     public string? Email { get; set; }
     
-    [MinLength(6, ErrorMessage = "A senha deve ter no minímo 6 caracteres")]
-    public string? Password { get; set; }
+    [Required(ErrorMessage = "Campo obrigatorio")]
+    public string CurrentPasswrod  { get; set; }
     
+    [Required(ErrorMessage = "Campo obrigatorio")]
+    [MinLength(6, ErrorMessage = "A senha deve ter no minímo 6 caracteres")]
+    public string Password { get; set; }
+    
+    [Required(ErrorMessage = "Campo obrigatorio")]
     [Compare("Password",ErrorMessage ="As senhas não coincidem")]
-    public  string? ConfirmPassword { get; set; }
+    public  string ConfirmPassword { get; set; }
 }
