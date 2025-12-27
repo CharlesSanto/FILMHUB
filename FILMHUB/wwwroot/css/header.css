@@ -3,23 +3,25 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 60px;   
+    height: 60px;
     background-color: #1A1A1A;
     color: #F5F5F5;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-    padding: 0 300px;
+    padding: 0 clamp(16px, 5vw, 300px);
+    box-sizing: border-box;
 }
 
 .account > div {
     display: flex;
-    align-items: center;   
+    align-items: center;
     margin: 0;
 }
 
 .logo {
     width: 300px;
+    max-width: 100%;
 }
 
 nav {
@@ -28,24 +30,30 @@ nav {
     justify-content: center;
     gap: 30px;
     width: 800px;
+    max-width: 100%;
 }
 
 search {
     width: 600px;
+    max-width: 100%;
 }
 
 .search-movie {
+    width: 100%;
     border-radius: 10px;
     background-color: #F5F5F5;
     color: #0D0D0D;
     height: 70%;
     border: none;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .search-movie:focus {
     background-color: #F5F5F5;
     border: 1px solid yellow;
     color: #0D0D0D;
+    outline: none;
 }
 
 ul {
@@ -56,7 +64,7 @@ ul {
     list-style: none;
 }
 
-li a{
+li a {
     padding: 10px;
     border-radius: 10px;
     transition: background-color 0.1s ease;
@@ -92,20 +100,18 @@ li a:hover {
     background-color: #1A1A1A;
     min-width: 150px;
     z-index: 1000;
-    border-radius:  0 0 10px 10px;
-    right: 10px;
+    border-radius: 0 0 10px 10px;
+    right: 0;
 }
 
 .dropdown-content a {
     color: #F5F5F5;
     padding: 12px 16px;
-    text-decoration: none;
     display: block;
 }
 
 .dropdown-content a:hover {
     background-color: rgba(13, 13, 13, 0.4);
-    text-decoration: none;
 }
 
 .dropdown:hover .dropdown-content {
@@ -123,13 +129,6 @@ li a:hover {
     padding: 20px;
 }
 
-.account-logout:hover,
-.account-settings:hover {
-    background-color: rgba(13, 13, 13, 0.4);
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .account-settings {
     border-radius: 10px 10px 0 0;
 }
@@ -138,8 +137,14 @@ li a:hover {
     border-radius: 0 0 10px 10px;
 }
 
+.account-logout:hover,
+.account-settings:hover {
+    background-color: rgba(13, 13, 13, 0.4);
+    cursor: pointer;
+}
+
 .enter-account,
-.register-account{
+.register-account {
     padding: 10px;
     border-radius: 10px;
     transition: background-color 0.1s ease;
@@ -148,7 +153,64 @@ li a:hover {
 }
 
 .enter-account:hover,
-.register-account:hover{
-    text-decoration: none;
+.register-account:hover {
     background-color: rgba(13, 13, 13, 0.4);
+}
+
+/* RESPONSIVO SEM MUDAR ESTRUTURA */
+
+@media (max-width: 992px) {
+    nav {
+        width: 100%;
+        gap: 20px;
+    }
+
+    .logo {
+        width: 220px;
+    }
+
+    search {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 16px;
+        gap: 10px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    ul {
+        gap: 6px;
+    }
+
+    li a {
+        font-size: 16px;
+    }
+
+    .dropbtn {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 160px;
+    }
+
+    li a {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .dropbtn {
+        font-size: 14px;
+    }
 }
