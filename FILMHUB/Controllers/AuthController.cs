@@ -78,14 +78,8 @@ public class AuthController : Controller
         
         if(!string.IsNullOrEmpty(user.Name))
             HttpContext.Session.SetString("UserName", user.Name);
-
-        var dto = new UpdateUserDto
-        {
-            Name = user.Name,
-            Email = user.Email
-        };
         
-        return View(dto);
+        return View();
     }
     
     [HttpPost]
@@ -97,12 +91,13 @@ public class AuthController : Controller
             return RedirectToAction("Login", "Auth");
         }
         int userId = (int)userIdSession;
+
+        if (!string.IsNullOrWhiteSpace(updateUserDto.CurrentPasswordd))
+        {
+            _authService.ChangePassword(userId, updateUserDto.Password, updateUserDto.CurrentPasswordd);
+        }
         
-        _authService.UpdateUser(
-            userId, updateUserDto.Name, 
-            updateUserDto.Email, 
-            updateUserDto.CurrentPasswrod, 
-            updateUserDto.Password);
+        _authService.UpdateUser(userId, updateUserDto.Name, updateUserDto.Email);
         
         return RedirectToAction("Settings", "Auth");
     }

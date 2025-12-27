@@ -9,5 +9,6 @@ public interface IAuthService
     void CreateUser(RegisterDto registerDto);
     User ValidateUser(string email,  string password);
     User GetUserById(int id);
-    void UpdateUser(int userId, string? name, string? email, string? currentPassword, string? password);
+    void UpdateUser(int userId, string? name, string? email);
+    void ChangePassword(int userId, string newPassword, string currentPassword);
 }

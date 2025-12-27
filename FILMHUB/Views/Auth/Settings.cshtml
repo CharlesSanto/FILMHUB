@@ -13,7 +13,7 @@
         
         
         
-        <form method="post" asp-action="Settings" class="settings-form" novalidate>
+        <form method="post" asp-controller="Auth" asp-action="Settings" class="settings-form" novalidate>
             
             <h2>Perfil</h2>
             
@@ -34,14 +34,14 @@
 
         </form>
         
-        <form method="post" asp-action="Settings" class="settings-form">
+        <form method="post" asp-controller="Auth" asp-action="Settings" class="settings-form">
 
             <h2>Alterar senha</h2>
             
             <div class="form-group">
-                <label asp-for="CurrentPasswrod">Senha atual</label>
-                <input asp-for="CurrentPasswrod" type="password" class="form-input"/>
-                <span asp-validation-for="CurrentPasswrod" class="validation-error"></span>
+                <label asp-for="CurrentPasswordd">Senha atual</label>
+                <input asp-for="CurrentPasswordd" type="password" class="form-input"/>
+                <span asp-validation-for="CurrentPasswordd" class="validation-error"></span>
             </div>
             
             <div class="form-group">
@@ -65,3 +65,7 @@
     </div>
     
 </div>
+
+@section Scripts {
+    <script src="~/js/validation.js"></script>
+}
