@@ -71,16 +71,46 @@
             <h2>Zona de perigo</h2>
             <p>Essa ação é permanente e não pode ser desfeita.</p>
 
-            <form method="post" asp-controller="Auth" asp-action="DeleteAccount">
-                <button type="submit" class="btn-danger">
+            <button id="btn-danger" class="btn-danger">
+                Deletar minha conta
+            </button>
+            
+        </div>
+    </div>
+    
+    <dialog id="delete-user" class="delete-user">
+        
+        <h1>Excluir conta</h1>
+        
+        <p>Tem certeza de que deseja excluir sua conta? <br/> Esta ação é permanente e não poderá ser desfeita.</p>
+        
+        <div class="dialog-actions">
+            <button id="btn-cancel" class="btn-cancel">
+                Cancelar
+            </button>
+            <form method="post" asp-action="DeleteUser">
+                <button class="btn-deleter">
                     Deletar minha conta
                 </button>
             </form>
+            
         </div>
-    </div>
+        
+    </dialog>
     
 </div>
 
 @section Scripts {
     <script src="~/js/validation.js"></script>
+    
+    
+    <script>
+        const deleteusermodal = document.getElementById('delete-user');
+        const btndanger = document.getElementById('btn-danger');
+        const btnCancel = document.getElementById('btn-cancel');
+
+        btndanger.addEventListener('click', () => deleteusermodal.showModal())
+        btnCancel.addEventListener('click', () => deleteusermodal.close())
+        
+    </script>
 }

@@ -101,4 +101,18 @@ public class AuthController : Controller
         
         return RedirectToAction("Settings", "Auth");
     }
+    
+    [HttpPost]
+    public IActionResult DeleteUser()
+    {
+        var userId = HttpContext.Session.GetInt32("UserId");
+        
+        if (userId == null) return RedirectToAction("Index", "Home");
+        
+        _authService.DeleteUser((int)userId);
+        
+        HttpContext.Session.Clear();
+        
+        return RedirectToAction("Index", "Home");
+    }
 }
