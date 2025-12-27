@@ -97,6 +97,23 @@ public class AuthController : Controller
         
         return RedirectToAction("Settings", "Auth");
     }
+
+    public IActionResult ChangePassword(UpdateUserDto updateUserDto)
+    {
+        int? userIdSession = HttpContext.Session.GetInt32("UserId");
+        if (userIdSession == null) return RedirectToAction("Index", "Home");
+        
+        var user = _authService.GetUserById((int)userIdSession);
+        
+        if (!PassowordHelper.VerifyPassword(updateUserDto.CurrentPassword, user.PasswordHash))
+            ModelState.AddModelError("CurrentPassword", "Senha atual incorreta.");
+        
+        if (!ModelState.IsValid) return View("Settings", updateUserDto);
+        
+        _authService.ChangePassword(user.Id, updateUserDto.Password);
+        
+        return RedirectToAction("Settings", "Auth");
+    }
     
     [HttpPost]
     public IActionResult DeleteUser()
