@@ -11,4 +11,5 @@ public interface IAuthService
     User GetUserById(int id);
     void UpdateUser(int userId, string? name, string? email);
     void ChangePassword(int userId, string newPassword, string currentPassword);
+    void DeleteUser(int userId);
 }

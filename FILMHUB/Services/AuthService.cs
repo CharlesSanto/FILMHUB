@@ -78,4 +78,14 @@ public class AuthService : IAuthService
         
         _context.SaveChanges();
     }
+
+    public void DeleteUser(int userId)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+        
+        if (user == null) return;
+        _context.Users.Remove(user);
+        
+        _context.SaveChanges();
+    }
 }
