@@ -10,7 +10,7 @@ public class UpdateUserDto
     public string? Email { get; set; }
     
     [MinLength(6, ErrorMessage = "A senha deve ter no minímo 6 caracteres")]
-    public string? Passowrd { get; set; }
+    public string? Password { get; set; }
     
     [Compare("Password",ErrorMessage ="As senhas não coincidem")]
     public  string? ConfirmPassword { get; set; }

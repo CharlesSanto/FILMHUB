@@ -3,3 +3,50 @@
     flex-direction: column;
     margin-top: 35px;
 }
+
+.settings-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.settings-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-input {
+    background-color: #1A1A1A;
+    border: none;
+    border-radius: 5px;
+    color: #F5F5F5;
+    width: 500px;
+}
+
+.form-input:focus {
+    background-color: #1A1A1A;
+}
+
+.btn-primary {
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 5px;
+    color: #1A1A1A;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: transform 0.2s ease-out;
+}
+
+.btn-primary:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+}
