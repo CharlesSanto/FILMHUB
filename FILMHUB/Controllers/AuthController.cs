@@ -79,6 +79,8 @@ public class AuthController : Controller
         if(!string.IsNullOrEmpty(user.Name))
             HttpContext.Session.SetString("UserName", user.Name);
         
+        ViewBag.PasswordError = TempData["PasswordError"];
+        
         return View();
     }
     
@@ -104,9 +106,13 @@ public class AuthController : Controller
         if (userIdSession == null) return RedirectToAction("Index", "Home");
         
         var user = _authService.GetUserById((int)userIdSession);
-        
+
         if (!PassowordHelper.VerifyPassword(updateUserDto.CurrentPassword, user.PasswordHash))
-            ModelState.AddModelError("CurrentPassword", "Senha atual incorreta.");
+        {
+            TempData["PasswordError"] = "Senha atual incorreta.";
+            return  RedirectToAction("Settings", "Auth");
+        }
+            
         
         if (!ModelState.IsValid) return View("Settings", updateUserDto);
         
