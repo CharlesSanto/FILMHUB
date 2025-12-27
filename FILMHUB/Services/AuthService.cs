@@ -54,7 +54,7 @@ public class AuthService : IAuthService
         return user;
     }
 
-    public void UpdateUser(int userId, string? name, string? email)
+    public void UpdateUser(int userId, string? name, string? email, string? currentPassword, string? password)
     {
         var user =  _context.Users.FirstOrDefault(u => u.Id == userId);
 
@@ -64,6 +64,8 @@ public class AuthService : IAuthService
             user.Name = name;
         if (!string.IsNullOrWhiteSpace(email))
             user.Email = email;
+        if (!string.IsNullOrWhiteSpace(currentPassword) && PassowordHelper.VerifyPassword(currentPassword, user.PasswordHash))
+            user.PasswordHash = PassowordHelper.HashPassword(password);
         
         _context.SaveChanges();
     }

@@ -98,7 +98,11 @@ public class AuthController : Controller
         }
         int userId = (int)userIdSession;
         
-        _authService.UpdateUser(userId, updateUserDto.Name, updateUserDto.Email);
+        _authService.UpdateUser(
+            userId, updateUserDto.Name, 
+            updateUserDto.Email, 
+            updateUserDto.CurrentPasswrod, 
+            updateUserDto.Password);
         
         return RedirectToAction("Settings", "Auth");
     }

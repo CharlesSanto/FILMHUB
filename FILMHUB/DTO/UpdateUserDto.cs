@@ -10,13 +10,13 @@ public class UpdateUserDto
     public string? Email { get; set; }
     
     [Required(ErrorMessage = "Campo obrigatorio")]
-    public string CurrentPasswrod  { get; set; }
+    public string? CurrentPasswrod  { get; set; }
     
     [Required(ErrorMessage = "Campo obrigatorio")]
     [MinLength(6, ErrorMessage = "A senha deve ter no minímo 6 caracteres")]
-    public string Password { get; set; }
+    public string? Password { get; set; }
     
     [Required(ErrorMessage = "Campo obrigatorio")]
     [Compare("Password",ErrorMessage ="As senhas não coincidem")]
-    public  string ConfirmPassword { get; set; }
+    public  string? ConfirmPassword { get; set; }
 }
