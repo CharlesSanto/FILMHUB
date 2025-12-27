@@ -4,26 +4,33 @@
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 80px);
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .login-container div {
     margin-top: 20px;
+    width: 100%;
 }
 
 .form-login {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     color: #F5F5F5;
     background-color: #1A1A1A;
-    padding: 40px 40px 30px 40px;
+    padding: 40px;
     border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .logo-login {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .login {
@@ -32,10 +39,12 @@
     height: 50px;
     border-radius: 5px;
     border: none;
-    margin-top: 15px;
+    margin-top: 20px;
     background-color: #E50914;
     color: #F5F5F5;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .login:hover {
@@ -43,14 +52,54 @@
 }
 
 .forgotten-password {
-    font-size: small;
+    font-size: 0.9rem;
     text-align: right;
     margin-top: 10px;
-    margin-right: 10px;
+}
+
+.forgotten-password a {
+    color: #F5F5F5;
+    text-decoration: none;
+}
+
+.forgotten-password a:hover {
+    text-decoration: underline;
 }
 
 .login-to-register {
     text-align: center;
     font-weight: bold;
-    padding-top: 15px;
+    padding-top: 20px;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        min-height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .form-login {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login {
+        font-size: 18px;
+        height: 45px;
+    }
+
+    .form-login {
+        padding: 20px 15px;
+        width: 100%;
+    }
+
+    .login-to-register,
+    .forgotten-password {
+        font-size: 0.85rem;
+    }
 }
