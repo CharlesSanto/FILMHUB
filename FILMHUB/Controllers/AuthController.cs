@@ -64,4 +64,25 @@ public class AuthController : Controller
         // return Ok(new { message = "User created successfully." });
         return RedirectToAction("Login", "Auth");
     }
+    
+    [HttpGet]
+    public IActionResult Settings()
+    {
+        return View();
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Settings(string? name, string? email)
+    {
+        int? userIdSession = HttpContext.Session.GetInt32("UserId");
+        if (userIdSession == null)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        int userId = (int)userIdSession;
+        
+        _authService.UpdateUser(userId, name, email);
+        
+        return View();
+    }
 }

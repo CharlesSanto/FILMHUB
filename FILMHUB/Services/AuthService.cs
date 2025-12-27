@@ -44,4 +44,18 @@ public class AuthService : IAuthService
         
         return user;
     }
+
+    public void UpdateUser(int userId, string? name, string? email)
+    {
+        var user =  _context.Users.FirstOrDefault(u => u.Id == userId);
+
+        if (user == null) return;
+        
+        if (!string.IsNullOrWhiteSpace(name))
+            user.Name = name;
+        if (!string.IsNullOrWhiteSpace(email))
+            user.Email = email;
+        
+        _context.SaveChanges();
+    }
 }
