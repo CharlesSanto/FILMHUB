@@ -10,7 +10,7 @@ public class UpdateUserDto
     public string? Email { get; set; }
     
     [Required(ErrorMessage = "Campo obrigatorio")]
-    public string? CurrentPasswordd  { get; set; }
+    public string? CurrentPassword  { get; set; }
     
     [Required(ErrorMessage = "Campo obrigatorio")]
     [MinLength(6, ErrorMessage = "A senha deve ter no minímo 6 caracteres")]

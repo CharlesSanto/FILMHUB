@@ -92,9 +92,9 @@ public class AuthController : Controller
         }
         int userId = (int)userIdSession;
 
-        if (!string.IsNullOrWhiteSpace(updateUserDto.CurrentPasswordd))
+        if (!string.IsNullOrWhiteSpace(updateUserDto.CurrentPassword))
         {
-            _authService.ChangePassword(userId, updateUserDto.Password, updateUserDto.CurrentPasswordd);
+            _authService.ChangePassword(userId, updateUserDto.Password, updateUserDto.CurrentPassword);
         }
         
         _authService.UpdateUser(userId, updateUserDto.Name, updateUserDto.Email);
