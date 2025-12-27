@@ -64,6 +64,21 @@
         
     </div>
     
+    <hr/>
+    
+    <div>
+        <div class="danger-zone">
+            <h2>Zona de perigo</h2>
+            <p>Essa ação é permanente e não pode ser desfeita.</p>
+
+            <form method="post" asp-controller="Auth" asp-action="DeleteAccount">
+                <button type="submit" class="btn-danger">
+                    Deletar minha conta
+                </button>
+            </form>
+        </div>
+    </div>
+    
 </div>
 
 @section Scripts {
