@@ -64,4 +64,74 @@ public class AuthController : Controller
         // return Ok(new { message = "User created successfully." });
         return RedirectToAction("Login", "Auth");
     }
+    
+    [HttpGet]
+    public IActionResult Settings()
+    {
+        int? userIdSession = HttpContext.Session.GetInt32("UserId");
+        if (userIdSession == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        
+        var user = _authService.GetUserById(userIdSession.Value);
+        
+        if(!string.IsNullOrEmpty(user.Name))
+            HttpContext.Session.SetString("UserName", user.Name);
+        
+        ViewBag.PasswordError = TempData["PasswordError"];
+        
+        return View();
+    }
+    
+    [HttpPost]
+    public IActionResult UpdateUser(UpdateUserDto updateUserDto)
+    {
+        int? userIdSession = HttpContext.Session.GetInt32("UserId");
+        if (userIdSession == null)
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        int userId = (int)userIdSession;
+        
+        if (!string.IsNullOrWhiteSpace(updateUserDto.Name) || !string.IsNullOrWhiteSpace(updateUserDto.Email))
+            _authService.UpdateUser(userId, updateUserDto.Name, updateUserDto.Email);
+        
+        return RedirectToAction("Settings", "Auth");
+    }
+
+    public IActionResult ChangePassword(UpdateUserDto updateUserDto)
+    {
+        int? userIdSession = HttpContext.Session.GetInt32("UserId");
+        if (userIdSession == null) return RedirectToAction("Index", "Home");
+        
+        var user = _authService.GetUserById((int)userIdSession);
+
+        if (!PassowordHelper.VerifyPassword(updateUserDto.CurrentPassword, user.PasswordHash))
+        {
+            TempData["PasswordError"] = "Senha atual incorreta.";
+            return  RedirectToAction("Settings", "Auth");
+        }
+            
+        
+        if (!ModelState.IsValid) return View("Settings", updateUserDto);
+        
+        _authService.ChangePassword(user.Id, updateUserDto.Password);
+        
+        return RedirectToAction("Settings", "Auth");
+    }
+    
+    [HttpPost]
+    public IActionResult DeleteUser()
+    {
+        var userId = HttpContext.Session.GetInt32("UserId");
+        
+        if (userId == null) return RedirectToAction("Index", "Home");
+        
+        _authService.DeleteUser((int)userId);
+        
+        HttpContext.Session.Clear();
+        
+        return RedirectToAction("Index", "Home");
+    }
 }

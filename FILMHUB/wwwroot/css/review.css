@@ -1,4 +1,4 @@
-dialog {
+.review-dialog {
     border: none;
     border-radius: 12px;
     padding: 50px;
@@ -14,7 +14,7 @@ dialog {
     max-width: 90%;
 }
 
-dialog::backdrop {
+.review-dialog::backdrop {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
 }

@@ -1,0 +1,123 @@
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+    gap: 10px;
+}
+
+.settings-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.settings-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-input {
+    background-color: #1A1A1A;
+    border: none;
+    border-radius: 5px;
+    color: #F5F5F5;
+    width: 500px;
+}
+
+.form-input:focus {
+    background-color: #1A1A1A;
+}
+
+.btn-primary {
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 5px;
+    color: #1A1A1A;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: transform 0.2s ease-out;
+}
+
+.btn-cancel:hover,
+.btn-deleter:hover,
+.btn-danger:hover,
+.btn-primary:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+}
+
+.danger-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-deleter,
+.btn-danger {
+    width: 200px;
+    background-color: darkred;
+    border: none;
+    border-radius: 5px;
+    color: #F5F5F5;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: transform 0.2s ease-out;
+}
+
+.delete-user {
+    border: none;
+    border-radius: 12px;
+    padding: 50px;
+    background: #0D0D0D;
+    color: white;
+    text-align: center;
+    margin: auto;
+    gap: 20px;
+
+    width: 1200px;
+    height: 250px;
+    max-width: 30%;
+}
+
+.delete-user::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.delete-user p {
+    line-height: 150%;
+}
+
+.dialog-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-deleter {
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    width: 200px;
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 5px;
+    color: #1A1A1A;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: transform 0.2s ease-out;
+    margin-top: 20px;
+}
