@@ -3,29 +3,33 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.register-container {
     min-height: calc(100vh - 80px);
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .form-createuser {
-    width: 600px;   
+    width: 100%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     color: #F5F5F5;
     background-color: #1A1A1A;
     padding: 40px;
     border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .title-createuser {
     font-size: 40px;
     color: #F5F5F5;
+    text-align: center;
 }
 
 .form-createuser div {
     margin-top: 20px;
+    width: 100%;
 }
 
 input {
@@ -36,15 +40,16 @@ input {
     margin-bottom: 5px;
     background-color: rgba(13, 13, 13, 0.8);
     border-radius: 5px;
-    border: transparent;
+    border: none;
     color: white;
     font-size: 20px;
+    box-sizing: border-box;
 }
 
 input:focus {
     background-color: rgba(13, 13, 13, 0.8);
     color: #F5F5F5;
-    border: none;
+    outline: none;
 }
 
 .register {
@@ -57,6 +62,12 @@ input:focus {
     background-color: #E50914;
     color: #F5F5F5;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register:hover {
+    background-color: #B00710;
 }
 
 .logo-register {
@@ -64,10 +75,6 @@ input:focus {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-}
-    
-.register:hover {
-    background-color: #B00710;
 }
 
 .register-to-login {
@@ -90,4 +97,48 @@ a:hover {
 .validation-error {
     color: red;
     font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .form-createuser {
+        padding: 30px 20px;
+    }
+
+    .title-createuser {
+        font-size: 32px;
+    }
+
+    input {
+        font-size: 18px;
+        height: 45px;
+    }
+
+    .register {
+        font-size: 18px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-createuser {
+        padding: 20px 15px;
+    }
+
+    .title-createuser {
+        font-size: 26px;
+    }
+
+    input {
+        font-size: 16px;
+        height: 42px;
+    }
+
+    .register {
+        font-size: 16px;
+        height: 42px;
+    }
+
+    .register-to-login {
+        font-size: 0.9rem;
+    }
 }
