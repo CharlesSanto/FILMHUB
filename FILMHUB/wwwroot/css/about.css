@@ -1,6 +1,6 @@
 .about-container {
     width: 100%;
-    min-height: calc(100vh - 200px);
+    min-height: calc(100vh - 220px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +37,7 @@
 @media (max-width: 768px) {
     .about-container {
         padding: 0 20px;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .about {
