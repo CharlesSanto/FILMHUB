@@ -1,12 +1,23 @@
 .favorites-movies {
+    width: 100%;
     margin-top: 40px;
+}
+
+.favorites-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .favorites-header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
+}
+
+.favorites-header h1 {
+    font-size: 32px;
 }
 
 .favorites-header p {
@@ -17,23 +28,23 @@
 .movie-cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
+    margin-top: 30px;
 }
 
 .movie-card-favorite {
-    width: 240px;
-    height: 430px;
-    flex-shrink: 0;
-    background-color: #1A1A1A;
-    border-radius: 10px;
-    padding-bottom: 5px;
+    width: 200px;
+    height: 310px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .movie-image {
     position: relative;
-    border-radius: 8px 8px 0 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
     overflow: hidden;
-    height: 80%;
 }
 
 .movie-image img {
@@ -47,21 +58,28 @@
     transform: scale(1.08);
 }
 
-.movie-rating-favorite {
-    gap: 3px;
+/* TABLETS — 3 FILMES POR LINHA */
+@media (max-width: 1024px) {
+    .movie-card-favorite {
+        width: 160px;
+        height: 250px;
+    }
 }
 
-.movie-rating-favorite span {
-    color: yellow;
-    font-size: 20px;
-}
+/* CELULARES */
+@media (max-width: 600px) {
 
-.movie-rating-favorite,
-.movie-card-favorite p  {
-    display: flex;
-    font-size: 16px;
-    text-align: left;
-    padding-top: 15px;
-    padding-left: 15px;
-    font-weight: bold;
+    .favorites-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .favorites-header h1 {
+        font-size: 26px;
+    }
+
+    .movie-card-favorite {
+        width: 84px;
+        height: 165px;
+    }
 }
