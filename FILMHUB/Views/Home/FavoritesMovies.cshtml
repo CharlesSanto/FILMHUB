@@ -24,7 +24,7 @@
         {
             @foreach (var movie in Model)
             {
-                <div class="movie-card">
+                <div class="movie-card-favorite">
                     <div class="movie-image">
                         <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.MovieId">
                             <img class="lazyload" loading="lazy"
