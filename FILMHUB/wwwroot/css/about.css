@@ -9,6 +9,11 @@
 
 .about {
     max-width: 800px;
+    width: 100%;
+}
+
+.about h2 {
+    text-align: center;
 }
 
 .about p {
@@ -26,4 +31,47 @@
 
 .tmdb-credit img {
     opacity: 0.9;
+}
+
+/* tablets */
+@media (max-width: 768px) {
+    .about-container {
+        padding: 0 20px;
+        align-items: flex-start;
+    }
+
+    .about {
+        margin-top: 40px;
+    }
+
+    .about p {
+        font-size: 18px;
+        padding-bottom: 24px;
+    }
+
+    .tmdb-credit {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .tmdb-credit img {
+        width: 220px;
+    }
+}
+
+/* mobile */
+@media (max-width: 480px) {
+    .about-container {
+        padding: 0 15px;
+    }
+
+    .about p {
+        font-size: 16px;
+        padding-bottom: 20px;
+    }
+
+    .tmdb-credit img {
+        width: 180px;
+    }
 }
