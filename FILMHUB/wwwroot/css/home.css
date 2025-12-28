@@ -179,6 +179,139 @@
     display: flex;
     font-size: 16px;
     text-align: left;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-left: 15px;
 }
+
+/* ===================== RESPONSIVO ===================== */
+
+/* ====== TABLET ====== */
+@media (max-width: 1024px) {
+
+    .home-banner {
+        height: 420px;
+    }
+
+    .banner-content {
+        width: 380px;
+    }
+
+    .banner-title {
+        font-size: 38px;
+    }
+
+    .banner-overview {
+        font-size: 15px;
+        -webkit-line-clamp: 3;
+    }
+
+    .banner-info {
+        width: 80%;
+        font-size: 18px;
+    }
+
+    .movie-card {
+        width: 200px;
+        height: 380px;
+    }
+
+    .carousel-btn {
+        height: 110px;
+    }
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 768px) {
+
+    .home-banner {
+        height: 360px;
+        margin-top: 20px;
+    }
+
+    .home-banner img {
+        border-radius: 8px;
+    }
+
+    .home-banner::before {
+        border-radius: 8px;
+    }
+
+    .banner-content {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .banner-title {
+        font-size: 30px;
+        text-align: left;
+    }
+
+    .banner-overview {
+        font-size: 14px;
+        -webkit-line-clamp: 3;
+    }
+
+    .banner-info {
+        width: 100%;
+        height: 46px;
+        font-size: 16px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .carousel {
+        gap: 10px;
+        overflow-x: auto;
+    }
+
+    .carousel-btn {
+        display: none;
+    }
+
+    .movie-card {
+        width: 180px;
+        height: 340px;
+    }
+
+    .movie-title,
+    .movie-rating {
+        font-size: 14px;
+        padding-left: 10px;
+        padding-top: 5px;
+    }
+}
+
+/* ====== MOBILE PEQUENO ====== */
+@media (max-width: 480px) {
+
+    .home-banner {
+        height: 300px;
+    }
+
+    .banner-title {
+        font-size: 24px;
+    }
+
+    .banner-overview {
+        font-size: 13px;
+        -webkit-line-clamp: 2;
+    }
+
+    .banner-info {
+        font-size: 15px;
+    }
+
+    .movie-card {
+        width: 180px;
+        height: 380px;  
+    }
+
+    .movie-rating span {
+        font-size: 14px;
+    }
+}
+

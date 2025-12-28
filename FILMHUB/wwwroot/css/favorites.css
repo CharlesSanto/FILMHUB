@@ -47,17 +47,17 @@
     transform: scale(1.08);
 }
 
-.movie-rating {
+.movie-rating-favorite {
     gap: 3px;
 }
 
-.movie-rating span {
+.movie-rating-favorite span {
     color: yellow;
     font-size: 20px;
 }
 
-.movie-rating,
-.movie-card p  {
+.movie-rating-favorite,
+.movie-card-favorite p  {
     display: flex;
     font-size: 16px;
     text-align: left;
