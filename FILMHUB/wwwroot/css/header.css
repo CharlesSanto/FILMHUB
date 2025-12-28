@@ -151,7 +151,6 @@ li a:hover {
     background-color: rgba(13, 13, 13, 0.4);
 }
 
-/* ================= RESPONSIVO ================= */
 
 @media (max-width: 992px) {
     header {
