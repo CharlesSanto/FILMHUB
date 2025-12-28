@@ -58,7 +58,7 @@
     transform: scale(1.08);
 }
 
-/* TABLETS — 3 FILMES POR LINHA */
+/* TABLETS */
 @media (max-width: 1024px) {
     .movie-card-favorite {
         width: 160px;
