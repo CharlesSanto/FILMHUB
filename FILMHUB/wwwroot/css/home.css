@@ -309,7 +309,8 @@
         width: 170px;
         height: 360px;  
     }
-
+    
+    .movie-title,
     .movie-rating span {
         font-size: 14px;
     }
