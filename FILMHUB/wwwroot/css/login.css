@@ -75,7 +75,7 @@
 
 @media (max-width: 768px) {
     .login-container {
-        min-height: 100dvh;
+        min-height: 90vh;
         display: flex;
         justify-content: center;
         align-items: center;
