@@ -165,25 +165,6 @@
     transform: scale(1.08);
 }
 
-.movie-rating {
-    gap: 3px;
-}
-
-.movie-rating span {
-    color: yellow;
-    font-size: 20px;
-}
-
-.movie-rating,
-.movie-title {
-    display: flex;
-    font-size: 16px;
-    text-align: left;
-    padding-top: 5px;
-    padding-left: 15px;
-    font-weight: bold;
-}
-
 /* ===================== RESPONSIVO ===================== */
 
 /* ====== TABLET ====== */
@@ -277,13 +258,6 @@
         width: 180px;
         height: 340px;
     }
-
-    .movie-title,
-    .movie-rating {
-        font-size: 14px;
-        padding-left: 10px;
-        padding-top: 5px;
-    }
 }
 
 /* ====== MOBILE PEQUENO ====== */
@@ -309,11 +283,6 @@
     .movie-card {
         width: 170px;
         height: 360px;  
-    }
-    
-    .movie-title,
-    .movie-rating span {
-        font-size: 14px;
     }
 }
 

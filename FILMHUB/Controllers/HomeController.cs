@@ -30,6 +30,16 @@ public class HomeController : Controller
         return View(movieResponse);
     }
 
+    public async Task<IActionResult> Search(string query)
+    {
+        if (string.IsNullOrEmpty(query))
+            return RedirectToAction("Index");
+        
+        var movies = await _movieService.Search(query);
+        
+        return View(movies);
+    }
+
     public async Task<IActionResult> Profile()
     {
         int? userIdSession =  HttpContext.Session.GetInt32("UserId");

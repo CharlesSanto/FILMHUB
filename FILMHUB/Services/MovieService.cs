@@ -42,7 +42,16 @@ public class MovieService : IMovieService
     public async Task<List<Movie>> GetTopRatedMovies() => await GetMovies("movie/top_rated");
 
     public async Task<List<Movie>> GetTrendingMovies() => await GetMovies("trending/movie/week");
-    
+
+    public async Task<MovieApiResponse> Search(string query)
+    {
+        var movies = await _client.GetFromJsonAsync<MovieApiResponse>
+            ($"search/movie?query={Uri.EscapeDataString(query)}&language=pt-BR");
+
+
+        return movies;
+    }
+
     public async Task<MovieApiResponse> GetPopularMoviesAsync(int page = 1)
     {
         var movies = await _client.GetFromJsonAsync<MovieApiResponse>($"movie/popular?language=pt-BR&page={page}");
