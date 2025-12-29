@@ -7,7 +7,11 @@
         </ul>
         
         <search>
-            <input class="search-movie" type="text"/>
+            
+            <form method="get" asp-controller="Home" asp-action="Search">
+                <input class="search-movie" name="query" type="text"/>
+            </form>
+            
         </search>
     </nav>
     
