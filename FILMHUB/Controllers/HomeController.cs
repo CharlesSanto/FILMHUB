@@ -32,8 +32,8 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Search(string query)
     {
-        if (string.IsNullOrEmpty(query))
-            return RedirectToAction("Index");
+        if (string.IsNullOrWhiteSpace(query))
+            return RedirectToAction("Index","Home");
 
         var movies = await _movieService.Search(query);
         
