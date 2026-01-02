@@ -35,7 +35,7 @@ public class HomeController : Controller
         if (string.IsNullOrEmpty(query))
             return RedirectToAction("Index");
 
-        MovieApiResponse movies = await _movieService.Search(query);
+        var movies = await _movieService.Search(query);
         
         return View(movies);
     }

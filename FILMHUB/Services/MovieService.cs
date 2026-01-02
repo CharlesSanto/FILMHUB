@@ -1,11 +1,12 @@
 using FILMHUB.Data;
 using FILMHUB.Models;
 using FILMHUB.ViewModel;
+using FILMHUB.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace FILMHUB.Services.Interfaces;
+namespace FILMHUB.Services;
 
 public class MovieService : IMovieService
 {
@@ -43,14 +44,23 @@ public class MovieService : IMovieService
 
     public async Task<List<Movie>> GetTrendingMovies() => await GetMovies("trending/movie/week");
 
-    public async Task<MovieApiResponse> Search(string query)
+    public async Task<MovieApiResponse?> Search(string query)
     {
-        var movies = await _client.GetFromJsonAsync<MovieApiResponse>
-            ($"search/movie?query={Uri.EscapeDataString(query)}&language=pt-BR");
-        
-        if (movies == null) return null;
-        
-        return movies;
+        try
+        {
+            var movies = await _client.GetFromJsonAsync<MovieApiResponse>(
+                $"search/movie?query={Uri.EscapeDataString(query)}&language=pt-BR"
+            );
+
+            if (movies == null)
+                return null;
+
+            return movies;
+        }
+        catch (HttpRequestException)
+        {
+            return null;
+        }
     }
 
     public async Task<MovieApiResponse> GetPopularMoviesAsync(int page = 1)

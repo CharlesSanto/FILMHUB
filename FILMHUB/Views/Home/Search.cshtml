@@ -13,18 +13,25 @@
     <hr/>
     
     <div class="search-content">
-        @foreach (var movie in Model.Results)
+        
+        @if (Model.Results.Any())
         {
-            @if (!string.IsNullOrEmpty(movie.PosterPath))
+            @foreach (var movie in Model.Results)
             {
-                <div class="movie-card-search">
-                    <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                        <img class="lazyload" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                             alt="@movie.Title"/>
-                    </a>
-                </div>
+                @if (!string.IsNullOrWhiteSpace(movie.PosterPath))
+                {
+                    <div class="movie-card-search">
+                        <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
+                            <img class="lazyload" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                 alt="@movie.Title"/>
+                        </a>
+                    </div>
+                }
             }
+        }
+        else
+        {
+            <p>Sem resultados para @query</p>
         }
     </div>
 </div>
-
