@@ -30,7 +30,7 @@ public class HomeController : Controller
         return View(movieResponse);
     }
 
-    public async Task<IActionResult> Search(string query, int page = 1)
+    public async Task<IActionResult> Search(string query)
     {
         if (string.IsNullOrEmpty(query))
             return RedirectToAction("Index");
