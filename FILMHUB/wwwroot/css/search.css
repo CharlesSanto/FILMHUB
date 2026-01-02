@@ -1,0 +1,36 @@
+.search-container {
+    margin-top: 35px;
+}
+
+.search-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.movie-card-search {
+    width: 100%;
+}
+
+.movie-card-search img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .search-content {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .search-content {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
+    }
+}
