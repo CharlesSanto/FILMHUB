@@ -17,6 +17,7 @@ public class Movie
     public string Overview { get; set; }
     
     [JsonPropertyName("release_date")]
+    [JsonConverter(typeof(NullableDateTimeConverter))]
     public DateTime? ReleaseDate { get; set; }
     
     [JsonPropertyName("poster_path")]

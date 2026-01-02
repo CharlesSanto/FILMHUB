@@ -30,7 +30,7 @@
                     </a>
 
                     <div class="reviews-container">
-                        <h2 class="movie-title">@movie.Title</h2>
+                        <h2 class="movie-title-review">@movie.Title</h2>
 
                         @foreach (var review in Model.UserMovies.Where(r => r.MovieId == movie.Id))
                         {

@@ -90,7 +90,7 @@ a {
     color: #F5F5F5;
 }
 
-a:hover {
+.form-createuser a:hover {
     text-decoration: underline;
 }
 

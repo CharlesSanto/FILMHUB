@@ -11,12 +11,19 @@ footer div {
     margin: 0;
 }
 
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .footer-content p {
     display: flex;
     justify-content: center;
     font-size: 15px;
     font-weight: normal;
     padding: 5px;
+    text-align: center;
 }
 
 .footer-content a {
@@ -26,7 +33,9 @@ footer div {
 }
 
 ul {
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 ul li {
@@ -37,4 +46,45 @@ ul li {
 
 i {
     margin-right: 4px;
+}
+
+
+/* tablets */
+@media (max-width: 768px) {
+    footer {
+        height: auto;
+        padding: 20px 15px;
+    }
+
+    ul {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    ul li {
+        padding: 8px;
+        text-align: center;
+    }
+}
+
+/* mobile */
+@media (max-width: 480px) {
+    footer {
+        padding: 25px 10px;
+    }
+
+    .footer-content p,
+    .footer-content a,
+    ul li {
+        font-size: 14px;
+    }
+
+    ul {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    ul li {
+        padding: 6px;
+    }
 }
