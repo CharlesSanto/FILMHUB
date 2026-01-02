@@ -47,8 +47,9 @@ public class MovieService : IMovieService
     {
         var movies = await _client.GetFromJsonAsync<MovieApiResponse>
             ($"search/movie?query={Uri.EscapeDataString(query)}&language=pt-BR");
-
-
+        
+        if (movies == null) return null;
+        
         return movies;
     }
 

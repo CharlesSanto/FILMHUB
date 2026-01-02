@@ -30,12 +30,12 @@ public class HomeController : Controller
         return View(movieResponse);
     }
 
-    public async Task<IActionResult> Search(string query)
+    public async Task<IActionResult> Search(string query, int page = 1)
     {
         if (string.IsNullOrEmpty(query))
             return RedirectToAction("Index");
-        
-        var movies = await _movieService.Search(query);
+
+        MovieApiResponse movies = await _movieService.Search(query);
         
         return View(movies);
     }
