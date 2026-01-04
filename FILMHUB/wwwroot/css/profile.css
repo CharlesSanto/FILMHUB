@@ -8,14 +8,15 @@
 
 .pf-header {
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .pf-user {
     display: flex;
-    gap: 16px;
     align-items: center;
+    margin-right: 16px;
 }
 
 .pf-avatar {
@@ -27,11 +28,11 @@
 .pf-user-info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .pf-username {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
 }
 
@@ -40,14 +41,15 @@
     background-color: #F5F5F5;
     color: #0d0d0d;
     font-weight: bold;
-    font-size: 12px;
-    border-radius: 4px;
+    font-size: 10px;
+    border-radius: 3px;
     width: fit-content;
 }
 
 .pf-stats {
     display: flex;
-    gap: 24px;
+    gap: 10px;
+    font-size: 10px;
 }
 
 .pf-stat {
