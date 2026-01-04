@@ -1,89 +1,111 @@
-.favorites-movies {
+.fav-page {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 24px;
 }
 
-.favorites-wrapper {
-    max-width: 1200px;
-    padding: 0 20px;
+.fav-container {
+    padding: 0 16px;
 }
 
-.favorites-header {
+.fav-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    gap: 16px;
+    justify-content: space-between;
+    background-color: transparent;
 }
 
-.favorites-header h1 {
-    font-size: 32px;
+.fav-header h1 {
+    font-size: 20px;
 }
 
-.favorites-header p {
-    font-size: 16px;
+.fav-count {
+    font-size: 12px;
     font-weight: bold;
 }
 
-.movie-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 30px;
+.fav-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
 }
 
-.movie-card-favorite {
-    width: 200px;
+.fav-card {
     aspect-ratio: 2 / 3;
     border-radius: 6px;
     overflow: hidden;
 }
 
-.movie-image {
+.fav-link {
+    display: block;
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
-.movie-image img {
+.fav-poster {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.movie-image:hover img {
+.fav-card:hover .fav-poster {
     transform: scale(1.08);
 }
 
-/* TABLETS */
-@media (max-width: 1024px) {
-    .movie-cards-container {
-        justify-content: center;
-    }
+.fav-empty {
+    margin-top: 24px;
+    font-size: 14px;
+}
 
-    .movie-card-favorite {
-        width: 160px;
+/* SMALL TABLETS */
+@media (min-width: 480px) {
+    .fav-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
     }
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
-
-    .favorites-header {
-        flex-direction: column;
-        align-items: flex-start;
+/* TABLETS */
+@media (min-width: 768px) {
+    .fav-container {
+        max-width: 720px;
+        margin: 0 auto;
     }
 
-    .favorites-header h1 {
-        font-size: 26px;
+    .fav-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .movie-cards-container {
-        justify-content: center;
-        gap: 12px;
+    .fav-header h1 {
+        font-size: 30px;
     }
 
-    .movie-card-favorite {
-        width: 130px;
+    .fav-count {
+        font-size: 15px;
+    }
+
+    .fav-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+    .fav-container {
+        max-width: 1200px;
+        padding: 0 20px;
+    }
+
+    .fav-header h1 {
+        font-size: 32px;
+    }
+
+    .fav-grid {
+        grid-template-columns: repeat(6, 1fr);
     }
 }
