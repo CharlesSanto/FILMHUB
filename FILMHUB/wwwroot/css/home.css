@@ -5,8 +5,8 @@
 .fh-banner {
     position: relative;
     width: 100%;
-    height: 560px;
-    margin-top: 30px;
+    height: 300px;
+    margin-top: 20px;
     overflow: hidden;
 }
 
@@ -36,39 +36,40 @@
     flex-direction: column;
     justify-content: flex-end;
 
-    width: 470px;
-    padding: 20px;
+    width: 100%;
+    padding: 16px;
     color: #F5F5F5;
 }
 
 .fh-banner-title {
-    font-size: 50px;
+    font-size: 24px;
     font-weight: bold;
 }
 
 .fh-banner-overview {
-    margin-top: 10px;
-    font-size: 16px;
+    margin-top: 8px;
+    font-size: 13px;
     line-height: 140%;
+
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
 .fh-banner-btn {
-    margin-top: 20px;
+    margin-top: 16px;
+    width: 100%;
+    height: 46px;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
 
-    width: 70%;
-    height: 50px;
-
     background-color: #1A1A1A;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: #F5F5F5;
 
@@ -83,12 +84,12 @@
 }
 
 .fh-section {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
 .fh-section-title {
-    font-size: 24px;
-    margin: 30px 0;
+    font-size: 20px;
+    margin: 24px 0;
 }
 
 .fh-carousel-wrapper {
@@ -100,9 +101,8 @@
     gap: 12px;
 
     overflow-x: auto;
-    overflow-y: hidden;
-
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -111,43 +111,25 @@
 }
 
 .fh-carousel-btn {
-    position: absolute;
-    top: 40%;
-    transform: translateY(-50%);
-
-    width: 40px;
-    height: 130px;
-
-    background: rgba(0,0,0,0.6);
-    border: none;
-    color: #fff;
-    font-size: 32px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.fh-carousel-btn.left {
-    left: 0;
-}
-
-.fh-carousel-btn.right {
-    right: 0;
+    display: none;
 }
 
 .fh-movie-card {
     flex: 0 0 auto;
 
-    width: 240px;
-    height: 430px;
+    width: 150px;
+    height: 225px;
 
-    background-color: #1A1A1A;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
+    background-color: #1A1A1A;
+
+    scroll-snap-align: start;
 }
 
 .fh-movie-image {
-    height: 80%;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 .fh-movie-image img {
@@ -161,104 +143,76 @@
     transform: scale(1.08);
 }
 
-.fh-movie-title,
-.fh-movie-rating {
-    padding: 6px 10px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.fh-movie-rating {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.fh-movie-rating span {
-    color: yellow;
-}
-
-/* TABLET */
-@media (max-width: 1024px) {
+@media (min-width: 1024px) {
     .fh-banner {
         height: 420px;
+        margin-top: 30px;
     }
 
     .fh-banner-content {
         width: 380px;
+        padding: 20px;
     }
 
     .fh-banner-title {
         font-size: 38px;
     }
 
-    .fh-movie-card {
-        width: 200px;
-        height: 380px;
-    }
-
-    .fh-carousel-btn {
-        height: 110px;
-    }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-    .fh-banner {
-        height: 360px;
-    }
-
-    .fh-banner-content {
-        width: 100%;
-        padding: 16px;
-    }
-
-    .fh-banner-title {
-        font-size: 30px;
-    }
-
-    .fh-banner-btn {
-        width: 100%;
-        height: 46px;
-        font-size: 16px;
-    }
-
     .fh-section-title {
-        font-size: 20px;
-    }
-
-    .fh-carousel {
-        scroll-snap-type: x mandatory;
-    }
-
-    .fh-movie-card {
-        scroll-snap-align: start;
-        width: 180px;
-        height: 340px;
-    }
-
-    .fh-carousel-btn {
-        display: none;
-    }
-}
-
-/* MOBILE PEQUENO */
-@media (max-width: 480px) {
-    .fh-banner {
-        height: 300px;
-    }
-
-    .fh-banner-title {
         font-size: 24px;
     }
 
-    .fh-banner-overview {
-        font-size: 13px;
-        -webkit-line-clamp: 2;
+    .fh-carousel-btn {
+        display: block;
+
+        position: absolute;
+        top: 40%;
+        transform: translateY(-50%);
+
+        width: 40px;
+        height: 110px;
+
+        background: rgba(0,0,0,0.6);
+        border: none;
+        color: #fff;
+        font-size: 32px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .fh-carousel-btn.left {
+        left: 0;
+    }
+
+    .fh-carousel-btn.right {
+        right: 0;
     }
 
     .fh-movie-card {
-        width: 170px;
+        width: 200px;
+        height: 300px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .fh-banner {
+        height: 560px;
+    }
+
+    .fh-banner-content {
+        width: 470px;
+    }
+
+    .fh-banner-title {
+        font-size: 50px;
+    }
+
+    .fh-movie-card {
+        width: 240px;
         height: 360px;
+    }
+
+    .fh-carousel-btn {
+        height: 130px;
     }
 }
