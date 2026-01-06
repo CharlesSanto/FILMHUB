@@ -9,22 +9,20 @@
     
     <hr/>
     
-    <div class="section-movies">
+    <div class="movies-grid">
         @foreach (var movie in Model.Results)
         {
-            <div class="movie-card">
-                <div class="movie-image">
-                    <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                        <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                             alt="@movie.Title"/>
+            <div class="movie-card-grid">
+                <div class="movie-card__image">
+                    <a asp-controller="Home"
+                       asp-action="MovieDetails"
+                       asp-route-id="@movie.Id">
+                        <img class="lazyload"
+                             loading="lazy"
+                             src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                             alt="@movie.Title" />
                     </a>
-                </div> 
-                <p class="movie-rating">
-                    <span class="material-symbols-outlined">
-                        star_rate
-                    </span>@Math.Round(movie.VoteAverage, 1)
-                </p>
-                <p class="movie-title">@movie.Title</p>
+                </div>
             </div>
         }
     </div>

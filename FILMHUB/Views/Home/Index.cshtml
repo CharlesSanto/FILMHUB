@@ -4,17 +4,16 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="home-container">
-    
-    <section class="home-banner">
+<div class="fh-home">
+
+    <section class="fh-banner">
         @{
-            <img class="lazyload" src="@($"https://image.tmdb.org/t/p/w1280{Model.BannerMovie.BackdropPath}")" alt="@Model.BannerMovie.Title"/>
-            
-            <div class="banner-content">
-                <h1 class="banner-title">@Model.BannerMovie.Title</h1>
-                <p class="banner-overview">@Model.BannerMovie.Overview</p>
-                <a class="banner-info" asp-controller="Home" asp-action="MovieDetails" asp-route-id="@Model.BannerMovie.Id">
-    
+            <img class="fh-banner-img lazyload" src="@($"https://image.tmdb.org/t/p/w1280{Model.BannerMovie.BackdropPath}")" alt="@Model.BannerMovie.Title" />
+
+            <div class="fh-banner-content">
+                <h1 class="fh-banner-title">@Model.BannerMovie.Title</h1>
+                <p class="fh-banner-overview">@Model.BannerMovie.Overview</p>
+                <a class="fh-banner-btn" asp-controller="Home" asp-action="MovieDetails" asp-route-id="@Model.BannerMovie.Id">
                     <span class="material-symbols-outlined">info</span>
                     Mais informações
                 </a>
@@ -22,98 +21,70 @@
         }
     </section>
 
-    <section class="popular-movies">
-        <h2 class="section-title">Populares da semama</h2>
-
-        <div class="carousel-wrapper">
-            <button class="carousel-btn left" onclick="scrollCarousel('popularCarousel', -900)">‹</button>
-
-            <div class="carousel" id="popularCarousel">
+    <section class="fh-section fh-popular">
+        <h2 class="fh-section-title">Populares da semana</h2>
+        <div class="fh-carousel-wrapper">
+            <button class="fh-carousel-btn left" onclick="scrollCarousel('fhPopularCarousel', -900)">‹</button>
+            <div class="fh-carousel" id="fhPopularCarousel">
                 @foreach (var movie in Model.TrendingMovies)
                 {
-                    <div class="movie-card">
-                        <div class="movie-image">
+                    <div class="fh-movie-card">
+                        <div class="fh-movie-image">
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                     alt="@movie.Title"/>
+                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")" alt="@movie.Title" />
                             </a>
                         </div>
-                        <p class="movie-rating">
-                            <span class="material-symbols-outlined">
-                                star_rate
-                            </span>@Math.Round(movie.VoteAverage, 1)
-                        </p>
-                        <p class="movie-title">@movie.Title</p>
                     </div>
                 }
             </div>
-            <button class="carousel-btn right" onclick="scrollCarousel('popularCarousel', 900)">›</button>
+            <button class="fh-carousel-btn right" onclick="scrollCarousel('fhPopularCarousel', 900)">›</button>
         </div>
     </section>
 
-    <section class="theater-movies">
-        <h2 class="section-title">Nos cinemas</h2>
-
-        <div class="carousel-wrapper">
-            <button class="carousel-btn left" onclick="scrollCarousel('theatersCarousel', -900)">‹</button>
-
-            <div class="carousel" id="theatersCarousel">
+    <section class="fh-section fh-theaters">
+        <h2 class="fh-section-title">Nos cinemas</h2>
+        <div class="fh-carousel-wrapper">
+            <button class="fh-carousel-btn left" onclick="scrollCarousel('fhTheatersCarousel', -900)">‹</button>
+            <div class="fh-carousel" id="fhTheatersCarousel">
                 @foreach (var movie in Model.MoviesInTheaters)
                 {
-                    <div class="movie-card">
-                        <div class="movie-image">
+                    <div class="fh-movie-card">
+                        <div class="fh-movie-image">
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                     alt="@movie.Title"/>
+                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")" alt="@movie.Title" />
                             </a>
-                        </div> 
-                        <p class="movie-rating">
-                            <span class="material-symbols-outlined">
-                                star_rate
-                            </span>@Math.Round(movie.VoteAverage, 1)
-                        </p>
-                        <p class="movie-title">@movie.Title</p>
+                        </div>
                     </div>
                 }
             </div>
-            <button class="carousel-btn right" onclick="scrollCarousel('theatersCarousel', 900)">›</button>
+            <button class="fh-carousel-btn right" onclick="scrollCarousel('fhTheatersCarousel', 900)">›</button>
         </div>
     </section>
 
-    <section class="top-movies">
-        <h2 class="section-title">Os favoritos do público</h2>
-
-        <div class="carousel-wrapper">
-            <button class="carousel-btn left" onclick="scrollCarousel('topmoviesCarousel', -900)">‹</button>
-
-            <div class="carousel" id="topmoviesCarousel">
+    <section class="fh-section fh-toprated">
+        <h2 class="fh-section-title">Os favoritos do público</h2>
+        <div class="fh-carousel-wrapper">
+            <button class="fh-carousel-btn left" onclick="scrollCarousel('fhTopRatedCarousel', -900)">‹</button>
+            <div class="fh-carousel" id="fhTopRatedCarousel">
                 @foreach (var movie in Model.TopRatedMovies)
                 {
-                    <div class="movie-card">
-                        <div class="movie-image">
+                    <div class="fh-movie-card">
+                        <div class="fh-movie-image">
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                     alt="@movie.Title"/>
+                                <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")" alt="@movie.Title" />
                             </a>
                         </div>
-                        <p class="movie-rating">
-                            <span class="material-symbols-outlined">
-                                star_rate
-                            </span>@Math.Round(movie.VoteAverage, 1)
-                        </p>
-                        <p class="movie-title">@movie.Title</p>
                     </div>
                 }
             </div>
-            <button class="carousel-btn right" onclick="scrollCarousel('topmoviesCarousel',900)">›</button>
+            <button class="fh-carousel-btn right" onclick="scrollCarousel('fhTopRatedCarousel', 900)">›</button>
         </div>
     </section>
 
 </div>
 
 <script>
-    function scrollCarousel(carrouselId, value) {
-        document.getElementById(carrouselId)
-            .scrollBy({ left: value, behavior: "smooth" });
+    function scrollCarousel(carouselId, value) {
+        document.getElementById(carouselId).scrollBy({ left: value, behavior: "smooth" });
     }
 </script>

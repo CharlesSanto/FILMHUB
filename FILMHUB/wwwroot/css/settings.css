@@ -1,123 +1,160 @@
-.settings-container {
+.account-page {
     display: flex;
     flex-direction: column;
-    margin-top: 35px;
-    gap: 10px;
+    gap: 24px;
+    margin-top: 32px;
 }
 
-.settings-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between
+.account-title {
+    font-size: 20px;
 }
 
-.settings-form{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+.account-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
 }
 
-.form-group {
+.account-form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 12px;
 }
 
-.form-input {
-    background-color: #1A1A1A;
+.account-section {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.account-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.account-input {
+    background: #1A1A1A;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    padding: 10px;
     color: #F5F5F5;
-    width: 500px;
+    width: 100%;
 }
 
-.form-input:focus {
-    background-color: #1A1A1A;
+.account-input:focus {
+    outline: none;
 }
 
-.btn-primary {
-    background-color: #F5F5F5;
-    border: none;
-    border-radius: 5px;
+.account-error {
+    font-size: 14px;
+    color: #ff6b6b;
+}
+
+.account-btn-main {
+    margin-top: 10px;
+    background: #F5F5F5;
     color: #1A1A1A;
-    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
     font-weight: bold;
-    font-size: 15px;
-    transition: transform 0.2s ease-out;
-}
-
-.btn-cancel:hover,
-.btn-deleter:hover,
-.btn-danger:hover,
-.btn-primary:hover {
     cursor: pointer;
-    transform: scale(1.04);
 }
 
-.danger-zone {
+.account-danger {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.btn-deleter,
-.btn-danger {
-    width: 200px;
-    background-color: darkred;
+.account-btn-danger {
+    background: darkred;
+    color: #fff;
     border: none;
-    border-radius: 5px;
-    color: #F5F5F5;
-    padding: 10px 15px;
+    border-radius: 6px;
+    padding: 12px;
     font-weight: bold;
-    font-size: 15px;
-    transition: transform 0.2s ease-out;
+    cursor: pointer;
 }
 
-.delete-user {
+.account-btn-cancel {
+    background: #F5F5F5;
+    color: #1A1A1A;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.account-btn-delete {
+    width: 100%;
+    background: darkred;
+    color: #F5F5F5;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.account-dialog {
     border: none;
     border-radius: 12px;
-    padding: 50px;
+    padding: 24px;
     background: #0D0D0D;
     color: white;
-    text-align: center;
+    width: 90%;
+    max-width: 420px;
     margin: auto;
-    gap: 20px;
-
-    width: 1200px;
-    height: 250px;
-    max-width: 30%;
 }
 
-.delete-user::backdrop {
+.account-dialog::backdrop {
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
 }
 
-.delete-user p {
-    line-height: 150%;
-}
-
-.dialog-actions {
+.account-dialog-actions {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
-}
-
-.btn-deleter {
+    flex-direction: column;
+    gap: 12px;
     margin-top: 20px;
 }
 
-.btn-cancel {
-    width: 200px;
-    background-color: #F5F5F5;
-    border: none;
-    border-radius: 5px;
-    color: #1A1A1A;
-    padding: 10px 15px;
-    font-weight: bold;
-    font-size: 15px;
-    transition: transform 0.2s ease-out;
-    margin-top: 20px;
+.account-dialog h1 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.account-dialog p{
+    font-size: 12px;
+    line-height: 24px;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+    .account-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .account-dialog h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .account-dialog p{
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    .account-btn-danger {
+        width: 20%;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+    .account-page {
+        max-width: 1100px;
+        margin: 40px auto;
+    }
 }

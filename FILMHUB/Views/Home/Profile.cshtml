@@ -1,120 +1,127 @@
-@model FILMHUB.ViewModel.ProfileViewModel;
+@model FILMHUB.ViewModel.ProfileViewModel
 
 @{
     ViewData["Title"] = "Perfil";
-}
-
-@{
     var userName = Context.Session.GetString("UserName");
 }
 
-<div class="profile-container">
-    
-    <div class="profile-header">
-    
-        <div class="profile-header__user">
-    
-            <img 
-                class="profile-header__avatar"
+<section class="pf-page">
+
+    <!-- HEADER -->
+    <div class="pf-header">
+
+        <div class="pf-user">
+            <img
+                class="pf-avatar"
                 src="~/img/temp-profile-photo-removebg-preview.png"
-                alt="Foto do perfil"
-            />
+                alt="Foto do perfil" />
 
-            <h1 class="profile-header__username">@userName</h1>
-            
-            <a asp-controller="Auth" asp-action="Settings" class="profile-header__edit-link">
-                Editar perfil
-            </a>
+            <div class="pf-user-info">
+                <h1 class="pf-username">@userName</h1>
 
+                <a asp-controller="Auth"
+                   asp-action="Settings"
+                   class="pf-edit">
+                    Editar perfil
+                </a>
+            </div>
         </div>
 
-        <div class="profile-header__stats">
-        
-            <div class="profile-header__stat">
-                <p class="profile-header__stat-number">@Model.Reviews.UserMovies.Count</p>
-                <p class="profile-header__stat-label">Filmes</p>
-            </div>
-            
-            <div class="vertical-line"></div>
-            
-            <div class="profile-header__stat">
-                <p class="profile-header__stat-number">@Model.Reviews.UserMovies.Count(r => r.WatchedAt?.Year == 2025)</p>
-                <p class="profile-header__stat-label">Este ano</p>
+        <div class="pf-stats">
+            <div class="pf-stat">
+                <span class="pf-stat-number">@Model.Reviews.UserMovies.Count</span>
+                <span class="pf-stat-label">Filmes</span>
             </div>
 
+            <div class="pf-divider"></div>
+
+            <div class="pf-stat">
+                <span class="pf-stat-number">
+                    @Model.Reviews.UserMovies.Count(r => r.WatchedAt?.Year == 2025)
+                </span>
+                <span class="pf-stat-label">Este ano</span>
+            </div>
         </div>
 
     </div>
 
-    <div class="profile-favorites">
+    <!-- RECENTES -->
+    <section class="pf-updates">
         <h2>Atualizações recentes</h2>
-        <hr/>
-        <div class="section-movies">
-            @foreach (var movie in Model.Reviews.Movies.Take(5))
+        <hr />
+
+        <div class="pf-movie-grid">
+            @foreach (var movie in Model.Reviews.Movies.Take(4))
             {
-                <div class="movie-card-profile">
-                    <div class="movie-image-profile">
-                        <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                            <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                 alt="@movie.Title"/>
-                        </a>
-                    </div>
-                </div>
+                <article class="pf-movie-card">
+                    <a asp-controller="Home"
+                       asp-action="MovieDetails"
+                       asp-route-id="@movie.Id">
+                        <img class="pf-movie-poster lazyload"
+                             loading="lazy"
+                             src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                             alt="@movie.Title" />
+                    </a>
+                </article>
             }
         </div>
-    </div>
-    
+    </section>
+
+    <!-- REVIEWS -->
     @if (Model.Reviews.UserMovies.Any())
     {
-        <div class="recent-reviews">
+        <section class="pf-reviews">
             <h2>Avaliações recentes</h2>
-            
-            <hr/>
+            <hr />
 
-            @foreach (var reviews in Model.Reviews.UserMovies.Where(r => !string.IsNullOrEmpty(r.Review)).Take(4))
+            @foreach (var review in Model.Reviews.UserMovies
+                       .Where(r => !string.IsNullOrEmpty(r.Review))
+                       .Take(4))
             {
-                var stars = (int)Math.Round((reviews.Rating ?? 0) / 2);
+                var stars = (int)Math.Round((review.Rating ?? 0) / 2);
 
-                <div class="review-cards-profile">
-                    
-                    <div class="review-poster-profile">
-                        @foreach (var movie in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
+                <article class="pf-review-card">
+
+                    <div class="pf-review-poster">
+                        @foreach (var movie in Model.Reviews.Movies.Where(m => m.Id == review.MovieId))
                         {
-                            <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                                <img loading="lazy" src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")" alt="@movie.Title" class="lazyload"/>
+                            <a asp-controller="Home"
+                               asp-action="MovieDetails"
+                               asp-route-id="@movie.Id">
+                                <img class="lazyload"
+                                     loading="lazy"
+                                     src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")"
+                                     alt="@movie.Title" />
                             </a>
                         }
                     </div>
 
-                    <div class="review-header-profile">
+                    <div class="pf-review-content">
 
-                        @foreach (var titles in Model.Reviews.Movies.Where(r => r.Id == reviews.MovieId))
+                        @foreach (var movie in Model.Reviews.Movies.Where(m => m.Id == review.MovieId))
                         {
-                            <p class="user-name-review">@titles.Title</p>
+                            <h3 class="pf-review-title">@movie.Title</h3>
                         }
 
-                        <div class="review-stars-profile">
-                            @for (int i = 1; i <= 5; i++)
-                            {
-                                <span class="star @(i <= stars ? "filled" : "")">★</span>
-                            }
-                            
-                            <p class="review-avaliation">
-                                Avaliado em @(reviews.WatchedAt.HasValue
-                                                ? reviews.WatchedAt.Value.ToString("dd/MM/yyyy")
-                                                : "-")
-                            </p>
+                        <div class="pf-review-meta">
+                            <div class="pf-stars">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="pf-star @(i <= stars ? "pf-star-filled" : "")">★</span>
+                                }
+                            </div>
+
+                            <span class="pf-review-date">
+                                Avaliado em @(review.WatchedAt?.ToString("dd/MM/yyyy") ?? "-")
+                            </span>
                         </div>
 
-                        
-                        
-                        <p class="review-comments-profile">@reviews.Review</p>
+                        <p class="pf-review-text">@review.Review</p>
 
                     </div>
-                </div>
+                </article>
             }
-        </div>
+        </section>
     }
-    
-</div>
 
+</section>

@@ -4,45 +4,45 @@
     ViewData["Title"] = "Favoritos";
 }
 
-<div class="favorites-movies">
-    <div class="favorites-wrapper">
+<section class="fav-page">
+    <div class="fav-container">
 
-        <div class="favorites-header">
+        <div class="fav-header">
             <h1>Favoritos</h1>
 
             @if (Model.Any())
             {
-                <p>@Model.Count @(Model.Count > 1 ? "filmes como favorito" : "filme como favorito")</p>
+                <span class="fav-count">
+                    @Model.Count @(Model.Count > 1 ? "filmes como favorito" : "filme como favorito")
+                </span>
             }
         </div>
 
-        <hr/>
+        <hr />
 
-        <div class="movie-cards-container">
-
-            @if (Model.Any())
-            {
+        @if (Model.Any())
+        {
+            <div class="fav-grid">
                 @foreach (var movie in Model)
                 {
-                    <div class="movie-card-favorite">
-                        <div class="movie-image">
-                            <a asp-controller="Home"
-                               asp-action="MovieDetails"
-                               asp-route-id="@movie.MovieId">
-                                <img class="lazyload"
-                                     loading="lazy"
-                                     src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                                     alt="@movie.Title"/>
-                            </a>
-                        </div>
-                    </div>
+                    <article class="fav-card">
+                        <a asp-controller="Home"
+                           asp-action="MovieDetails"
+                           asp-route-id="@movie.MovieId"
+                           class="fav-link">
+                            <img class="fav-poster lazyload"
+                                 loading="lazy"
+                                 src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                                 alt="@movie.Title" />
+                        </a>
+                    </article>
                 }
-            }
-            else
-            {
-                <p>Não tem filmes como favoritos</p>
-            }
+            </div>
+        }
+        else
+        {
+            <p class="fav-empty">Não tem filmes como favoritos</p>
+        }
 
-        </div>
     </div>
-</div>
+</section>

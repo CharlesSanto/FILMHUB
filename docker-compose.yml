@@ -14,5 +14,20 @@ services:
     volumes:
       - filmhub_data:/var/lib/postgresql/data
 
+  filmhub:
+    container_name: filmhub-app
+    build:
+      context: .
+      dockerfile: FILMHUB/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=filmhubdb;Username=postgres;Password=postgres
+      TMDB__Bearer: SEU_TOKEN
+      TMDB__BaseUrl: https://api.themoviedb.org/3
+
 volumes:
   filmhub_data:

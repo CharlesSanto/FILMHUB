@@ -4,38 +4,43 @@
     ViewData["Title"] = "Watchlist";
 }
 
-<div class="watchlist-container">
+<section class="wl-page">
     
-    <div class="watchlist-header">
+    <div class="wl-header">
         <h1>Watchlist</h1>
-        
+
         @if (Model.Any())
         {
-            <p> @Model.Count @(Model.Count > 1 ? "filmes para assistir" : "filme para assistir")</p>
+            <span class="wl-count">
+                @Model.Count @(Model.Count > 1 ? "filmes para assistir" : "filme para assistir")
+            </span>
         }
-        
     </div>
-    
-    <hr/>
-    
+
+    <hr />
+
     @if (Model.Any())
     {
-        <div class="watchlist-movie">
+        <div class="wl-grid">
             @foreach (var movie in Model)
             {
-                <div class="watchlist-card">
-                
-                    <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                        <img class="lazyload" loading="lazy" src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
-                             alt="@movie.Title"/>
+                <article class="wl-card">
+                    <a asp-controller="Home"
+                       asp-action="MovieDetails"
+                       asp-route-id="@movie.Id"
+                       class="wl-link">
+                        <img class="wl-poster lazyload"
+                             loading="lazy"
+                             src="@($"https://image.tmdb.org/t/p/w300{movie.PosterPath}")"
+                             alt="@movie.Title" />
                     </a>
-                </div>
+                </article>
             }
         </div>
     }
     else
     {
-        <p>Sem filmes na watchlist</p>
+        <p class="wl-empty">Sem filmes na watchlist</p>
     }
-    
-</div>
+
+</section>

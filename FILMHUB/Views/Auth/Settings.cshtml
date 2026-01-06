@@ -1,135 +1,149 @@
-@model FILMHUB.DTO.UpdateUserDto;
+@model FILMHUB.DTO.UpdateUserDto
 
 @{
-    ViewData["Title"] ="Configurações";
+    ViewData["Title"] = "Configurações";
 }
 
-<div class="settings-container">
-    <h1>Configurações</h1>
-    
-    <hr/>
-    
-    <div class="settings-content">
-        
-        
-        
-        <form method="post" asp-controller="Auth" asp-action="UpdateUser" class="settings-form" novalidate>
-            
-            <h2>Perfil</h2>
-            
-            <div class="form-group">
+<section class="account-page">
+
+    <h1 class="account-title">Configurações</h1>
+    <hr />
+
+    <div class="account-layout">
+
+        <!-- PERFIL -->
+        <form method="post"
+              asp-controller="Auth"
+              asp-action="UpdateUser"
+              class="account-form"
+              novalidate>
+
+            <h2 class="account-section">Perfil</h2>
+
+            <div class="account-field">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" type="text" class="form-input"/>
+                <input asp-for="Name" type="text" class="account-input" />
             </div>
 
-            <div class="form-group">
+            <div class="account-field">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" type="email" class="form-input"/>
-                <span asp-validation-for="Email" class="validation-error"></span>
+                <input asp-for="Email" type="email" class="account-input" />
+                <span asp-validation-for="Email" class="account-error"></span>
             </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn-primary">Salvar mudanças</button>
-            </div>
-
-        </form>
-        
-        <form method="post" asp-controller="Auth" asp-action="ChangePassword" class="settings-form">
-
-            <h2>Alterar senha</h2>
-            
-            <div class="form-group">
-                <label asp-for="CurrentPassword">Senha atual</label>
-                <input asp-for="CurrentPassword" type="password" class="form-input"/>
-                <span asp-validation-for="CurrentPassword" class="validation-error"> @ViewBag.PasswordError</span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="Password">Senha</label>
-                <input asp-for="Password" type="password" class="form-input"/>
-                <span asp-validation-for="Password" class="validation-error"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="ConfirmPassword">Confirmar senha</label>
-                <input asp-for="ConfirmPassword" type="password" class="form-input"/>
-                <span asp-validation-for="ConfirmPassword" class="validation-error"></span>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="btn-primary">Salvar mudanças</button>
-            </div>
-
-        </form>
-        
-    </div>
-    
-    <hr/>
-    
-    <div>
-        <div class="danger-zone">
-            <h2>Zona de perigo</h2>
-            <p>Essa ação é permanente e não pode ser desfeita.</p>
-
-            <button id="btn-danger" class="btn-danger">
-                Deletar minha conta
+            <button type="submit" class="account-btn-main">
+                Salvar mudanças
             </button>
-            
-        </div>
+
+        </form>
+
+        <!-- SENHA -->
+        <form method="post"
+              asp-controller="Auth"
+              asp-action="ChangePassword"
+              class="account-form"
+              id="changePasswordForm">
+
+            <h2 class="account-section">Alterar senha</h2>
+
+            <div class="account-field">
+                <label asp-for="CurrentPassword">Senha atual</label>
+                <input asp-for="CurrentPassword" type="password" class="account-input" />
+                <span id="currentPasswordError"
+                      asp-validation-for="CurrentPassword"
+                      class="account-error">
+                    @ViewBag.PasswordError
+                </span> 
+            </div>
+
+            <div class="account-field">
+                <label asp-for="Password">Senha</label>
+                <input asp-for="Password" type="password" class="account-input" />
+                <span asp-validation-for="Password" class="account-error"></span>
+            </div>
+
+            <div class="account-field">
+                <label asp-for="ConfirmPassword">Confirmar senha</label>
+                <input asp-for="ConfirmPassword" type="password" class="account-input" />
+                <span asp-validation-for="ConfirmPassword" class="account-error"></span>
+            </div>
+
+            <button type="submit" class="account-btn-main">
+                Salvar mudanças
+            </button>
+
+        </form>
+
     </div>
-    
-    <dialog id="delete-user" class="delete-user">
-        
+
+    <hr />
+
+    <!-- DANGER -->
+    <section class="account-danger">
+        <h2 class="account-section">Zona de perigo</h2>
+        <p>Essa ação é permanente e não pode ser desfeita.</p>
+
+        <button id="open-delete-dialog" class="account-btn-danger">
+            Deletar minha conta
+        </button>
+    </section>
+
+    <!-- MODAL -->
+    <dialog id="delete-dialog" class="account-dialog">
+
         <h1>Excluir conta</h1>
-        
-        <p>Tem certeza de que deseja excluir sua conta? <br/> Esta ação é permanente e não poderá ser desfeita.</p>
-        
-        <div class="dialog-actions">
-            <button id="btn-cancel" class="btn-cancel">
+
+        <p>
+            Tem certeza de que deseja excluir sua conta?<br />
+            Esta ação é permanente e não poderá ser desfeita.
+        </p>
+
+        <div class="account-dialog-actions">
+            <button id="close-delete-dialog" class="account-btn-cancel">
                 Cancelar
             </button>
+
             <form method="post" asp-action="DeleteUser">
-                <button class="btn-deleter">
+                <button class="account-btn-delete">
                     Deletar minha conta
                 </button>
             </form>
-            
         </div>
-        
+
     </dialog>
-    
-</div>
+
+</section>
+
 
 @section Scripts {
     <script src="~/js/validation.js"></script>
     
     
     <script>
-        const deleteusermodal = document.getElementById('delete-user');
-        const btndanger = document.getElementById('btn-danger');
-        const btnCancel = document.getElementById('btn-cancel');
+        const dialog = document.getElementById('delete-dialog');
+        const openBtn = document.getElementById('open-delete-dialog');
+        const closeBtn = document.getElementById('close-delete-dialog');
 
-        btndanger.addEventListener('click', () => deleteusermodal.showModal())
-        btnCancel.addEventListener('click', () => deleteusermodal.close())
-        
+        openBtn.addEventListener('click', () => dialog.showModal());
+        closeBtn.addEventListener('click', () => dialog.close());
     </script>
     
     <script>
         document.getElementById("changePasswordForm")
             .addEventListener("submit", async function (e) {
-        
+    
             e.preventDefault();
-        
+    
             const errorSpan = document.getElementById("currentPasswordError");
             errorSpan.textContent = "";
-        
+    
             const formData = new FormData(this);
-        
+    
             const response = await fetch("/Auth/ChangePassword", {
                 method: "POST",
                 body: formData
             });
-        
+    
             if (!response.ok) {
                 const error = await response.json();
                 if (error.field === "CurrentPassword") {
@@ -137,10 +151,9 @@
                 }
                 return;
             }
-        
+    
             alert("Senha alterada com sucesso!");
             this.reset();
         });
     </script>
-
 }
